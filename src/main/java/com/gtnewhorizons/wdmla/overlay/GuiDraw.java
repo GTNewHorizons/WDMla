@@ -183,16 +183,62 @@ public final class GuiDraw {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
     }
 
-    public static void drawThickBeveledBox(IArea area, int thickness, int topleftcolor, int botrightcolor,
-            int fillcolor) {
+    public static void drawStraightGradientRect(IArea area, int grad1, int grad2, boolean horizontal) {
+        int x = area.getX();
+        int y = area.getY();
+        int w = area.getW();
+        int h = area.getH();
+
+        float zLevel = 0.0f;
+
+        float a1 = (grad1 >> 24 & 255) / 255.0F;
+        float r1 = (grad1 >> 16 & 255) / 255.0F;
+        float g1 = (grad1 >> 8 & 255) / 255.0F;
+        float b1 = (grad1 & 255) / 255.0F;
+        float a2 = (grad2 >> 24 & 255) / 255.0F;
+        float r2 = (grad2 >> 16 & 255) / 255.0F;
+        float g2 = (grad2 >> 8 & 255) / 255.0F;
+        float b2 = (grad2 & 255) / 255.0F;
+
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glShadeModel(GL11.GL_SMOOTH);
+
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+
+        if (horizontal) {
+            tessellator.setColorRGBA_F(r1, g1, b1, a1);
+            tessellator.addVertex(x, y, zLevel);
+            tessellator.addVertex(x, y + h, zLevel);
+
+            tessellator.setColorRGBA_F(r2, g2, b2, a2);
+            tessellator.addVertex(x + w, y + h, zLevel);
+            tessellator.addVertex(x + w, y, zLevel);
+        } else {
+            tessellator.setColorRGBA_F(r1, g1, b1, a1);
+            tessellator.addVertex(x + w, y, zLevel);
+            tessellator.addVertex(x, y, zLevel);
+
+            tessellator.setColorRGBA_F(r2, g2, b2, a2);
+            tessellator.addVertex(x, y + h, zLevel);
+            tessellator.addVertex(x + w, y + h, zLevel);
+        }
+
+        tessellator.draw();
+        GL11.glShadeModel(GL11.GL_FLAT);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+    }
+
+    public static void drawBoxBorder(IArea area, int thickness, int topleftcolor, int botrightcolor) {
         int x1 = area.getX();
         int y1 = area.getY();
         int x2 = area.getEX();
         int y2 = area.getEY();
-
-        if (fillcolor != -1) {
-            Gui.drawRect(x1 + 1, y1 + 1, x2 - 1, y2 - 1, fillcolor);
-        }
 
         Gui.drawRect(x1, y1, x2 - 1, y1 + thickness, topleftcolor);
         Gui.drawRect(x1, y1, x1 + thickness, y2 - 1, topleftcolor);

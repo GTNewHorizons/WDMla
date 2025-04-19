@@ -8,9 +8,6 @@ import com.gtnewhorizons.wdmla.impl.ui.sizer.Padding;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
 import com.gtnewhorizons.wdmla.impl.ui.value.FilledAmount;
 
-/**
- * requires rework
- */
 public class AmountComponent extends TooltipComponent {
 
     public static final int DEFAULT_W = 100;

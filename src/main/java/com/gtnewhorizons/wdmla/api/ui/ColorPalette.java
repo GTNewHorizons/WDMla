@@ -24,7 +24,7 @@ public final class ColorPalette {
     public static final int NO_BORDER = 0x00000000;
 
     public static final int AMOUNT_BORDER_WAILA = 0xFF555555;
-    public static final int AMOUNT_BACKGROUND_WAILA = 0xFFFFFFFF;
+    public static final int AMOUNT_BACKGROUND_WAILA = -1;
     public static final int AMOUNT_FILLED_WAILA = 0xFFD7D7D7;
     public static final int AMOUNT_FILLED_ALTERNATE_WAILA = 0xFFD7D7D7;
 

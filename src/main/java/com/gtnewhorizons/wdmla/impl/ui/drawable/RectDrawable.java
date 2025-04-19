@@ -31,7 +31,7 @@ public class RectDrawable implements IDrawable {
         } else {
             GuiDraw.drawGradientRect(area, style.getBackgroundColor1(), style.getBackgroundColor2());
             if (style.getBorderColor() != ColorPalette.NO_BORDER) {
-                GuiDraw.drawThickBeveledBox(area, 1, style.getBorderColor(), style.getBorderColor(), -1);
+                GuiDraw.drawBoxBorder(area, 1, style.getBorderColor(), style.getBorderColor());
             }
         }
     }

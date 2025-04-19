@@ -5,6 +5,7 @@ import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 
 import java.util.List;
 
+import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
@@ -193,9 +194,9 @@ public class ThemeHelper {
         }
     }
 
-    public IComponent amount(long current, long max, IComponent content) {
+    public IComponent amount(long current, long max, IComponent textContent) {
         ITooltip amountTooltip = new AmountComponent(current, max);
-        amountTooltip.child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(content));
+        amountTooltip.child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(textContent));
         return amountTooltip;
     }
 

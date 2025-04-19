@@ -2,6 +2,10 @@ package com.gtnewhorizons.wdmla.test;
 
 import java.util.Random;
 
+import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
+import com.gtnewhorizons.wdmla.config.General;
+import com.gtnewhorizons.wdmla.impl.ui.component.AmountComponent;
+import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -24,6 +28,8 @@ import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
 import com.gtnewhorizons.wdmla.impl.ui.style.PanelStyle;
 
 import mcp.mobius.waila.overlay.DisplayUtil;
+
+import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_AMOUNT_TEXT_PADDING;
 
 public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
@@ -68,8 +74,10 @@ public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerData
         tooltip.child(new TextComponent("Recieved Server Data: " + random));
 
         if (cookTime != 0) {
-            tooltip.child(
-                    ThemeHelper.INSTANCE.amount(cookTime, 10, new TextComponent("Smelting: " + cookTime + " / 10 s")));
+            ITooltip amountTooltip = new AmountComponent(cookTime, 10).style(
+                    new AmountStyle().filledColor(ColorPalette.DANGER).alternateFilledColor(ColorPalette.AMOUNT_BORDER_WAILA))
+                    .child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(new TextComponent("Smelting: " + cookTime + " / 10 s")));
+            tooltip.child(amountTooltip);
         }
 
         int burnTime = accessor.getServerData().getInteger("BurnTime") / 20;
@@ -112,7 +120,7 @@ public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerData
         }
         data.setTag("Items", nbttaglist);
 
-        data.setShort("CookTime", (short) 5);
+        data.setShort("CookTime", (short) 100);
         data.setInteger("BurnTime", 5);
         data.setInteger("random", new Random().nextInt(11));
     }

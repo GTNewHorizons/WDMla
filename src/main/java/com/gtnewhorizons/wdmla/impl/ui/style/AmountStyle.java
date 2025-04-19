@@ -16,7 +16,7 @@ public class AmountStyle implements IAmountStyle {
     private IDrawable overlay;
 
     public AmountStyle(int borderColor, int backgroundColor, int filledColor, int alternateFilledColor,
-            IDrawable overlay) {
+                       @Nullable IDrawable overlay) {
         this.borderColor = borderColor;
         this.backgroundColor = backgroundColor;
         this.filledColor = filledColor;
