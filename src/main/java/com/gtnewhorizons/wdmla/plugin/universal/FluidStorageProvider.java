@@ -141,14 +141,13 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
                 }
                 switch (showMode) {
                     case GAUGE -> {
-                        // TODO:adjust the size with the longest text
                         // TODO:invert text color with bright fluid
                         AmountStyle amountStyle = new AmountStyle().overlay(new FluidDrawable(view.overlay));
                         if (view.hasScale) {
                             amountStyle.alternateFilledColor(ColorPalette.AMOUNT_BORDER);
                         }
                         tooltip.child(
-                                new AmountComponent(view.current, view.max).style(amountStyle).size(new Size(125, 12))
+                                new AmountComponent(view.current, view.max).style(amountStyle)
                                         .child(
                                                 new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING)
                                                         .child(mainText)));
