@@ -7,7 +7,7 @@ import com.gtnewhorizons.wdmla.api.ui.IDrawable;
 /**
  * Collection of filled bar settings.
  */
-public interface IAmountStyle extends IRectStyle {
+public interface IAmountStyle {
 
     /**
      * If this is not null, it will be rendered instead of filled color.<br>

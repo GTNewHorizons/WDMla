@@ -75,7 +75,7 @@ public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerData
 
         if (cookTime != 0) {
             ITooltip amountTooltip = new AmountComponent(cookTime, 10).style(
-                    new AmountStyle().filledColor(ColorPalette.DANGER).alternateFilledColor(ColorPalette.AMOUNT_BORDER_WAILA))
+                    new AmountStyle().filledColor(0xFFFF0000).alternateFilledColor(ColorPalette.AMOUNT_BORDER_WAILA))
                     .child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(new TextComponent("Smelting: " + cookTime + " / 10 s")));
             tooltip.child(amountTooltip);
         }

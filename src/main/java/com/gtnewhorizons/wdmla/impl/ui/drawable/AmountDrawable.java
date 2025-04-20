@@ -26,35 +26,28 @@ public class AmountDrawable implements IDrawable {
         return this;
     }
 
-    //TODO: split
     @Override
     public void draw(IArea area) {
         long current = progress.getCurrent();
         long max = progress.getMax();
-        if(style.getBackgroundColor1() != -1) {
-            GuiDraw.drawGradientRect(area, style.getBackgroundColor1(), style.getBackgroundColor2());
+        if (current <= 0L || max <= 0L) {
+            return;
         }
-        GuiDraw.drawBoxBorder(
-                area,
-                1,
-                style.getBorderColor(),
-                style.getBorderColor());
-        if (current > 0L && max > 0L) {
-            int dx = (int) Math.min(current * (long) (area.getW() - 2) / max, (long) (area.getW() - 2));
-            if (dx > 0) {
-                if (style.getOverlay() != null) {
-                    style.getOverlay().draw(new Area(area.getX() + 1, area.getY() + 1, dx + 1, area.getH() - 2));
-                } else {
-                    fillWithGradient(area, dx);
-                }
+
+        int dx = (int) Math.min(current * (long) (area.getW() - 2) / max, (long) (area.getW() - 2));
+        if (dx > 0) {
+            if (style.getOverlay() != null) {
+                style.getOverlay().draw(new Area(area.getX() + 1, area.getY() + 1, dx + 1, area.getH() - 2));
+            } else {
+                fillWithGradient(area, dx);
             }
-            if (style.getFilledColor() != style.getAlternateFilledColor()) {
-                for (int xx = area.getX() + 1; xx <= area.getX() + dx + 1; ++xx) {
-                    if ((xx % 3) != 2) {
-                        continue;
-                    }
-                    GuiDraw.drawVerticalLine(xx, area.getY() + 1, area.getEY() - 1, style.getAlternateFilledColor());
+        }
+        if (style.getFilledColor() != style.getAlternateFilledColor()) {
+            for (int xx = area.getX() + 1; xx <= area.getX() + dx + 1; ++xx) {
+                if ((xx % 3) != 2) {
+                    continue;
                 }
+                GuiDraw.drawVerticalLine(xx, area.getY() + 1, area.getEY() - 1, style.getAlternateFilledColor());
             }
         }
     }
