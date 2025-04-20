@@ -3,7 +3,6 @@ package com.gtnewhorizons.wdmla.test;
 import java.util.Random;
 
 import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
-import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.ui.component.AmountComponent;
 import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
 import net.minecraft.init.Blocks;
@@ -20,7 +19,6 @@ import com.gtnewhorizons.wdmla.api.provider.IBlockComponentProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.ui.sizer.IPadding;
-import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Padding;
@@ -74,8 +72,7 @@ public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerData
         tooltip.child(new TextComponent("Recieved Server Data: " + random));
 
         if (cookTime != 0) {
-            ITooltip amountTooltip = new AmountComponent(cookTime, 10).style(
-                    new AmountStyle().filledColor(0xFFFF0000).alternateFilledColor(ColorPalette.AMOUNT_BORDER_WAILA))
+            ITooltip amountTooltip = new AmountComponent(cookTime, 10)
                     .child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(new TextComponent("Smelting: " + cookTime + " / 10 s")));
             tooltip.child(amountTooltip);
         }

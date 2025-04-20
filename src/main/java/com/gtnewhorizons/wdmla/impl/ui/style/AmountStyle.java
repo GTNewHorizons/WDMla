@@ -21,9 +21,15 @@ public class AmountStyle implements IAmountStyle {
     }
 
     public AmountStyle() {
-        this.filledColor = ColorPalette.AMOUNT_FILLED_WAILA;
-        this.alternateFilledColor = ColorPalette.AMOUNT_FILLED_ALTERNATE_WAILA;
+        this.filledColor = ColorPalette.AMOUNT_FILLED;
+        this.alternateFilledColor = ColorPalette.AMOUNT_FILLED_ALTERNATE;
         this.overlay = null;
+    }
+
+    public AmountStyle singleColor(int color) {
+        this.filledColor = color;
+        this.alternateFilledColor = color;
+        return this;
     }
 
     public AmountStyle filledColor(int filledColor) {

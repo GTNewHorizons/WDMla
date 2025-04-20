@@ -2,6 +2,10 @@ package com.gtnewhorizons.wdmla.test;
 
 import java.util.Arrays;
 
+import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
+import com.gtnewhorizons.wdmla.impl.ui.component.AmountComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
+import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +16,8 @@ import com.gtnewhorizons.wdmla.api.provider.IBlockComponentProvider;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
+
+import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_AMOUNT_TEXT_PADDING;
 
 public enum TestThemeBlockProvider implements IBlockComponentProvider {
 
@@ -31,7 +37,13 @@ public enum TestThemeBlockProvider implements IBlockComponentProvider {
         tooltip.child(ThemeHelper.INSTANCE.warning("This is warning"));
         tooltip.child(ThemeHelper.INSTANCE.danger("This is danger"));
         tooltip.child(ThemeHelper.INSTANCE.failure("This is failure"));
-        tooltip.child(ThemeHelper.INSTANCE.amount(5, 10, new TextComponent("This is test amount")));
+        tooltip.child(new AmountComponent(6,10)
+                .style(new AmountStyle().filledColor(ColorPalette.PROGRESS_FILLED).alternateFilledColor(ColorPalette.PROGRESS_FILLED_ALTERNATE))
+                .child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(new TextComponent("Test Progress: 6 / 10"))));
+        tooltip.child(new AmountComponent(8,10)
+                .style(new AmountStyle().filledColor(ColorPalette.ENERGY_FILLED).alternateFilledColor(ColorPalette.ENERGY_FILLED_ALTERNATE))
+                .child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(new TextComponent("Test Energy: 8μI / 10μI"))));
+
         tooltip.child(ThemeHelper.INSTANCE.value("The answer", "42"));
         tooltip.child(
                 ThemeHelper.INSTANCE.furnaceLikeProgress(

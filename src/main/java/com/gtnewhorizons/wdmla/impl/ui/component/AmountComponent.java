@@ -33,8 +33,8 @@ public class AmountComponent extends TooltipComponent {
                 new Size(DEFAULT_W, DEFAULT_H),
                 new AmountDrawable(new FilledAmount(current, max)));
         this.rectDrawable = new RectDrawable().style(new RectStyle()
-                .backgroundColor(ColorPalette.AMOUNT_BACKGROUND_WAILA)
-                .borderColor(ColorPalette.AMOUNT_BORDER_WAILA));
+                .backgroundColor(ColorPalette.AMOUNT_BACKGROUND)
+                .borderColor(ColorPalette.AMOUNT_BORDER));
     }
 
     public AmountComponent style(IAmountStyle style) {

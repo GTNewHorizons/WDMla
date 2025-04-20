@@ -194,12 +194,6 @@ public class ThemeHelper {
         }
     }
 
-    public IComponent amount(long current, long max, IComponent textContent) {
-        ITooltip amountTooltip = new AmountComponent(current, max);
-        amountTooltip.child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING).child(textContent));
-        return amountTooltip;
-    }
-
     public IComponent value(String entry, String value) {
         return new HPanelComponent().text(String.format("%s: ", entry)).child(info(value));
     }
