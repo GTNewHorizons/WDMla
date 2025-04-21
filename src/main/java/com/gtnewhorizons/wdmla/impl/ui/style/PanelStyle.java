@@ -13,7 +13,7 @@ public class PanelStyle implements IPanelStyle {
     private final int borderThickness;
 
     public PanelStyle(int spacing, int borderThickness) {
-        this.borderColor = ColorPalette.NO_BORDER;
+        this.borderColor = ColorPalette.TRANSPARENT;
         this.alignment = ComponentAlignment.TOPLEFT;
         this.spacing = spacing;
         this.borderThickness = borderThickness;
@@ -21,7 +21,7 @@ public class PanelStyle implements IPanelStyle {
 
     public PanelStyle() {
         IPanelStyle theme = General.currentTheme.get().panelStyle;
-        this.borderColor = ColorPalette.NO_BORDER;
+        this.borderColor = ColorPalette.TRANSPARENT;
         this.alignment = ComponentAlignment.TOPLEFT;
         this.spacing = theme.getSpacing();
         this.borderThickness = theme.getBorderThickness();
@@ -44,7 +44,7 @@ public class PanelStyle implements IPanelStyle {
 
     @Override
     public int getBorderThickness() {
-        if (borderColor == ColorPalette.NO_BORDER) {
+        if (borderColor == ColorPalette.TRANSPARENT) {
             return 0;
         }
 

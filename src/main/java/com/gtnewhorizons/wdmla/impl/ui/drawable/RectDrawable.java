@@ -30,7 +30,7 @@ public class RectDrawable implements IDrawable {
             GuiDraw.drawVerticalLine(area.getX(), area.getY(), area.getEY(), style.getBackgroundColor1());
         } else {
             GuiDraw.drawGradientRect(area, style.getBackgroundColor1(), style.getBackgroundColor2());
-            if (style.getBorderColor() != ColorPalette.NO_BORDER) {
+            if (style.getBorderColor() != ColorPalette.TRANSPARENT) {
                 GuiDraw.drawBoxBorder(area, 1, style.getBorderColor(), style.getBorderColor());
             }
         }

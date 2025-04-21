@@ -25,7 +25,7 @@ public class BorderDrawable implements IDrawable {
     @Override
     public void draw(IArea area) {
         int color = this.style.getBorderColor();
-        if (this.style.getBorderColor() != ColorPalette.NO_BORDER) {
+        if (this.style.getBorderColor() != ColorPalette.TRANSPARENT) {
             GuiDraw.drawHorizontalLine(area.getX(), area.getY(), area.getEX() - 1, color);
             GuiDraw.drawHorizontalLine(area.getX(), area.getEY() - 1, area.getEX() - 1, color);
             GuiDraw.drawVerticalLine(area.getX(), area.getY(), area.getEY() - 1, color);

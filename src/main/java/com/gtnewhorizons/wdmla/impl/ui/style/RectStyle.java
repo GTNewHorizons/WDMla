@@ -10,9 +10,9 @@ public class RectStyle implements IRectStyle {
     private int borderColor;
 
     public RectStyle() {
-        this.backgroundColor1 = ColorPalette.BG_GRADIENT1_WAILA;
-        this.backgroundColor2 = ColorPalette.BG_GRADIENT2_WAILA;
-        this.borderColor = ColorPalette.NO_BORDER;
+        this.backgroundColor1 = ColorPalette.TRANSPARENT;
+        this.backgroundColor2 = ColorPalette.TRANSPARENT;
+        this.borderColor = ColorPalette.TRANSPARENT;
     }
 
     public RectStyle borderColor(int borderColor) {

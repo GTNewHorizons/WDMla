@@ -21,18 +21,21 @@ public final class ColorPalette {
     public static final int WARNING_TOP = 0xFFFFFF55; // yellow
 
     // other colors
-    public static final int NO_BORDER = 0x00000000;
+    public static final int TRANSPARENT = 0x00FFFFFF;
 
+    public static final int PROGRESS_BACKGROUND = TRANSPARENT;
     public static final int PROGRESS_BORDER = 0xFF555555;
-    public static final int PROGRESS_BACKGROUND = 0x00FFFFFF; //transparent
     public static final int PROGRESS_FILLED = 0xFFFFCC00;
     public static final int PROGRESS_FILLED_ALTERNATE = 0xFFBB9900;
 
     public static final int ENERGY_FILLED = 0xFFAA0000;
     public static final int ENERGY_FILLED_ALTERNATE = 0xFF660000;
 
+    @SuppressWarnings("unused")
     public static final int BG_COLOR_WAILA = 0x9E100010;
+    @SuppressWarnings("unused")
     public static final int BG_GRADIENT1_WAILA = 0x9E5000ff;
+    @SuppressWarnings("unused")
     public static final int BG_GRADIENT2_WAILA = 0x9E28007f;
 
     public static final int BG_COLOR_JADE = 0xB3131313;
