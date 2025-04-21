@@ -1,5 +1,16 @@
 package com.gtnewhorizons.wdmla.plugin.universal;
 
+import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
+
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ResourceLocation;
+
 import com.gtnewhorizons.wdmla.ClientProxy;
 import com.gtnewhorizons.wdmla.CommonProxy;
 import com.gtnewhorizons.wdmla.api.Identifiers;
@@ -10,7 +21,6 @@ import com.gtnewhorizons.wdmla.api.accessor.EntityAccessor;
 import com.gtnewhorizons.wdmla.api.provider.IComponentProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerExtensionProvider;
-import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.view.ClientViewGroup;
 import com.gtnewhorizons.wdmla.api.view.ProgressView;
@@ -21,16 +31,6 @@ import com.gtnewhorizons.wdmla.impl.WDMlaCommonRegistration;
 import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ResourceLocation;
-
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
 
 public class ProgressProvider<T extends Accessor> implements IComponentProvider<T>, IServerDataProvider<T> {
 
@@ -43,10 +43,12 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
     }
 
     public static class ForBlock extends ProgressProvider<BlockAccessor> {
+
         private static final ForBlock INSTANCE = new ForBlock();
     }
 
     public static class ForEntity extends ProgressProvider<EntityAccessor> {
+
         private static final ForEntity INSTANCE = new ForEntity();
     }
 
@@ -63,18 +65,22 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
 
         boolean renderGroup = groups.size() > 1 || groups.get(0).shouldRenderGroup();
         ClientViewGroup.tooltip(tooltip, groups, renderGroup, (theTooltip, group) -> {
-            if (renderGroup  && group.title != null) {
+            if (renderGroup && group.title != null) {
                 group.renderHeader(theTooltip);
             }
             for (var view : group.views) {
-                ProgressStyle progressStyle = view.style == null ? new ProgressStyle().singleColor(General.progressColor.filled) : view.style;
+                ProgressStyle progressStyle = view.style == null
+                        ? new ProgressStyle().singleColor(General.progressColor.filled)
+                        : view.style;
                 if (view.hasScale && view.style == null) {
                     progressStyle.color(General.progressColor.filled, General.progressColor.filledAlternate);
                 }
-                ProgressComponent progress = new ProgressComponent(view.progress, view.maxProgress).style(progressStyle);
+                ProgressComponent progress = new ProgressComponent(view.progress, view.maxProgress)
+                        .style(progressStyle);
                 if (view.description != null) {
-                    progress.child(new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
-                            .child(view.description));
+                    progress.child(
+                            new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
+                                    .child(view.description));
                 }
                 tooltip.child(progress);
             }
@@ -83,7 +89,8 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
 
     @Override
     public void appendServerData(NBTTagCompound data, T accessor) {
-        Map.Entry<ResourceLocation, List<ViewGroup<ProgressView.Data>>> entry = CommonProxy.getServerExtensionData(accessor, WDMlaCommonRegistration.instance().progressProviders);
+        Map.Entry<ResourceLocation, List<ViewGroup<ProgressView.Data>>> entry = CommonProxy
+                .getServerExtensionData(accessor, WDMlaCommonRegistration.instance().progressProviders);
         if (entry != null) {
             data.setTag(Identifiers.PROGRESS.toString(), encodeGroups(entry));
         }
@@ -141,7 +148,8 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
 
     @Override
     public boolean shouldRequestData(T accessor) {
-        return WDMlaCommonRegistration.instance().progressProviders.hitsAny(accessor, IServerExtensionProvider::shouldRequestData);
+        return WDMlaCommonRegistration.instance().progressProviders
+                .hitsAny(accessor, IServerExtensionProvider::shouldRequestData);
     }
 
     @Override

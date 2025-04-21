@@ -71,7 +71,7 @@ public enum StatusEffectProvider implements IEntityComponentProvider, IServerDat
     public void appendServerData(NBTTagCompound data, EntityAccessor accessor) {
         NBTTagCompound fullNBT = new NBTTagCompound();
         accessor.getEntity().writeToNBT(fullNBT);
-        if(fullNBT.hasKey("ActiveEffects")) {
+        if (fullNBT.hasKey("ActiveEffects")) {
             data.setTag("ActiveEffects", fullNBT.getTagList("ActiveEffects", 10));
         }
     }

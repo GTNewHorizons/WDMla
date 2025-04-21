@@ -7,7 +7,7 @@ package com.gtnewhorizons.wdmla.api.ui;
  */
 public final class ColorPalette {
 
-    //non-configurable
+    // non-configurable
     public static final int TRANSPARENT = 0x00FFFFFF;
 
     public static final int BREAK_PROGRESS_DEFAULT = 0xFFA0A0A0;

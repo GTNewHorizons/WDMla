@@ -1,11 +1,11 @@
 package com.gtnewhorizons.wdmla.impl.ui.value;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.MathHelper;
 
 import com.gtnewhorizons.wdmla.api.ui.sizer.IArea;
 import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Area;
-import net.minecraft.util.MathHelper;
 
 public class HUDBlockDamage {
 

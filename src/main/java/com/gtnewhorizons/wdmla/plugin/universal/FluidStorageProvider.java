@@ -27,7 +27,6 @@ import com.gtnewhorizons.wdmla.api.provider.IClientExtensionProvider;
 import com.gtnewhorizons.wdmla.api.provider.IComponentProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerExtensionProvider;
-import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
 import com.gtnewhorizons.wdmla.api.ui.IComponent;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.view.ClientViewGroup;
@@ -38,9 +37,9 @@ import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import com.gtnewhorizons.wdmla.impl.WDMlaClientRegistration;
 import com.gtnewhorizons.wdmla.impl.WDMlaCommonRegistration;
 import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
-import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.FluidComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.drawable.FluidDrawable;
@@ -127,17 +126,16 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
                 switch (showMode) {
                     case GAUGE -> {
                         // TODO:invert text color with bright fluid
-                        ProgressStyle progressStyle = new ProgressStyle()
-                                .singleColor(General.progressColor.filled).overlay(new FluidDrawable(view.overlay));
+                        ProgressStyle progressStyle = new ProgressStyle().singleColor(General.progressColor.filled)
+                                .overlay(new FluidDrawable(view.overlay));
                         if (view.hasScale) {
-                            //TODO: proper fluid scale color
+                            // TODO: proper fluid scale color
                             progressStyle.color(General.progressColor.filled, General.progressColor.border);
                         }
                         tooltip.child(
-                                new ProgressComponent(view.current, view.max).style(progressStyle)
-                                        .child(
-                                                new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
-                                                        .child(mainText)));
+                                new ProgressComponent(view.current, view.max).style(progressStyle).child(
+                                        new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
+                                                .child(mainText)));
                     }
                     case ICON_TEXT -> {
                         if (view.overlay != null) {
@@ -240,8 +238,9 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
 
     @Override
     public boolean shouldRequestData(T accessor) {
-        return (accessor.showDetails() || !PluginsConfig.universal.fluidStorage.detailed) &&
-                accessor.getTarget() != null && !WDMlaCommonRegistration.instance().fluidStorageProviders.wrappedGet(accessor).isEmpty();
+        return (accessor.showDetails() || !PluginsConfig.universal.fluidStorage.detailed)
+                && accessor.getTarget() != null
+                && !WDMlaCommonRegistration.instance().fluidStorageProviders.wrappedGet(accessor).isEmpty();
     }
 
     public enum Extension

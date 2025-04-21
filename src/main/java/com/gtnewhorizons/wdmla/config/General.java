@@ -81,7 +81,8 @@ public class General {
         public int modName;
     }
 
-    @Config.Comment("The colors used in progress bar. \n" + "This category is shared between fluid, energy and general progress display.")
+    @Config.Comment("The colors used in progress bar. \n"
+            + "This category is shared between fluid, energy and general progress display.")
     @Config.LangKey("option.wdmla.progresscolor.category")
     public static class ProgressColor {
 

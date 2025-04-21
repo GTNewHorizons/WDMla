@@ -1,11 +1,10 @@
 package com.gtnewhorizons.wdmla.impl.ui.style;
 
-import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
-import com.gtnewhorizons.wdmla.config.General;
 import org.jetbrains.annotations.Nullable;
 
-import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
 import com.gtnewhorizons.wdmla.api.ui.IDrawable;
+import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
+import com.gtnewhorizons.wdmla.config.General;
 
 public class ProgressStyle implements IProgressStyle {
 
@@ -14,15 +13,14 @@ public class ProgressStyle implements IProgressStyle {
     @Nullable
     private IDrawable overlay;
 
-    public ProgressStyle(int filledColor, int alternateFilledColor,
-                         @Nullable IDrawable overlay) {
+    public ProgressStyle(int filledColor, int alternateFilledColor, @Nullable IDrawable overlay) {
         this.filledColor = filledColor;
         this.alternateFilledColor = alternateFilledColor;
         this.overlay = overlay;
     }
 
     public ProgressStyle() {
-        //fallback colors
+        // fallback colors
         this.filledColor = General.progressColor.filled;
         this.alternateFilledColor = General.progressColor.filled;
         this.overlay = null;

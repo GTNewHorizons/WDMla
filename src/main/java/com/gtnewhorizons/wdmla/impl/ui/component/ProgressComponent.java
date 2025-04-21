@@ -2,7 +2,8 @@ package com.gtnewhorizons.wdmla.impl.ui.component;
 
 import java.util.ArrayList;
 
-import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizons.wdmla.api.ui.IComponent;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
@@ -15,8 +16,8 @@ import com.gtnewhorizons.wdmla.impl.ui.sizer.Padding;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
 import com.gtnewhorizons.wdmla.impl.ui.style.RectStyle;
 import com.gtnewhorizons.wdmla.impl.ui.value.FilledProgress;
+
 import mcp.mobius.waila.utils.WailaExceptionHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class ProgressComponent extends TooltipComponent {
 
@@ -34,10 +35,10 @@ public class ProgressComponent extends TooltipComponent {
                 new Padding(),
                 new Size(MINIMAL_W, MINIMAL_H),
                 new ProgressDrawable(new FilledProgress(current, max)));
-        this.rectDrawable = new RectDrawable().style(new RectStyle()
-                .backgroundColor(General.progressColor.background)
-                .borderColor(General.progressColor.border));
-        //TODO:register ProgressTracker to unify the Width of All ProgressComponent
+        this.rectDrawable = new RectDrawable().style(
+                new RectStyle().backgroundColor(General.progressColor.background)
+                        .borderColor(General.progressColor.border));
+        // TODO:register ProgressTracker to unify the Width of All ProgressComponent
     }
 
     public ProgressComponent style(IProgressStyle style) {
@@ -58,13 +59,14 @@ public class ProgressComponent extends TooltipComponent {
 
     @Override
     public ITooltip child(@NotNull IComponent child) {
-        if(children.isEmpty()) {
+        if (children.isEmpty()) {
             this.children.add(child);
-        }
-        else {
+        } else {
             WailaExceptionHandler.handleErr(
-                    new IllegalArgumentException("ProgressComponent only accepts one child! Consider appending PanelComponent if you want multiple."),
-                    this.getClass().getName(), null);
+                    new IllegalArgumentException(
+                            "ProgressComponent only accepts one child! Consider appending PanelComponent if you want multiple."),
+                    this.getClass().getName(),
+                    null);
         }
         int width = Math.max(size.getW(), children.get(0).getWidth());
         int height = Math.max(size.getH(), children.get(0).getHeight());

@@ -8,27 +8,27 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.gtnewhorizons.wdmla.api.Theme;
-import com.gtnewhorizons.wdmla.api.ui.ComponentAlignment;
-import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
-import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
-import com.gtnewhorizons.wdmla.impl.ui.component.RectComponent;
-import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
-import com.gtnewhorizons.wdmla.impl.ui.style.PanelStyle;
-import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
-import com.gtnewhorizons.wdmla.impl.ui.style.RectStyle;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StringUtils;
 
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
+import com.gtnewhorizons.wdmla.api.Theme;
+import com.gtnewhorizons.wdmla.api.ui.ComponentAlignment;
 import com.gtnewhorizons.wdmla.api.ui.IComponent;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.ui.MessageType;
 import com.gtnewhorizons.wdmla.config.General;
+import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.RectComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
+import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
+import com.gtnewhorizons.wdmla.impl.ui.style.PanelStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.RectStyle;
 
 @ApiStatus.Experimental
 public class ClientViewGroup<T> {
@@ -74,9 +74,13 @@ public class ClientViewGroup<T> {
                 // TODO:overlap progress bar with item group
                 IComponent content = new TextComponent(String.format("%d%%", (int) (group.boxProgress * 100)));
                 tooltip.child(
-                        new ProgressComponent(group.boxProgress).style(
-                                new ProgressStyle().singleColor(General.currentTheme.get().textColor(group.messageType)))
-                                .child(new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING).child(content)));
+                        new ProgressComponent(group.boxProgress)
+                                .style(
+                                        new ProgressStyle()
+                                                .singleColor(General.currentTheme.get().textColor(group.messageType)))
+                                .child(
+                                        new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
+                                                .child(content)));
             }
         }
     }

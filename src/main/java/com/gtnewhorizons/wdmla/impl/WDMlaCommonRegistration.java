@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -22,6 +21,7 @@ import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerExtensionProvider;
 import com.gtnewhorizons.wdmla.api.provider.IWDMlaProvider;
 import com.gtnewhorizons.wdmla.api.view.FluidView;
+import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import com.gtnewhorizons.wdmla.impl.lookup.HierarchyLookup;
 import com.gtnewhorizons.wdmla.impl.lookup.PairHierarchyLookup;
 import com.gtnewhorizons.wdmla.impl.lookup.WrappedHierarchyLookup;

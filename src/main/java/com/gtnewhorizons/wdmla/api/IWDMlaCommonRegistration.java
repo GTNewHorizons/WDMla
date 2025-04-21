@@ -1,6 +1,5 @@
 package com.gtnewhorizons.wdmla.api;
 
-import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
@@ -11,6 +10,7 @@ import com.gtnewhorizons.wdmla.api.accessor.EntityAccessor;
 import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerExtensionProvider;
 import com.gtnewhorizons.wdmla.api.view.FluidView;
+import com.gtnewhorizons.wdmla.api.view.ProgressView;
 
 /**
  * Main server registration class of WDMla.<br>

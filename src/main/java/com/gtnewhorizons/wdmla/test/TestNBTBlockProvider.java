@@ -1,8 +1,9 @@
 package com.gtnewhorizons.wdmla.test;
 
+import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
+
 import java.util.Random;
 
-import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import com.gtnewhorizons.wdmla.api.provider.IBlockComponentProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.ui.sizer.IPadding;
+import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Padding;
@@ -24,8 +26,6 @@ import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
 import com.gtnewhorizons.wdmla.impl.ui.style.PanelStyle;
 
 import mcp.mobius.waila.overlay.DisplayUtil;
-
-import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
 
 public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
@@ -70,8 +70,9 @@ public enum TestNBTBlockProvider implements IBlockComponentProvider, IServerData
         tooltip.child(new TextComponent("Recieved Server Data: " + random));
 
         if (cookTime != 0) {
-            ITooltip amountTooltip = new ProgressComponent(cookTime, 10)
-                    .child(new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING).child(new TextComponent("Smelting: " + cookTime + " / 10 s")));
+            ITooltip amountTooltip = new ProgressComponent(cookTime, 10).child(
+                    new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
+                            .child(new TextComponent("Smelting: " + cookTime + " / 10 s")));
             tooltip.child(amountTooltip);
         }
 

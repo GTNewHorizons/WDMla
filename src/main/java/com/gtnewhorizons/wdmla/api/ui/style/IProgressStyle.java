@@ -26,8 +26,8 @@ public interface IProgressStyle {
     int getFilledColor();
 
     /**
-     * @return The color which is applied to the vertical indicator of the bar.
-     * It will not be rendered unless specified.
+     * @return The color which is applied to the vertical indicator of the bar. It will not be rendered unless
+     *         specified.
      */
     int getAlternateFilledColor();
 }

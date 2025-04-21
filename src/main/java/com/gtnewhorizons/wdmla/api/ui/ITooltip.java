@@ -29,7 +29,7 @@ public interface ITooltip extends IComponent {
 
     ITooltip progress(long current, long max, String progressText);
 
-    //spotless:off
+    // spotless:off
     /**
      * Appends any component to this tooltip as child.<br>
      * Child component behaves same as normal component, except it can be searched from parent with

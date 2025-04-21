@@ -5,7 +5,7 @@ public class Color {
     public static int setLightness(int color, float multiplier) {
         int a = (color >> 24) & 0xFF;
         int r = (color >> 16) & 0xFF;
-        int g = (color >> 8)  & 0xFF;
+        int g = (color >> 8) & 0xFF;
         int b = color & 0xFF;
 
         r = Math.min(255, (int) (r * multiplier));

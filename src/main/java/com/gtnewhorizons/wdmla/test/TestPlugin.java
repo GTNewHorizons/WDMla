@@ -1,13 +1,9 @@
 package com.gtnewhorizons.wdmla.test;
 
 import net.minecraft.block.BlockCommandBlock;
-import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.BlockEndPortalFrame;
-import net.minecraft.block.BlockQuartz;
 import net.minecraft.block.BlockSign;
 import net.minecraft.block.BlockStoneSlab;
-import net.minecraft.block.BlockWoodSlab;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 

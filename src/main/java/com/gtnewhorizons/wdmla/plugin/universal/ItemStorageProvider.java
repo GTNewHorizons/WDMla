@@ -277,8 +277,8 @@ public class ItemStorageProvider<T extends Accessor> implements IComponentProvid
         if (amount == 0) {
             return false;
         }
-        return accessor.getTarget() != null &&
-                !WDMlaCommonRegistration.instance().itemStorageProviders.wrappedGet(accessor).isEmpty();
+        return accessor.getTarget() != null
+                && !WDMlaCommonRegistration.instance().itemStorageProviders.wrappedGet(accessor).isEmpty();
     }
 
     public static class ForBlock extends ItemStorageProvider<BlockAccessor> {
