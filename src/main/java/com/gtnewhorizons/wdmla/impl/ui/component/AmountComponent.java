@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class AmountComponent extends TooltipComponent {
 
-    public static final int MINIMAL_W = 100;
+    public static final int MINIMAL_W = 125;
     public static final int MINIMAL_H = 8;
     private final RectDrawable rectDrawable;
 

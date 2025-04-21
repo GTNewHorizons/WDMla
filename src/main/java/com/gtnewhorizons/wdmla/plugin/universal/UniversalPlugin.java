@@ -24,6 +24,8 @@ public class UniversalPlugin implements IWDMlaPlugin {
         registration.registerEntityDataProvider(ItemStorageProvider.getEntity(), Entity.class);
         registration.registerBlockDataProvider(FluidStorageProvider.getBlock(), Block.class);
         registration.registerEntityDataProvider(FluidStorageProvider.getEntity(), Entity.class);
+        registration.registerBlockDataProvider(ProgressProvider.getBlock(), Block.class);
+        registration.registerEntityDataProvider(ProgressProvider.getEntity(), Entity.class);
     }
 
     @Override
@@ -32,6 +34,8 @@ public class UniversalPlugin implements IWDMlaPlugin {
         registration.registerEntityComponent(ItemStorageProvider.getEntity(), Entity.class);
         registration.registerBlockComponent(FluidStorageProvider.getBlock(), Block.class);
         registration.registerEntityComponent(FluidStorageProvider.getEntity(), Entity.class);
+        registration.registerBlockComponent(ProgressProvider.getBlock(), Block.class);
+        registration.registerEntityComponent(ProgressProvider.getEntity(), Entity.class);
         registration.registerItemStorageClient(ItemStorageProvider.Extension.INSTANCE);
         registration.registerFluidStorageClient(FluidStorageProvider.Extension.INSTANCE);
 

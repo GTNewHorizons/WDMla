@@ -98,17 +98,8 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
 
         boolean renderGroup = groups.size() > 1 || groups.get(0).shouldRenderGroup();
         ClientViewGroup.tooltip(tooltip, groups, renderGroup, (theTooltip, group) -> {
-            if (renderGroup && group.title != null) {
-                Theme theme = General.currentTheme.get();
-                ITooltip hPanel = new HPanelComponent().style(new PanelStyle().alignment(ComponentAlignment.CENTER));
-                hPanel.child(
-                        new RectComponent().style(new RectStyle().backgroundColor(theme.textColor(MessageType.NORMAL)))
-                                .size(new Size(20, 1)));
-                hPanel.child(new TextComponent(group.title).scale(0.6f));
-                hPanel.child(
-                        new RectComponent().style(new RectStyle().backgroundColor(theme.textColor(MessageType.NORMAL)))
-                                .size(new Size(30, 1)));
-                tooltip.child(hPanel);
+            if (renderGroup) {
+                group.renderHeader(tooltip);
             }
             for (var view : group.views) {
                 IComponent mainText;

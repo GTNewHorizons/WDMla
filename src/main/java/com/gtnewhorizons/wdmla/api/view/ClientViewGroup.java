@@ -7,6 +7,13 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.gtnewhorizons.wdmla.api.Theme;
+import com.gtnewhorizons.wdmla.api.ui.ComponentAlignment;
+import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.RectComponent;
+import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
+import com.gtnewhorizons.wdmla.impl.ui.style.PanelStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.RectStyle;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StringUtils;
 
@@ -75,5 +82,20 @@ public class ClientViewGroup<T> {
 
     public boolean shouldRenderGroup() {
         return title != null || boxProgress > 0;
+    }
+
+    public void renderHeader(ITooltip tooltip) {
+        if (title != null) {
+            Theme theme = General.currentTheme.get();
+            ITooltip hPanel = new HPanelComponent().style(new PanelStyle().alignment(ComponentAlignment.CENTER));
+            hPanel.child(
+                    new RectComponent().style(new RectStyle().backgroundColor(theme.textColor(MessageType.NORMAL)))
+                            .size(new Size(20, 1)));
+            hPanel.child(new TextComponent(title).scale(0.6f));
+            hPanel.child(
+                    new RectComponent().style(new RectStyle().backgroundColor(theme.textColor(MessageType.NORMAL)))
+                            .size(new Size(30, 1)));
+            tooltip.child(hPanel);
+        }
     }
 }

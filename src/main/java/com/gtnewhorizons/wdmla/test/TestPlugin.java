@@ -3,6 +3,11 @@ package com.gtnewhorizons.wdmla.test;
 import net.minecraft.block.BlockCommandBlock;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.block.BlockEndPortalFrame;
+import net.minecraft.block.BlockQuartz;
+import net.minecraft.block.BlockSign;
+import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.BlockWoodSlab;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 
@@ -18,15 +23,17 @@ public class TestPlugin implements IWDMlaPlugin {
         registration.registerEntityDataProvider(TestEntityProvider.INSTANCE, EntityPig.class);
         registration.registerItemStorage(TestItemStorageProvider.INSTANCE, BlockDispenser.class);
         registration.registerFluidStorage(TestFluidStorageProvider.INSTANCE, EntitySheep.class);
+        registration.registerProgress(TestProgressProvider.INSTANCE, BlockSign.class);
     }
 
     @Override
     public void registerClient(IWDMlaClientRegistration registration) {
         registration.registerBlockComponent(TestHeaderProvider.INSTANCE, BlockCommandBlock.class);
         registration.registerBlockComponent(TestNBTBlockProvider.INSTANCE, BlockCommandBlock.class);
-        registration.registerBlockComponent(TestThemeBlockProvider.INSTANCE, BlockDirt.class);
+        registration.registerBlockComponent(TestThemeBlockProvider.INSTANCE, BlockStoneSlab.class);
         registration.registerEntityComponent(TestEntityProvider.INSTANCE, EntityPig.class);
         registration.registerItemStorageClient(TestItemStorageProvider.INSTANCE);
         registration.registerFluidStorageClient(TestFluidStorageProvider.INSTANCE);
+        registration.registerProgressClient(TestProgressProvider.INSTANCE);
     }
 }

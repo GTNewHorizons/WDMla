@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.api;
 
+import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -45,6 +46,8 @@ public interface IWDMlaClientRegistration {
     void registerItemStorageClient(IClientExtensionProvider<ItemStack, ItemView> provider);
 
     void registerFluidStorageClient(IClientExtensionProvider<FluidView.Data, FluidView> provider);
+
+    void registerProgressClient(IClientExtensionProvider<ProgressView.Data, ProgressView> provider);
 
     /**
      * @return is server validation succeeded on world join

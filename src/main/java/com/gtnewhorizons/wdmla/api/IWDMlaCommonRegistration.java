@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.api;
 
+import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
@@ -42,4 +43,7 @@ public interface IWDMlaCommonRegistration {
 
     @ApiStatus.Experimental
     <T> void registerFluidStorage(IServerExtensionProvider<FluidView.Data> provider, Class<? extends T> clazz);
+
+    @ApiStatus.Experimental
+    <T> void registerProgress(IServerExtensionProvider<ProgressView.Data> provider, Class<? extends T> clazz);
 }
