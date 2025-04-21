@@ -5,49 +5,46 @@ import java.util.ArrayList;
 import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
 import com.gtnewhorizons.wdmla.api.ui.IComponent;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
-import com.gtnewhorizons.wdmla.api.ui.style.IAmountStyle;
+import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
 import com.gtnewhorizons.wdmla.api.ui.style.IRectStyle;
-import com.gtnewhorizons.wdmla.impl.ui.drawable.AmountDrawable;
+import com.gtnewhorizons.wdmla.impl.ui.drawable.ProgressDrawable;
 import com.gtnewhorizons.wdmla.impl.ui.drawable.RectDrawable;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Area;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Padding;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
 import com.gtnewhorizons.wdmla.impl.ui.style.RectStyle;
-import com.gtnewhorizons.wdmla.impl.ui.value.FilledAmount;
+import com.gtnewhorizons.wdmla.impl.ui.value.FilledProgress;
 import mcp.mobius.waila.utils.WailaExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * aka. ProgressComponent
- */
-public class AmountComponent extends TooltipComponent {
+public class ProgressComponent extends TooltipComponent {
 
     public static final int MINIMAL_W = 125;
     public static final int MINIMAL_H = 8;
     private final RectDrawable rectDrawable;
 
-    public AmountComponent(float ratio) {
+    public ProgressComponent(float ratio) {
         this(Math.round(ratio * 1000), 1000);
     }
 
-    public AmountComponent(long current, long max) {
+    public ProgressComponent(long current, long max) {
         super(
                 new ArrayList<>(),
                 new Padding(),
                 new Size(MINIMAL_W, MINIMAL_H),
-                new AmountDrawable(new FilledAmount(current, max)));
+                new ProgressDrawable(new FilledProgress(current, max)));
         this.rectDrawable = new RectDrawable().style(new RectStyle()
-                .backgroundColor(ColorPalette.AMOUNT_BACKGROUND)
-                .borderColor(ColorPalette.AMOUNT_BORDER));
-        //TODO:register AmountTracker to unify the Width of All AmountComponent
+                .backgroundColor(ColorPalette.PROGRESS_BACKGROUND)
+                .borderColor(ColorPalette.PROGRESS_BORDER));
+        //TODO:register ProgressTracker to unify the Width of All ProgressComponent
     }
 
-    public AmountComponent style(IAmountStyle style) {
-        ((AmountDrawable) foreground).style(style);
+    public ProgressComponent style(IProgressStyle style) {
+        ((ProgressDrawable) foreground).style(style);
         return this;
     }
 
-    public AmountComponent rectStyle(IRectStyle style) {
+    public ProgressComponent rectStyle(IRectStyle style) {
         rectDrawable.style(style);
         return this;
     }
@@ -65,7 +62,7 @@ public class AmountComponent extends TooltipComponent {
         }
         else {
             WailaExceptionHandler.handleErr(
-                    new IllegalArgumentException("AmountComponent only accepts one child! Consider appending PanelComponent if you want multiple."),
+                    new IllegalArgumentException("ProgressComponent only accepts one child! Consider appending PanelComponent if you want multiple."),
                     this.getClass().getName(), null);
         }
         int width = Math.max(size.getW(), children.get(0).getWidth());

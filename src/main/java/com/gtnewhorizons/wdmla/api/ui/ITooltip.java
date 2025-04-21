@@ -27,19 +27,21 @@ public interface ITooltip extends IComponent {
 
     ITooltip item(ItemStack stack);
 
-    ITooltip amount(long current, long max, String amountText);
+    ITooltip progress(long current, long max, String progressText);
 
+    //spotless:off
     /**
      * Appends any component to this tooltip as child.<br>
-     * Child component behaves same as normal component, except it can be searched from parent
-     * {@link ITooltip#getChildWithTag(ResourceLocation)} and its position might be affected by parent position and
-     * setting Any tooltip is (mostly) the child of {@link com.gtnewhorizons.wdmla.impl.ui.component.RootComponent}. It
-     * can be chained like this:
+     * Child component behaves same as normal component, except it can be searched from parent with
+     * {@link ITooltip#getChildWithTag(ResourceLocation)}.<br>
+     * Its position might be affected by the parent position and setting.<br>
+     * Any tooltip is (mostly) the child of {@link com.gtnewhorizons.wdmla.impl.ui.component.RootComponent}. <br>
+     * It can be chained like this:
      * 
      * <pre>
      * {@code
      *             tooltip.child(new HPanelComponent().text("example1").item(new ItemStack(Items.apple)))
-     *                     .child(new AmountComponent(10, 100))
+     *                     .child(new ProgressComponent(10, 100))
      *                     .child(new ArmorComponent(10));
      * }
      * </pre>
@@ -47,6 +49,7 @@ public interface ITooltip extends IComponent {
      * @param child The component which will be the child of this component
      * @return this tooltip instance
      */
+    //spotless:on
     ITooltip child(@NotNull IComponent child);
 
     /**

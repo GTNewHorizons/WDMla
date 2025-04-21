@@ -1,7 +1,7 @@
 package com.gtnewhorizons.wdmla.api.view;
 
 import com.gtnewhorizons.wdmla.api.ui.IComponent;
-import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
 import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -9,8 +9,11 @@ import org.jetbrains.annotations.Nullable;
 @ApiStatus.Experimental
 public class ProgressView {
 
+	/**
+	 * if the style is null, the default progress style is applied
+	 */
 	@Nullable
-	public AmountStyle style;
+	public ProgressStyle style;
 	public long progress;
     public long maxProgress;
 	@Nullable
@@ -21,7 +24,7 @@ public class ProgressView {
 	 */
 	public boolean hasScale;
 
-	public ProgressView(@Nullable AmountStyle style) {
+	public ProgressView(@Nullable ProgressStyle style) {
 		this.style = style;
 	}
 

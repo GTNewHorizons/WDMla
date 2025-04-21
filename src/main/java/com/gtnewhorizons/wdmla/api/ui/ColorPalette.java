@@ -23,13 +23,11 @@ public final class ColorPalette {
     // other colors
     public static final int NO_BORDER = 0x00000000;
 
-    public static final int AMOUNT_BORDER = 0xFF555555;
-    public static final int AMOUNT_BACKGROUND = 0x00FFFFFF; //transparent
-    public static final int AMOUNT_FILLED = 0xFFD7D7D7;
-    public static final int AMOUNT_FILLED_ALTERNATE = 0xFFD7D7D7;
-
+    public static final int PROGRESS_BORDER = 0xFF555555;
+    public static final int PROGRESS_BACKGROUND = 0x00FFFFFF; //transparent
     public static final int PROGRESS_FILLED = 0xFFFFCC00;
     public static final int PROGRESS_FILLED_ALTERNATE = 0xFFBB9900;
+
     public static final int ENERGY_FILLED = 0xFFAA0000;
     public static final int ENERGY_FILLED_ALTERNATE = 0xFF660000;
 

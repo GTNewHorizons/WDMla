@@ -1,27 +1,27 @@
 package com.gtnewhorizons.wdmla.impl.ui.drawable;
 
+import com.gtnewhorizons.wdmla.api.ui.IFilledProgress;
+import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
 import com.gtnewhorizons.wdmla.util.Color;
 import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizons.wdmla.api.ui.IDrawable;
-import com.gtnewhorizons.wdmla.api.ui.IFilledAmount;
 import com.gtnewhorizons.wdmla.api.ui.sizer.IArea;
-import com.gtnewhorizons.wdmla.api.ui.style.IAmountStyle;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Area;
-import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
 import com.gtnewhorizons.wdmla.overlay.GuiDraw;
 
-public class AmountDrawable implements IDrawable {
+public class ProgressDrawable implements IDrawable {
 
-    private final @NotNull IFilledAmount progress;
-    private @NotNull IAmountStyle style;
+    private final @NotNull IFilledProgress progress;
+    private @NotNull IProgressStyle style;
 
-    public AmountDrawable(@NotNull IFilledAmount progress) {
+    public ProgressDrawable(@NotNull IFilledProgress progress) {
         this.progress = progress;
-        this.style = new AmountStyle();
+        this.style = new ProgressStyle();
     }
 
-    public AmountDrawable style(IAmountStyle style) {
+    public ProgressDrawable style(IProgressStyle style) {
         this.style = style;
         return this;
     }

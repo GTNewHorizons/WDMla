@@ -1,6 +1,6 @@
 package com.gtnewhorizons.wdmla.plugin.universal;
 
-import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_AMOUNT_TEXT_PADDING;
+import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import org.jetbrains.annotations.Nullable;
 import com.gtnewhorizons.wdmla.ClientProxy;
 import com.gtnewhorizons.wdmla.CommonProxy;
 import com.gtnewhorizons.wdmla.api.Identifiers;
-import com.gtnewhorizons.wdmla.api.Theme;
 import com.gtnewhorizons.wdmla.api.TooltipPosition;
 import com.gtnewhorizons.wdmla.api.accessor.Accessor;
 import com.gtnewhorizons.wdmla.api.accessor.BlockAccessor;
@@ -29,10 +28,8 @@ import com.gtnewhorizons.wdmla.api.provider.IComponentProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerDataProvider;
 import com.gtnewhorizons.wdmla.api.provider.IServerExtensionProvider;
 import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
-import com.gtnewhorizons.wdmla.api.ui.ComponentAlignment;
 import com.gtnewhorizons.wdmla.api.ui.IComponent;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
-import com.gtnewhorizons.wdmla.api.ui.MessageType;
 import com.gtnewhorizons.wdmla.api.view.ClientViewGroup;
 import com.gtnewhorizons.wdmla.api.view.FluidView;
 import com.gtnewhorizons.wdmla.api.view.ViewGroup;
@@ -41,18 +38,15 @@ import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import com.gtnewhorizons.wdmla.impl.WDMlaClientRegistration;
 import com.gtnewhorizons.wdmla.impl.WDMlaCommonRegistration;
 import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
-import com.gtnewhorizons.wdmla.impl.ui.component.AmountComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.FluidComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
-import com.gtnewhorizons.wdmla.impl.ui.component.RectComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.drawable.FluidDrawable;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Padding;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
-import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
-import com.gtnewhorizons.wdmla.impl.ui.style.PanelStyle;
-import com.gtnewhorizons.wdmla.impl.ui.style.RectStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
 import com.gtnewhorizons.wdmla.util.FormatUtil;
 
 import mcp.mobius.waila.overlay.DisplayUtil;
@@ -133,14 +127,14 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
                 switch (showMode) {
                     case GAUGE -> {
                         // TODO:invert text color with bright fluid
-                        AmountStyle amountStyle = new AmountStyle().overlay(new FluidDrawable(view.overlay));
+                        ProgressStyle progressStyle = new ProgressStyle().singleColor(ColorPalette.PROGRESS_FILLED).overlay(new FluidDrawable(view.overlay));
                         if (view.hasScale) {
-                            amountStyle.alternateFilledColor(ColorPalette.AMOUNT_BORDER);
+                            progressStyle.alternateFilledColor(ColorPalette.PROGRESS_BORDER);
                         }
                         tooltip.child(
-                                new AmountComponent(view.current, view.max).style(amountStyle)
+                                new ProgressComponent(view.current, view.max).style(progressStyle)
                                         .child(
-                                                new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING)
+                                                new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
                                                         .child(mainText)));
                     }
                     case ICON_TEXT -> {

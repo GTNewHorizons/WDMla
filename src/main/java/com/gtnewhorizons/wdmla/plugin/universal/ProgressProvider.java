@@ -17,9 +17,9 @@ import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import com.gtnewhorizons.wdmla.api.view.ViewGroup;
 import com.gtnewhorizons.wdmla.impl.WDMlaClientRegistration;
 import com.gtnewhorizons.wdmla.impl.WDMlaCommonRegistration;
-import com.gtnewhorizons.wdmla.impl.ui.component.AmountComponent;
+import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
-import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_AMOUNT_TEXT_PADDING;
+import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
 
 public class ProgressProvider<T extends Accessor> implements IComponentProvider<T>, IServerDataProvider<T> {
 
@@ -66,13 +66,13 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
                 group.renderHeader(theTooltip);
             }
             for (var view : group.views) {
-                AmountStyle amountStyle = view.style == null ? new AmountStyle().singleColor(ColorPalette.PROGRESS_FILLED) : view.style;
+                ProgressStyle progressStyle = view.style == null ? new ProgressStyle().singleColor(ColorPalette.PROGRESS_FILLED) : view.style;
                 if (view.hasScale && view.style == null) {
-                    amountStyle.alternateFilledColor(ColorPalette.PROGRESS_FILLED_ALTERNATE);
+                    progressStyle.alternateFilledColor(ColorPalette.PROGRESS_FILLED_ALTERNATE);
                 }
-                AmountComponent progress = new AmountComponent(view.progress, view.maxProgress).style(amountStyle);
+                ProgressComponent progress = new ProgressComponent(view.progress, view.maxProgress).style(progressStyle);
                 if (view.description != null) {
-                    progress.child(new VPanelComponent().padding(DEFAULT_AMOUNT_TEXT_PADDING)
+                    progress.child(new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING)
                             .child(view.description));
                 }
                 tooltip.child(progress);

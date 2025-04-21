@@ -19,7 +19,7 @@ public class TooltipComponent extends Component implements ITooltip {
 
     protected List<IComponent> children;
 
-    public static final IPadding DEFAULT_AMOUNT_TEXT_PADDING = new Padding(3, 2, 2, 3);
+    public static final IPadding DEFAULT_PROGRESS_DESCRIPTION_PADDING = new Padding(3, 2, 2, 3);
 
     protected TooltipComponent(List<IComponent> children, IPadding padding, ISize size, IDrawable foreground) {
         super(padding, size, foreground);
@@ -96,9 +96,9 @@ public class TooltipComponent extends Component implements ITooltip {
     }
 
     @Override
-    public ITooltip amount(long current, long max, String amountText) {
-        ITooltip c = new AmountComponent(current, max)
-                .child(new TextComponent(amountText).padding(DEFAULT_AMOUNT_TEXT_PADDING));
+    public ITooltip progress(long current, long max, String progressText) {
+        ITooltip c = new ProgressComponent(current, max)
+                .child(new TextComponent(progressText).padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING));
         this.children.add(c);
         return this;
     }

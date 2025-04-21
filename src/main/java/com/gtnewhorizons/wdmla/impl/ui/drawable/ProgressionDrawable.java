@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizons.wdmla.api.ui.IDrawable;
-import com.gtnewhorizons.wdmla.api.ui.IFilledAmount;
+import com.gtnewhorizons.wdmla.api.ui.IFilledProgress;
 import com.gtnewhorizons.wdmla.api.ui.sizer.IArea;
 import com.gtnewhorizons.wdmla.overlay.GuiDraw;
 
@@ -14,9 +14,9 @@ public class ProgressionDrawable implements IDrawable {
 
     private final Minecraft mc = Minecraft.getMinecraft();
     private final ResourceLocation texture = new ResourceLocation("waila", "textures/sprites.png");
-    private final @NotNull IFilledAmount progress;
+    private final @NotNull IFilledProgress progress;
 
-    public ProgressionDrawable(@NotNull IFilledAmount progress) {
+    public ProgressionDrawable(@NotNull IFilledProgress progress) {
         this.progress = progress;
     }
 

@@ -1,11 +1,9 @@
 package com.gtnewhorizons.wdmla.impl.ui;
 
-import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_AMOUNT_TEXT_PADDING;
 import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 
 import java.util.List;
 
-import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
@@ -21,7 +19,6 @@ import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.ui.MessageType;
 import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.format.TimeFormattingPattern;
-import com.gtnewhorizons.wdmla.impl.ui.component.AmountComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.ItemComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;

@@ -1,21 +1,21 @@
 package com.gtnewhorizons.wdmla.impl.ui.value;
 
-import com.gtnewhorizons.wdmla.api.ui.IFilledAmount;
+import com.gtnewhorizons.wdmla.api.ui.IFilledProgress;
 
-public class FilledAmount implements IFilledAmount {
+public class FilledProgress implements IFilledProgress {
 
     long current;
     long max;
 
-    public FilledAmount(long current, long max) {
+    public FilledProgress(long current, long max) {
         if (current < 0) {
             current = 0;
         }
         if (max < 0) {
-            throw new IllegalArgumentException("Max amount cannot below zero.");
+            throw new IllegalArgumentException("Max Progress cannot below zero.");
         }
         if (current > max) {
-            throw new IllegalArgumentException("Current amount cannot exceed max amount.");
+            throw new IllegalArgumentException("Current progress cannot exceed max progress.");
         }
 
         this.current = current;

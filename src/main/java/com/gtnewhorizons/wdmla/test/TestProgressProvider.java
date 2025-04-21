@@ -9,7 +9,7 @@ import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import com.gtnewhorizons.wdmla.api.view.ViewGroup;
 import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
-import com.gtnewhorizons.wdmla.impl.ui.style.AmountStyle;
+import com.gtnewhorizons.wdmla.impl.ui.style.ProgressStyle;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -34,7 +34,7 @@ public enum TestProgressProvider implements IServerExtensionProvider<ProgressVie
             view.hasScale = true;
 
             view = clientGroup.views.get(1);
-            view.style = new AmountStyle().singleColor(0xFF00CC00);
+            view.style = new ProgressStyle().singleColor(0xFF00CC00);
             view.description = new TextComponent("Test");
         });
     }

@@ -113,6 +113,4 @@ public class General {
             BOTTOM
         }
     }
-
-    // TODO:AmountStyle Config
 }
