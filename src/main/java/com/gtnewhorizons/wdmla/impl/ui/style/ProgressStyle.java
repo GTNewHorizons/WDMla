@@ -27,18 +27,12 @@ public class ProgressStyle implements IProgressStyle {
         this.overlay = null;
     }
 
-    public ProgressStyle singleColor(int color) {
-        this.filledColor = color;
-        this.alternateFilledColor = color;
-        return this;
+    public ProgressStyle singleColor(int singleColor) {
+        return color(singleColor, singleColor);
     }
 
-    public ProgressStyle filledColor(int filledColor) {
+    public ProgressStyle color(int filledColor, int alternateFilledColor) {
         this.filledColor = filledColor;
-        return this;
-    }
-
-    public ProgressStyle alternateFilledColor(int alternateFilledColor) {
         this.alternateFilledColor = alternateFilledColor;
         return this;
     }

@@ -38,7 +38,7 @@ public enum TestThemeBlockProvider implements IBlockComponentProvider {
         tooltip.child(ThemeHelper.INSTANCE.danger("This is danger"));
         tooltip.child(ThemeHelper.INSTANCE.failure("This is failure"));
         tooltip.child(new ProgressComponent(8,10)
-                .style(new ProgressStyle().filledColor(ColorPalette.ENERGY_FILLED).alternateFilledColor(ColorPalette.ENERGY_FILLED_ALTERNATE))
+                .style(new ProgressStyle().color(ColorPalette.ENERGY_FILLED, ColorPalette.ENERGY_FILLED_ALTERNATE))
                 .child(new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING).child(new TextComponent("Test Energy: 8μI / 10μI"))));
 
         tooltip.child(ThemeHelper.INSTANCE.value("The answer", "42"));

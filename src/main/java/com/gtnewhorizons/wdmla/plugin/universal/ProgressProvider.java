@@ -68,7 +68,7 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
             for (var view : group.views) {
                 ProgressStyle progressStyle = view.style == null ? new ProgressStyle().singleColor(ColorPalette.PROGRESS_FILLED) : view.style;
                 if (view.hasScale && view.style == null) {
-                    progressStyle.alternateFilledColor(ColorPalette.PROGRESS_FILLED_ALTERNATE);
+                    progressStyle.color(ColorPalette.PROGRESS_FILLED, ColorPalette.PROGRESS_FILLED_ALTERNATE);
                 }
                 ProgressComponent progress = new ProgressComponent(view.progress, view.maxProgress).style(progressStyle);
                 if (view.description != null) {

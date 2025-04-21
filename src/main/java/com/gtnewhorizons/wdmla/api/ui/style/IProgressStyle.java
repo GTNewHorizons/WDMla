@@ -21,12 +21,13 @@ public interface IProgressStyle {
     /**
      * TODO:animated sprite instead of single color
      * 
-     * @return the single color for partially filling the background rectangle.
+     * @return The single color for partially filling the background rectangle.
      */
     int getFilledColor();
 
     /**
-     * @return the color which is applied to the vertical indicator of the bar
+     * @return The color which is applied to the vertical indicator of the bar.
+     * It will not be rendered unless specified.
      */
     int getAlternateFilledColor();
 }

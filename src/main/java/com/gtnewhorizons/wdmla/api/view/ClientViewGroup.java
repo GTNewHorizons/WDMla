@@ -74,7 +74,7 @@ public class ClientViewGroup<T> {
                 IComponent content = new TextComponent(String.format("%d%%", (int) (group.boxProgress * 100)));
                 tooltip.child(
                         new ProgressComponent(group.boxProgress).style(
-                                new ProgressStyle().filledColor(General.currentTheme.get().textColor(group.messageType)))
+                                new ProgressStyle().singleColor(General.currentTheme.get().textColor(group.messageType)))
                                 .child(new VPanelComponent().padding(DEFAULT_PROGRESS_DESCRIPTION_PADDING).child(content)));
             }
         }
