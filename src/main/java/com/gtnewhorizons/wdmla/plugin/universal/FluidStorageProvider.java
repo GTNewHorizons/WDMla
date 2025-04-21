@@ -233,7 +233,7 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
 
     @Override
     public int getDefaultPriority() {
-        return TooltipPosition.TAIL;
+        return TooltipPosition.TAIL + 200;
     }
 
     @Override

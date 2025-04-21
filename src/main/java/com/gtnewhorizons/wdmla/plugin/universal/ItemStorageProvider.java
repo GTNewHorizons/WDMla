@@ -263,7 +263,7 @@ public class ItemStorageProvider<T extends Accessor> implements IComponentProvid
 
     @Override
     public int getDefaultPriority() {
-        return TooltipPosition.TAIL;
+        return TooltipPosition.TAIL + 100;
     }
 
     @Override

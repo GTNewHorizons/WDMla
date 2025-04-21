@@ -150,7 +150,7 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
 
     @Override
     public int getDefaultPriority() {
-        return TooltipPosition.BODY + 1000;
+        return TooltipPosition.TAIL + 400;
     }
 
     @Override
