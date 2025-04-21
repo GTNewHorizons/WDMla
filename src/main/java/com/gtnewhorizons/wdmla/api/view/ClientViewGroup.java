@@ -3,6 +3,7 @@ package com.gtnewhorizons.wdmla.api.view;
 import static com.gtnewhorizons.wdmla.impl.ui.component.TooltipComponent.DEFAULT_PROGRESS_DESCRIPTION_PADDING;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -48,7 +49,7 @@ public class ClientViewGroup<T> {
             @Nullable BiConsumer<ViewGroup<IN>, ClientViewGroup<OUT>> clientGroupDecorator) {
         return groups.stream().map($ -> {
             ClientViewGroup<OUT> group = new ClientViewGroup<>(
-                    $.views.stream().map(itemFactory).collect(Collectors.toList()));
+                    $.views.stream().map(itemFactory).filter(Objects::nonNull).collect(Collectors.toList()));
             NBTTagCompound data = $.extraData;
             if (data != null) {
                 group.boxProgress = data.getFloat("Progress");
