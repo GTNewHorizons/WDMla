@@ -247,6 +247,12 @@ option.wdmla.general.textcolor.danger=Danger
 option.wdmla.general.textcolor.failure=Failure
 option.wdmla.general.textcolor.modname=Mod Name
 
+option.wdmla.progresscolor.category=Progress Bar Colors
+option.wdmla.general.progresscolor.background=Background
+option.wdmla.general.progresscolor.border=Background Border
+option.wdmla.general.progresscolor.filled=Progress Fill
+option.wdmla.general.progresscolor.filled.alternate=Progress Scale
+
 option.wdmla.breakprogress.category=Break Progress
 option.wdmla.general.breakprogress.mode=Display Mode
 option.wdmla.general.breakprogress.position=Position

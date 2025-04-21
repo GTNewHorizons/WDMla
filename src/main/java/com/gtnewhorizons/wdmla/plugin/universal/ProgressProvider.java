@@ -15,6 +15,7 @@ import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.view.ClientViewGroup;
 import com.gtnewhorizons.wdmla.api.view.ProgressView;
 import com.gtnewhorizons.wdmla.api.view.ViewGroup;
+import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.WDMlaClientRegistration;
 import com.gtnewhorizons.wdmla.impl.WDMlaCommonRegistration;
 import com.gtnewhorizons.wdmla.impl.ui.component.ProgressComponent;
@@ -66,9 +67,9 @@ public class ProgressProvider<T extends Accessor> implements IComponentProvider<
                 group.renderHeader(theTooltip);
             }
             for (var view : group.views) {
-                ProgressStyle progressStyle = view.style == null ? new ProgressStyle().singleColor(ColorPalette.PROGRESS_FILLED) : view.style;
+                ProgressStyle progressStyle = view.style == null ? new ProgressStyle().singleColor(General.progressColor.filled) : view.style;
                 if (view.hasScale && view.style == null) {
-                    progressStyle.color(ColorPalette.PROGRESS_FILLED, ColorPalette.PROGRESS_FILLED_ALTERNATE);
+                    progressStyle.color(General.progressColor.filled, General.progressColor.filledAlternate);
                 }
                 ProgressComponent progress = new ProgressComponent(view.progress, view.maxProgress).style(progressStyle);
                 if (view.description != null) {

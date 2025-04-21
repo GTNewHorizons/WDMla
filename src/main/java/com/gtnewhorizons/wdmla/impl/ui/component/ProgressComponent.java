@@ -7,6 +7,7 @@ import com.gtnewhorizons.wdmla.api.ui.IComponent;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
 import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
 import com.gtnewhorizons.wdmla.api.ui.style.IRectStyle;
+import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.ui.drawable.ProgressDrawable;
 import com.gtnewhorizons.wdmla.impl.ui.drawable.RectDrawable;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Area;
@@ -34,8 +35,8 @@ public class ProgressComponent extends TooltipComponent {
                 new Size(MINIMAL_W, MINIMAL_H),
                 new ProgressDrawable(new FilledProgress(current, max)));
         this.rectDrawable = new RectDrawable().style(new RectStyle()
-                .backgroundColor(ColorPalette.PROGRESS_BACKGROUND)
-                .borderColor(ColorPalette.PROGRESS_BORDER));
+                .backgroundColor(General.progressColor.background)
+                .borderColor(General.progressColor.border));
         //TODO:register ProgressTracker to unify the Width of All ProgressComponent
     }
 

@@ -19,6 +19,8 @@ public class General {
 
     public static TextColor textColor = new TextColor();
 
+    public static ProgressColor progressColor = new ProgressColor();
+
     public static BreakProgress breakProgress = new BreakProgress();
 
     @Config.LangKey("option.wdmla.general.forcelegacy")
@@ -77,6 +79,27 @@ public class General {
         @Config.LangKey("option.wdmla.general.textcolor.modname")
         @Config.DefaultInt(ColorPalette.MOD_NAME)
         public int modName;
+    }
+
+    @Config.Comment("The colors used in progress bar. \n" + "This category is shared between fluid, energy and general progress display.")
+    @Config.LangKey("option.wdmla.progresscolor.category")
+    public static class ProgressColor {
+
+        @Config.LangKey("option.wdmla.general.progresscolor.background")
+        @Config.DefaultInt(ColorPalette.PROGRESS_BACKGROUND)
+        public int background;
+
+        @Config.LangKey("option.wdmla.general.progresscolor.border")
+        @Config.DefaultInt(ColorPalette.PROGRESS_BORDER)
+        public int border;
+
+        @Config.LangKey("option.wdmla.general.progresscolor.filled")
+        @Config.DefaultInt(ColorPalette.PROGRESS_FILLED)
+        public int filled;
+
+        @Config.LangKey("option.wdmla.general.progresscolor.filled.alternate")
+        @Config.DefaultInt(ColorPalette.PROGRESS_FILLED_ALTERNATE)
+        public int filledAlternate;
     }
 
     @Config.LangKey("option.wdmla.breakprogress.category")

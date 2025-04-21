@@ -1,6 +1,7 @@
 package com.gtnewhorizons.wdmla.impl.ui.style;
 
 import com.gtnewhorizons.wdmla.api.ui.style.IProgressStyle;
+import com.gtnewhorizons.wdmla.config.General;
 import org.jetbrains.annotations.Nullable;
 
 import com.gtnewhorizons.wdmla.api.ui.ColorPalette;
@@ -22,8 +23,8 @@ public class ProgressStyle implements IProgressStyle {
 
     public ProgressStyle() {
         //fallback colors
-        this.filledColor = ColorPalette.PROGRESS_FILLED;
-        this.alternateFilledColor = ColorPalette.PROGRESS_FILLED;
+        this.filledColor = General.progressColor.filled;
+        this.alternateFilledColor = General.progressColor.filled;
         this.overlay = null;
     }
 

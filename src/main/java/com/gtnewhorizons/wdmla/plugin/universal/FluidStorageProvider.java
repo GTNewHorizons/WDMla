@@ -127,9 +127,11 @@ public class FluidStorageProvider<T extends Accessor> implements IComponentProvi
                 switch (showMode) {
                     case GAUGE -> {
                         // TODO:invert text color with bright fluid
-                        ProgressStyle progressStyle = new ProgressStyle().singleColor(ColorPalette.PROGRESS_FILLED).overlay(new FluidDrawable(view.overlay));
+                        ProgressStyle progressStyle = new ProgressStyle()
+                                .singleColor(General.progressColor.filled).overlay(new FluidDrawable(view.overlay));
                         if (view.hasScale) {
-                            progressStyle.color(ColorPalette.PROGRESS_FILLED, ColorPalette.PROGRESS_BORDER);
+                            //TODO: proper fluid scale color
+                            progressStyle.color(General.progressColor.filled, General.progressColor.border);
                         }
                         tooltip.child(
                                 new ProgressComponent(view.current, view.max).style(progressStyle)

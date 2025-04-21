@@ -1,12 +1,20 @@
 package com.gtnewhorizons.wdmla.api.ui;
 
 /**
- * Every color constant used in WDMla should be stored here for the accessibility.
+ * Every color constant used in WDMla should be stored here for the accessibility.<br>
+ * These are configurable values unless explicitly stated.<br>
+ * DO NOT USE THESE IN YOUR PROVIDER DIRECTLY!<br>
  */
 public final class ColorPalette {
 
-    // text colors
-    // access through theme
+    //non-configurable
+    public static final int TRANSPARENT = 0x00FFFFFF;
+
+    public static final int BREAK_PROGRESS_DEFAULT = 0xFFA0A0A0;
+    public static final int BREAK_PROGRESS_FAILURE = 0xFFAA0000;
+
+    // configurable
+    // text colors. access through theme
     public static final int DEFAULT = 0xFFA0A0A0;
     public static final int INFO = 0xFFFFFFFF;
     public static final int TITLE = 0xFFFFFFFF;
@@ -19,9 +27,6 @@ public final class ColorPalette {
     public static final int SUCCESS_JADE = 0xFF55FF55; // green
     public static final int SUCCESS_TOP = 0xFF55FF55; // green
     public static final int WARNING_TOP = 0xFFFFFF55; // yellow
-
-    // other colors
-    public static final int TRANSPARENT = 0x00FFFFFF;
 
     public static final int PROGRESS_BACKGROUND = TRANSPARENT;
     public static final int PROGRESS_BORDER = 0xFF555555;
@@ -45,7 +50,4 @@ public final class ColorPalette {
     public static final int BG_COLOR_TOP = 0xB3006699;
     public static final int BG_GRADIENT1_TOP = 0xB39999FF;
     public static final int BG_GRADIENT2_TOP = 0xB39999FF;
-
-    public static final int BREAK_PROGRESS_DEFAULT = 0xFFA0A0A0;
-    public static final int BREAK_PROGRESS_FAILURE = 0xFFAA0000;
 }
