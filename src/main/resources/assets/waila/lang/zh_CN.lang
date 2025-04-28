@@ -104,6 +104,8 @@ hud.msg.wdmla.seeing.block=查看方块视角
 hud.msg.wdmla.seeing.entity=查看实体视角
 hud.msg.wdmla.more.tanks=+%d个储罐
 hud.msg.wdmla.remaining.time=剩余时间
+hud.msg.wdmla.rng.multiplier=[+随机增益 ×%s]
+hud.msg.wdmla.milk.cooldown=挤奶冷却
 
 # state
 hud.msg.wdmla.mature=成熟
@@ -125,6 +127,8 @@ hud.msg.wdmla.idle=空闲中
 hud.msg.wdmla.working.disabled=工作已禁用
 hud.msg.wdmla.insufficient.energy=能量不足
 hud.msg.wdmla.insufficient.fuel=燃料不足
+hud.msg.wdmla.near.water=Near Water
+hud.msg.wdmla.cannot.hoe=Cannot Hoe
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
@@ -237,6 +241,15 @@ provider.wdmla.debug.hardness=方块硬度
 provider.wdmla.debug.blast.resistance=爆炸抗性
 provider.wdmla.debug.registry.data=注册表数据
 provider.wdmla.debug.coordinates=坐标
+
+provider.wdmla.hungeroverhaul.category=Hunger Overhaul
+provider.wdmla.hungeroverhaul.slow.chicken=Slower Chicken Activity
+provider.wdmla.hungeroverhaul.slow.animal=Slower Animal Activity
+provider.wdmla.hungeroverhaul.milk.cooldown=Milk Cooldown
+provider.wdmla.hungeroverhaul.hoe.result=Hoe Result
+
+provider.wdmla.harvestcraft.category=Pam's Harvestcraft
+provider.wdmla.harvestcraft.fruit.growth.rate=Fruit Growth
 
 # options
 
@@ -422,5 +435,6 @@ waila.keybind.recipe=[Waila]显示合成
 waila.keybind.usage=[Waila]显示可参与合成
 waila.keybind.testing=[Waila]测试
 waila.keybind.details=显示详细信息
+
 
 
