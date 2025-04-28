@@ -242,14 +242,14 @@ provider.wdmla.debug.blast.resistance=爆炸抗性
 provider.wdmla.debug.registry.data=注册表数据
 provider.wdmla.debug.coordinates=坐标
 
-provider.wdmla.hungeroverhaul.category=Hunger Overhaul
-provider.wdmla.hungeroverhaul.slow.chicken=Slower Chicken Activity
-provider.wdmla.hungeroverhaul.slow.animal=Slower Animal Activity
-provider.wdmla.hungeroverhaul.milk.cooldown=Milk Cooldown
-provider.wdmla.hungeroverhaul.hoe.result=Hoe Result
+provider.wdmla.hungeroverhaul.category=饥饿机制调整
+provider.wdmla.hungeroverhaul.slow.chicken=鸡活动减缓
+provider.wdmla.hungeroverhaul.slow.animal=动物活动减缓
+provider.wdmla.hungeroverhaul.milk.cooldown=挤奶冷却
+provider.wdmla.hungeroverhaul.hoe.result=锄地效果
 
-provider.wdmla.harvestcraft.category=Pam's Harvestcraft
-provider.wdmla.harvestcraft.fruit.growth.rate=Fruit Growth
+provider.wdmla.harvestcraft.category=潘马斯农场
+provider.wdmla.harvestcraft.fruit.growth.rate=水果生长速率
 
 # options
 
