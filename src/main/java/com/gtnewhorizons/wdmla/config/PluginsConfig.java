@@ -75,6 +75,14 @@ public class PluginsConfig {
             @Config.LangKey("option.wdmla.core.renderer.rotation.speed")
             @Config.DefaultInt(1)
             public int rendererRotationSpeed;
+
+            @Config.LangKey("option.wdmla.core.entity.icon.auto.scale")
+            @Config.DefaultBoolean(true)
+            public boolean iconAutoScale;
+
+            @Config.LangKey("option.wdmla.core.entity.default.scale")
+            @Config.DefaultFloat(1.2f)
+            public float defaultScale;
         }
     }
 

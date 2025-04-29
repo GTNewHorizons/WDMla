@@ -28,7 +28,8 @@ public class EntityDrawable implements IDrawable {
     public void draw(IArea area) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        // TODO: support float
+        float autoScale = Math.max(PluginsConfig.core.defaultEntity.defaultScale, 0.1f) / Math.max(entity.width, entity.height);
+        GL11.glPushMatrix();
         try {
             if(entity instanceof EntityLiving living) {
                 String bossName = BossStatus.bossName;
@@ -39,9 +40,13 @@ public class EntityDrawable implements IDrawable {
                 // editing entity custom name directly will trigger DataWatcher
                 RendererLivingEntity.NAME_TAG_RANGE = 0;
                 RendererLivingEntity.NAME_TAG_RANGE_SNEAK = 0;
+                GL11.glTranslatef(area.getX(), area.getY() + area.getH(), 0);
+                if(PluginsConfig.core.defaultEntity.iconAutoScale) {
+                    GL11.glScalef(autoScale, autoScale, 1.0f);
+                }
                 GuiInventory.func_147046_a(
-                        (int) area.getX(),
-                        (int) (area.getY() + area.getH()),
+                        0,
+                        0,
                         (int) area.getW(),
                         135,
                         0,
@@ -53,18 +58,24 @@ public class EntityDrawable implements IDrawable {
                 BossStatus.hasColorModifier = bossHasColorModifier;
             }
             else {
+                // yOffset
+                GL11.glTranslatef(area.getX(), (area.getY() + area.getH() - area.getW() / 2), 0);
+                if(PluginsConfig.core.defaultEntity.iconAutoScale) {
+                    GL11.glScalef(autoScale, autoScale, 1.0f);
+                }
                 GuiDraw.drawNonLivingEntity(
-                        (int) area.getX(),
-                        (int) (area.getY() + area.getH() - area.getW() / 2), //offset
+                        0,
+                        0,
                         (int) area.getW(),
                         135 + (entity.ticksExisted * PluginsConfig.core.defaultEntity.rendererRotationSpeed) % 360,
                         -0,
                         entity
                 );
             }
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
         } catch (Exception e) {
             Waila.log.error("Error rendering instance of entity", e);
         }
+        GL11.glPopMatrix();
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
     }
 }
