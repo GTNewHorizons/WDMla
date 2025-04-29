@@ -21,7 +21,6 @@ public enum Mods {
     TCONSTUCT("TConstruct", null),
     NOTENOUGHITEMS("NotEnoughItems", version -> new DefaultArtifactVersion("2.7.29-GTNH").compareTo(version) <= 0),
     FORGEMULTIPARTS("ForgeMultipart", null),
-    BLOCKRENDERER6343("blockrenderer6343", version -> new DefaultArtifactVersion("1.3.12-pre").compareTo(version) <= 0)
     ;
 
     public final String modID;
