@@ -28,7 +28,7 @@ public class EntityDrawable implements IDrawable {
     public void draw(IArea area) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        float autoScale = Math.max(PluginsConfig.core.defaultEntity.defaultScale, 0.1f) / Math.max(entity.width, entity.height);
+        float autoScale = Math.max(PluginsConfig.core.defaultEntity.iconDefaultScale, 0.1f) / Math.max(entity.width, entity.height);
         GL11.glPushMatrix();
         try {
             if(entity instanceof EntityLiving living) {

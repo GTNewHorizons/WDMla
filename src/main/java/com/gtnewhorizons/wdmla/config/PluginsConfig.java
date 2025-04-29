@@ -80,9 +80,9 @@ public class PluginsConfig {
             @Config.DefaultBoolean(true)
             public boolean iconAutoScale;
 
-            @Config.LangKey("option.wdmla.core.entity.default.scale")
+            @Config.LangKey("option.wdmla.core.entity.icon.default.scale")
             @Config.DefaultFloat(1.2f)
-            public float defaultScale;
+            public float iconDefaultScale;
         }
     }
 
