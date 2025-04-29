@@ -35,7 +35,7 @@ public enum MobSpawnerHeaderProvider implements IBlockComponentProvider {
                 }
 
                 ItemStack newStack = new ItemStack(Blocks.mob_spawner, 1, (int) entityID);
-                ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newStack);
+                ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newStack, false);
             }
         }
     }

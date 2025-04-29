@@ -33,7 +33,7 @@ public enum CustomMetaDataHeaderProvider implements IBlockComponentProvider {
 
         if (newItemStack != null) {
             ThemeHelper.INSTANCE.overrideTooltipTitle(tooltip, newItemStack);
-            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newItemStack);
+            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newItemStack, false);
         }
     }
 

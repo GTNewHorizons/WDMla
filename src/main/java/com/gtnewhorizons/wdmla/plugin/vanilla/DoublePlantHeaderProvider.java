@@ -23,7 +23,7 @@ public enum DoublePlantHeaderProvider implements IBlockComponentProvider {
             int meta = accessor.getWorld().getBlockMetadata(x, y, z);
 
             ItemStack newStack = new ItemStack(Blocks.double_plant, 0, meta);
-            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newStack);
+            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newStack, false);
             ThemeHelper.INSTANCE.overrideTooltipTitle(tooltip, newStack);
         }
     }

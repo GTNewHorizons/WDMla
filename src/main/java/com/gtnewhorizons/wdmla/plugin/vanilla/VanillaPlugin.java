@@ -183,7 +183,7 @@ public class VanillaPlugin implements IWDMlaPlugin {
 
         @Override
         public void appendTooltip(ITooltip tooltip, BlockAccessor accessor) {
-            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Items.redstone));
+            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Items.redstone), false);
         }
 
         @Override

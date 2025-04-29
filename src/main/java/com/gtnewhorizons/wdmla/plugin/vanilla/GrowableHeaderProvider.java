@@ -23,9 +23,9 @@ public enum GrowableHeaderProvider implements IBlockComponentProvider {
             ThemeHelper.INSTANCE
                     .overrideTooltipTitle(tooltip, StatCollector.translateToLocal("hud.msg.wdmla.wheatcrop"));
         } else if (accessor.getBlock().equals(Blocks.carrots)) {
-            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Items.carrot));
+            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Items.carrot), false);
         } else if (accessor.getBlock().equals(Blocks.potatoes)) {
-            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Items.potato));
+            ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Items.potato), false);
         } else if (accessor.getBlock().equals(Blocks.pumpkin_stem)) {
             ThemeHelper.INSTANCE
                     .overrideTooltipTitle(tooltip, StatCollector.translateToLocal("hud.msg.wdmla.pumpkinstem"));

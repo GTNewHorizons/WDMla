@@ -4,6 +4,7 @@ import static mcp.mobius.waila.api.SpecialChars.ITALIC;
 
 import java.util.List;
 
+import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -46,7 +47,16 @@ public class ThemeHelper {
 
     }
 
+    @Deprecated
     public void overrideTooltipIcon(ITooltip root, ItemStack newItemStack) {
+        overrideTooltipIcon(root, newItemStack, false);
+    }
+
+    public void overrideTooltipIcon(ITooltip root, ItemStack newItemStack, boolean overrideFancyRenderer) {
+        if(!overrideFancyRenderer && PluginsConfig.core.defaultBlock.fancyRenderer) {
+            return;
+        }
+
         root.replaceChildWithTag(
                 Identifiers.ITEM_ICON,
                 new ItemComponent(newItemStack).doDrawOverlay(false).tag(Identifiers.ITEM_ICON));
@@ -87,7 +97,7 @@ public class ThemeHelper {
     }
 
     public void overrideTooltipHeader(ITooltip root, ItemStack newItemStack) {
-        overrideTooltipIcon(root, newItemStack);
+        overrideTooltipIcon(root, newItemStack, false);
         overrideTooltipTitle(root, newItemStack);
         overrideTooltipModName(root, newItemStack);
     }

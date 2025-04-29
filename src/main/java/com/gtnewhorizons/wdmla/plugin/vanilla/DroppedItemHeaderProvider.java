@@ -19,7 +19,7 @@ public enum DroppedItemHeaderProvider implements IBlockComponentProvider {
                 accessor.getBlock(),
                 1,
                 accessor.getBlock().damageDropped(accessor.getMetadata()));
-        ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newStack);
+        ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, newStack, false);
         ThemeHelper.INSTANCE.overrideTooltipTitle(tooltip, newStack);
     }
 

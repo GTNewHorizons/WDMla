@@ -30,7 +30,7 @@ public enum TestHeaderProvider implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor) {
-        ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Blocks.lit_furnace));
+        ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Blocks.lit_furnace), true);
         ThemeHelper.INSTANCE.overrideTooltipTitle(tooltip, "Furnace");
         tooltip.replaceChildWithTag(
                 Identifiers.MOD_NAME,
