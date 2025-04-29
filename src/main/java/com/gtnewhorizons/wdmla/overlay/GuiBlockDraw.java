@@ -1,6 +1,7 @@
 package com.gtnewhorizons.wdmla.overlay;
 
 import com.gtnewhorizon.gtnhlib.blockpos.BlockPos;
+import com.gtnewhorizons.wdmla.util.HotSwapUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -16,7 +17,6 @@ import org.joml.Vector3f;
 import org.joml.Vector4i;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import org.lwjgl.util.glu.GLU;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -104,13 +104,13 @@ public class GuiBlockDraw {
         glLoadIdentity();
 
         float aspectRatio = width / (height * 1.0f);
-        GLU.gluPerspective(60.0f, aspectRatio, 0.1f, 10000.0f);
+        HotSwapUtil.gluPerspective(60.0f, aspectRatio, 0.1f, 10000.0f);
 
         // setup modelview matrix
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
-        GLU.gluLookAt(eyePos.x, eyePos.y, eyePos.z, lookAt.x, lookAt.y, lookAt.z, worldUp.x, worldUp.y, worldUp.z);
+        HotSwapUtil.gluLookat(eyePos.x, eyePos.y, eyePos.z, lookAt.x, lookAt.y, lookAt.z, worldUp.x, worldUp.y, worldUp.z);
     }
 
     protected void scissorView(int x, int y, int width, int height) {
