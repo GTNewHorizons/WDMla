@@ -47,6 +47,10 @@ public class PluginsConfig {
             @Config.LangKey("option.wdmla.core.fancy.renderer")
             @Config.DefaultBoolean(true)
             public boolean fancyRenderer;
+
+            @Config.LangKey("option.wdmla.core.renderer.rotation.speed")
+            @Config.DefaultInt(1)
+            public int rendererRotationSpeed;
         }
 
         @Config.LangKey("provider.wdmla.core.default.entity")
@@ -67,6 +71,10 @@ public class PluginsConfig {
             @Config.LangKey("option.wdmla.core.fancy.renderer")
             @Config.DefaultBoolean(true)
             public boolean fancyRenderer;
+
+            @Config.LangKey("option.wdmla.core.renderer.rotation.speed")
+            @Config.DefaultInt(1)
+            public int rendererRotationSpeed;
         }
     }
 

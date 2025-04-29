@@ -298,6 +298,7 @@ option.wdmla.core.show.modname=Show Mod Name
 option.wdmla.core.show.entity=Render Entity
 option.wdmla.core.show.entityname=Show Entity Name
 option.wdmla.core.fancy.renderer=Fancy Renderer
+option.wdmla.core.renderer.rotation.speed=Renderer Rotation Speed
 
 # universal options
 option.wdmla.universal.normal.amount=Normal Amount

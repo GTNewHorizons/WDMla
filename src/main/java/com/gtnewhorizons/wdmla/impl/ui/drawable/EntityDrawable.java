@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.impl.ui.drawable;
 
+import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import com.gtnewhorizons.wdmla.overlay.GuiDraw;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
@@ -56,7 +57,7 @@ public class EntityDrawable implements IDrawable {
                         (int) area.getX(),
                         (int) (area.getY() + area.getH() - area.getW() / 2), //offset
                         (int) area.getW(),
-                        135 + (entity.ticksExisted * 1) % 360,
+                        135 + (entity.ticksExisted * PluginsConfig.core.defaultEntity.rendererRotationSpeed) % 360,
                         -0,
                         entity
                 );

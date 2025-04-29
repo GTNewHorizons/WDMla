@@ -3,6 +3,7 @@ package com.gtnewhorizons.wdmla.impl.ui.drawable;
 import blockrenderer6343.integration.wdmla.HUDBlockHandler;
 import com.gtnewhorizons.wdmla.api.ui.IDrawable;
 import com.gtnewhorizons.wdmla.api.ui.sizer.IArea;
+import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import mcp.mobius.waila.overlay.OverlayConfig;
 import net.minecraft.client.Minecraft;
 
@@ -26,7 +27,8 @@ public class WorldBlockDrawable implements IDrawable {
     @Override
     public void draw(IArea area) {
         //TODO: get RenderPartialTick
-        rotationPitch += (Minecraft.getMinecraft().theWorld.getTotalWorldTime() - lastTime) * 1.0f;
+        rotationPitch += (Minecraft.getMinecraft().theWorld.getTotalWorldTime() - lastTime)
+                * PluginsConfig.core.defaultEntity.rendererRotationSpeed;
         //custom viewport is unaffected by GLScalef
         HUDBlockHandler.drawWorldBlock(
                 (int) ((area.getX() - area.getW() * (SIZE_MULTIPLIER - 1)  / 2) * OverlayConfig.scale),
