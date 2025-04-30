@@ -106,6 +106,9 @@ hud.msg.wdmla.more.tanks=+%d个储罐
 hud.msg.wdmla.remaining.time=剩余时间
 hud.msg.wdmla.rng.multiplier=[+随机增益 ×%s]
 hud.msg.wdmla.milk.cooldown=挤奶冷却
+hud.msg.wdmla.must.surround=必须被%s包围
+hud.msg.wdmla.dirt.or.grass=泥土或草方块
+hud.msg.wdmla.any.fluid=任意流体
 
 # state
 hud.msg.wdmla.mature=成熟
@@ -127,8 +130,8 @@ hud.msg.wdmla.idle=空闲中
 hud.msg.wdmla.working.disabled=工作已禁用
 hud.msg.wdmla.insufficient.energy=能量不足
 hud.msg.wdmla.insufficient.fuel=燃料不足
-hud.msg.wdmla.near.water=Near Water
-hud.msg.wdmla.cannot.hoe=Cannot Hoe
+hud.msg.wdmla.near.water=靠近水源
+hud.msg.wdmla.cannot.hoe=无法锄地
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
@@ -231,6 +234,9 @@ provider.wdmla.minecraft.te.custom.name.header=自定义名称方块标题
 provider.wdmla.minecraft.cauldron=炼药锅
 provider.wdmla.minecraft.minecart.command.block=命令方块矿车
 provider.wdmla.minecraft.minecart.furnace=动力矿车
+provider.wdmla.minecraft.snow.layer=雪
+provider.wdmla.minecraft.ender.dragon.header=末影龙标题
+provider.wdmla.minecraft.end.portal.header=末地传送门标题
 
 provider.wdmla.harvestability.category=Waila Harvestability
 provider.wdmla.harvestability.legacy=旧版模式
@@ -250,6 +256,8 @@ provider.wdmla.hungeroverhaul.hoe.result=锄地效果
 
 provider.wdmla.harvestcraft.category=潘马斯农场
 provider.wdmla.harvestcraft.fruit.growth.rate=水果生长速率
+provider.wdmla.harvestcraft.animal.trap=捕兽笼
+provider.wdmla.harvestcraft.fish.trap=渔栅
 
 # options
 
@@ -260,6 +268,7 @@ option.wdmla.general.ghostproduct=虚像物品
 option.wdmla.general.theme=主题预设
 option.wdmla.general.previewincfg=配置预览
 option.wdmla.general.customnameoverride=自定义名称覆盖
+option.wdmla.general.maxnamelengthpixel=最大名称长度（像素）
 
 option.wdmla.textcolor.category=文本颜色
 option.wdmla.general.textcolor.info=信息颜色
@@ -297,6 +306,10 @@ option.wdmla.core.show.blockname=显示方块名称
 option.wdmla.core.show.modname=显示模组名称
 option.wdmla.core.show.entity=渲染实体
 option.wdmla.core.show.entityname=显示实体名称
+option.wdmla.core.fancy.renderer=高级渲染器
+option.wdmla.core.renderer.rotation.speed=高级渲染器旋转速度
+option.wdmla.core.entity.icon.auto.scale=图标自动缩放
+option.wdmla.core.entity.icon.default.scale=图标默认缩放
 
 # universal options
 option.wdmla.universal.normal.amount=普通数量
@@ -394,6 +407,9 @@ option.stevescarts.colorblind=色盲模式
 option.stevescarts.shifttoggle=潜行切换
 option.thaumcraft.aspects=显示要素
 
+
+# missing block key section
+block.EndPortal.name=末地传送门
 
 # missing entity key section
 # vanilla minecart uses special switch case to add lang key
