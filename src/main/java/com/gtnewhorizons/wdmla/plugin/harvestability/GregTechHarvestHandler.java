@@ -23,7 +23,7 @@ public enum GregTechHarvestHandler implements HarvestHandler {
     public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
                             EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if(phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_ICON) {
-            if (info.harvestLevel != -1 && info.effectiveTool != null) {
+            if (info.harvestLevel != -1 && info.effectiveTool != null && info.effectiveToolIcon == null) {
                 info.effectiveToolIcon = ProxyGregTech.getEffectiveGregToolIcon(info.effectiveTool, info.harvestLevel);
             }
         }
