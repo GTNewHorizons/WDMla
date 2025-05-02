@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability;
 
+import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.provider.HarvestHandler;
@@ -14,17 +15,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public enum GregTechHarvestHandler implements HarvestHandler {
     INSTANCE;
 
     @Override
     public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
                             EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
-        if(phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_ICON) {
-            if (info.harvestLevel != -1 && info.effectiveTool != null && info.effectiveToolIcon == null) {
-                info.effectiveToolIcon = ProxyGregTech.getEffectiveGregToolIcon(info.effectiveTool, info.harvestLevel);
+        if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
+            if(info.effectiveTool.isSameTool(ProxyGregTech.toolWrench)) {
+                info.effectiveTool = ProxyGregTech.toolWrench;
+            }
+            else if (info.effectiveTool.isSameTool(ProxyGregTech.toolWireCutter)) {
+                info.effectiveTool = ProxyGregTech.toolWireCutter;
             }
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
@@ -62,7 +64,7 @@ public enum GregTechHarvestHandler implements HarvestHandler {
 
     // run full check
     public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld,
-                                          String effectiveTool, int harvestLevel) {
+                                          EffectiveTool effectiveTool, int harvestLevel) {
         boolean isHoldingTinkersTool = ProxyTinkersConstruct.hasToolTag(itemHeld);
         boolean isHeldToolCorrect = isHeldToolCorrect(
                 player,
@@ -78,12 +80,12 @@ public enum GregTechHarvestHandler implements HarvestHandler {
     }
 
     public static boolean isHeldToolCorrect(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld,
-                                            String effectiveTool, boolean isHoldingTinkersTool) {
+                                            EffectiveTool effectiveTool, boolean isHoldingTinkersTool) {
         if (ProxyGregTech.isMachine(block)) {
             // GT_MetaGenerated_Tool's getDigSpeed is broken
-            return Objects.equals(effectiveTool, ProxyGregTech.TOOL_WRENCH)
+            return effectiveTool.isSameTool(ProxyGregTech.toolWrench)
                     && ProxyGregTech.isWrench(itemHeld)
-                    || Objects.equals(effectiveTool, ProxyGregTech.TOOL_WIRE_CUTTER)
+                    || effectiveTool.isSameTool(ProxyGregTech.toolWireCutter)
                     && ProxyGregTech.isWireCutter(itemHeld);
         } else if (ProxyGregTech.isGTTool(itemHeld)) {
             // GT tool don't care net.minecraft.block.material.Material#isToolNotRequired

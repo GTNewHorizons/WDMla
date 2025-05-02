@@ -15,7 +15,7 @@ public class HarvestabilityInfo {
     public Block block = Blocks.air;
     public int meta = 0;
 
-    public String effectiveTool = null;
+    public @NotNull EffectiveTool effectiveTool = new EffectiveTool(null, null);
     /**
      * if -1: hand(no tool)
      */
@@ -26,6 +26,7 @@ public class HarvestabilityInfo {
     /**
      * the primary harvest tool (pickaxe for hopper, shovel for dirt...)
      */
+    //pending removal
     public ItemStack effectiveToolIcon = null;
 
     /**

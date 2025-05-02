@@ -19,18 +19,18 @@ public enum TinkersHarvestHandler implements HarvestHandler {
 
     @Override
     public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
-        if (phase == HarvestabilityTestPhase.HARVEST_LEVEL_NAME) {
-            info.harvestLevelName = ProxyTinkersConstruct.getTicHarvestLevelName(info.harvestLevel);
-        }
-        else if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_ICON) {
-            if (info.harvestLevel != -1 && TOOL_PICKAXE.equals(info.effectiveTool)) {
+        if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
+            if (info.effectiveTool.isSameTool(ProxyTinkersConstruct.pickaxe)) {
                 //override vanilla pickaxe icon
-                info.effectiveToolIcon = ProxyTinkersConstruct.getEffectivePickaxeIcon(info.harvestLevel);
+                info.effectiveTool = ProxyTinkersConstruct.pickaxe;
             }
+        }
+        else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL_NAME) {
+            info.harvestLevelName = ProxyTinkersConstruct.getTicHarvestLevelName(info.harvestLevel);
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
             if (player.getHeldItem() != null) {
-                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.effectiveTool, info.harvestLevel);
+                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.harvestLevel);
             }
         }
         else if (phase == HarvestabilityTestPhase.IS_HELD_TOOL_EFFECTIVE) {
@@ -54,8 +54,7 @@ public enum TinkersHarvestHandler implements HarvestHandler {
     }
 
     //TiCon simplified check handler
-    public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld,
-                                          String effectiveTool, int harvestLevel) {
+    public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld, int harvestLevel) {
         boolean isHoldingTinkersTool = ProxyTinkersConstruct.hasToolTag(itemHeld);
         boolean isHeldToolCorrect = BaseHarvestLogicHandler.canToolHarvestBlock(itemHeld, block)
                 || (!isHoldingTinkersTool && block.canHarvestBlock(player, meta));

@@ -5,10 +5,12 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizons.wdmla.api.Mods;
@@ -17,7 +19,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
  * We support GregTech 5 tool stats on our side to support non-GTNH GT5-unofficial<br>
- * TODO: after The Great Renaming, this class no longer works outside GTNH
+ * TODO: after The Great Renaming, this class no longer works outside GTNH, fix it
  */
 public class ProxyGregTech {
 
@@ -26,14 +28,13 @@ public class ProxyGregTech {
     public static final String MACHINE_ID = "gt.blockmachines";
     public static final String MACHINE_UNIQUE_IDENTIFIER = Mods.GREGTECH.modID + ":" + MACHINE_ID;
 
-    public static final String TOOL_WRENCH = "wrench";
-    public static final String TOOL_WIRE_CUTTER = "cutter";
-
-    private static int wrench;
-    private static int wireCutter;
-    private static ItemStack ironWrench;
-    private static ItemStack steelWrench;
-    private static ItemStack ironWireCutter;
+    private static int wrenchID;
+    private static int wireCutterID;
+    private static ItemStack iconIronWrench;
+    private static ItemStack iconSteelWrench;
+    private static ItemStack iconIronWireCutter;
+    public static EffectiveTool toolWrench;
+    public static EffectiveTool toolWireCutter;
 
     @SuppressWarnings("unchecked")
     public static void init() {
@@ -49,19 +50,36 @@ public class ProxyGregTech {
 
             Field idField = GT_MetaGenerated_Tool_01.getField("ID");
             Object wrenchConstant = Enum.valueOf((Class<Enum>) GT_MetaGenerated_Tool_01, "WRENCH");
-            wrench = idField.getInt(wrenchConstant);
+            wrenchID = idField.getInt(wrenchConstant);
             Object wireCutterConstant = Enum.valueOf((Class<Enum>) GT_MetaGenerated_Tool_01, "WIRECUTTER");
-            wireCutter = idField.getInt(wireCutterConstant);
+            wireCutterID = idField.getInt(wireCutterConstant);
 
             Object ironMaterial = Materials.getField("Iron").get(null);
             Object steelMaterial = Materials.getField("Steel").get(null);
 
-            ironWrench = (ItemStack) getToolWithStatsMethod
-                    .invoke(metaTool01, wrench, 1, ironMaterial, ironMaterial, null);
-            steelWrench = (ItemStack) getToolWithStatsMethod
-                    .invoke(metaTool01, wrench, 1, steelMaterial, steelMaterial, null);
-            ironWireCutter = (ItemStack) getToolWithStatsMethod
-                    .invoke(metaTool01, wireCutter, 1, ironMaterial, ironMaterial, null);
+            iconIronWrench = (ItemStack) getToolWithStatsMethod
+                    .invoke(metaTool01, wrenchID, 1, ironMaterial, ironMaterial, null);
+            iconSteelWrench = (ItemStack) getToolWithStatsMethod
+                    .invoke(metaTool01, wrenchID, 1, steelMaterial, steelMaterial, null);
+            iconIronWireCutter = (ItemStack) getToolWithStatsMethod
+                    .invoke(metaTool01, wireCutterID, 1, ironMaterial, ironMaterial, null);
+
+            toolWrench = new EffectiveTool("wrench", new HashMap<>() {
+                {
+                    put(0, iconIronWrench);
+                    put(1, iconIronWrench);
+                    put(2, iconIronWrench);
+                    put(3, iconSteelWrench);
+                    put(4, iconSteelWrench); // idk does 4 actually exist though.
+                }
+            });
+            toolWireCutter = new EffectiveTool("cutter", new HashMap<>() {
+                {
+                    put(0, iconIronWireCutter);
+                    put(1, iconIronWireCutter);
+                    put(2, iconIronWireCutter);
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,33 +133,10 @@ public class ProxyGregTech {
     }
 
     public static boolean isWrench(ItemStack itemStack) {
-        return isGTTool(itemStack) && itemStack.getItemDamage() == wrench;
+        return isGTTool(itemStack) && itemStack.getItemDamage() == wrenchID;
     }
 
     public static boolean isWireCutter(ItemStack itemStack) {
-        return isGTTool(itemStack) && itemStack.getItemDamage() == wireCutter;
-    }
-
-    public static ItemStack getEffectiveGregToolIcon(String effectiveTool, int harvestLevel) {
-        return switch (effectiveTool) {
-            case "wrench" -> getEffectiveWrenchIcon(harvestLevel);
-            case "cutter" -> getEffectiveCutterIcon(harvestLevel);
-            default -> null;
-        };
-    }
-
-    public static ItemStack getEffectiveWrenchIcon(int num) {
-        return switch (num) {
-            case 0, 1, 2 -> ironWrench;
-            case 3, 4 -> steelWrench; // idk does 4 actually exist though.
-            default -> null;
-        };
-    }
-
-    public static ItemStack getEffectiveCutterIcon(int num) {
-        return switch (num) {
-            case 0, 1, 2 -> ironWireCutter;
-            default -> null;
-        };
+        return isGTTool(itemStack) && itemStack.getItemDamage() == wireCutterID;
     }
 }

@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability;
 
+import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.TooltipPosition;
@@ -15,7 +16,6 @@ import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
-import java.util.Set;
 
 public enum BaseHarvestLogicHandler implements HarvestHandler {
     INSTANCE;
@@ -31,10 +31,10 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
                 info.stopFurtherTesting = true;
             }
 
-            info.effectiveTool = block.getHarvestTool(meta);
+            info.effectiveTool = new EffectiveTool(block.getHarvestTool(meta), null);
         }
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
-            info.harvestLevel = getHarvestLevel(block, meta, info.effectiveTool);
+            info.harvestLevel = info.effectiveTool.getHarvestLevel(block, meta);
         }
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL_NAME) {
             String unlocalized = "hud.msg.wdmla.harvestlevel" + (info.harvestLevel + 1);
@@ -46,7 +46,7 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
                 info.harvestLevelName = String.valueOf(info.harvestLevel);
             }
         }
-        else if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_ICON) {
+        else if (phase == HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON) {
             Map.Entry<ItemStack, Boolean> canShear = BlockHelper.getShearability(player, block, meta, position);
             Map.Entry<ItemStack, Boolean> canSilkTouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
 
@@ -62,7 +62,7 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
                 info.canHarvest = ForgeHooks.canHarvestBlock(block, player, meta);
             }
             else {
-                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.effectiveTool, info.harvestLevel);
+                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem());
             }
         }
         else if (phase == HarvestabilityTestPhase.IS_HELD_TOOL_EFFECTIVE) {
@@ -88,21 +88,14 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         return block.getBlockHardness(world, x, y, z) == -1.0f;
     }
 
-    public int getHarvestLevel(Block block, int meta, String effectiveTool) {
-        int harvestLevel = block.getHarvestLevel(meta);
-        if (effectiveTool != null && harvestLevel < 0) harvestLevel = 0;
-        return harvestLevel;
-    }
-
-    public boolean canInstaBreak(int harvestLevel, String effectiveTool, Block block, boolean canShear,
+    public boolean canInstaBreak(int harvestLevel, EffectiveTool effectiveTool, Block block, boolean canShear,
                                          boolean canSilkTouch) {
-        boolean blockHasEffectiveTools = harvestLevel >= 0 && effectiveTool != null;
+        boolean blockHasEffectiveTools = harvestLevel >= 0 && effectiveTool.isValid();
         return block.getMaterial().isToolNotRequired() && !blockHasEffectiveTools && !canShear && !canSilkTouch;
     }
 
     //vanilla simplified check handler
-    public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld,
-                                          String effectiveTool, int harvestLevel) {
+    public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld) {
         boolean isHeldToolCorrect = canToolHarvestBlock(itemHeld, block)
                 || block.canHarvestBlock(player, meta);
         boolean isAboveMinHarvestLevel = ForgeHooks.canToolHarvestBlock(block, meta, itemHeld);
@@ -114,21 +107,13 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         return block.getMaterial().isToolNotRequired() || tool.func_150998_b(block); // func_150998_b = canHarvestBlock
     }
 
-    public static boolean isToolEffectiveAgainst(ItemStack tool, Block block, int metadata, String effectiveToolClass) {
+    public static boolean isToolEffectiveAgainst(ItemStack tool, Block block, int metadata, EffectiveTool effectiveTool) {
         return ForgeHooks.isToolEffective(tool, block, metadata)
-                || (toolHasAnyToolClass(tool) ? isToolOfClass(tool, effectiveToolClass)
+                || (toolHasAnyToolClass(tool) ? effectiveTool.isToolInstance(tool)
                 : tool.getItem().getDigSpeed(tool, block, metadata) > 1.5f);
     }
 
-    public static boolean isToolOfClass(ItemStack tool, String toolClass) {
-        return getToolClassesOf(tool).contains(toolClass);
-    }
-
     public static boolean toolHasAnyToolClass(ItemStack tool) {
-        return !getToolClassesOf(tool).isEmpty();
-    }
-
-    public static Set<String> getToolClassesOf(ItemStack tool) {
-        return tool.getItem().getToolClasses(tool);
+        return !tool.getItem().getToolClasses(tool).isEmpty();
     }
 }

@@ -2,9 +2,10 @@ package com.gtnewhorizons.wdmla.plugin.harvestability.proxy;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
+import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
 import com.gtnewhorizons.wdmla.plugin.harvestability.BaseHarvestLogicHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,6 @@ import net.minecraftforge.common.ForgeHooks;
 import com.gtnewhorizons.wdmla.api.Mods;
 import com.gtnewhorizons.wdmla.config.PluginsConfig;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import tconstruct.library.TConstructRegistry;
 import tconstruct.library.crafting.ToolBuilder;
 import tconstruct.library.tools.DualHarvestTool;
@@ -27,6 +27,7 @@ public class ProxyTinkersConstruct {
     private static Method getHarvestType = null;
     private static Method getSecondHarvestType = null;
     public static final List<ItemStack> defaultPickaxes = new ArrayList<>();
+    public static EffectiveTool pickaxe;
 
     public static void init() {
         try {
@@ -38,6 +39,28 @@ public class ProxyTinkersConstruct {
                 defaultPickaxes.add(buildDefaultPickaxe(materialID));
             }
         } catch (Exception ignore) {}
+
+        initPickaxeTool();
+    }
+
+    /**
+     * Gets the icon of the effective Pickaxe from config. Important note: the default config value is tuned for Iguana
+     * Tweaks with vanilla mode disabled. You have to edit the config in order to play with vanilla mode or TiC alone
+     * See: <a href=
+     * "https://github.com/GTNewHorizons/TinkersConstruct/blob/master/src/main/java/tconstruct/tools/TinkerTools.java#L1771">...</a>
+     */
+    public static void initPickaxeTool() {
+        PluginsConfig.Harvestability.TinkersConstruct tiCConfig = PluginsConfig.harvestability.tinkersConstruct;
+        pickaxe = new EffectiveTool("pickaxe", new HashMap<>() {
+            {
+                put(0, defaultPickaxes.get(tiCConfig.harvestLevel0));
+                put(1, defaultPickaxes.get(tiCConfig.harvestLevel1));
+                put(2, defaultPickaxes.get(tiCConfig.harvestLevel2));
+                put(3, defaultPickaxes.get(tiCConfig.harvestLevel3));
+                put(4, defaultPickaxes.get(tiCConfig.harvestLevel4));
+                put(5, defaultPickaxes.get(tiCConfig.harvestLevel5));
+            }
+        });
     }
 
     public static boolean hasToolTag(ItemStack itemStack) {
@@ -58,26 +81,28 @@ public class ProxyTinkersConstruct {
         return toolTag.getInteger("HarvestLevel2");
     }
 
-    public static boolean isToolEffectiveAgainst(ItemStack tool, Block block, int metadata, String effectiveToolClass) {
+    public static boolean isToolEffectiveAgainst(ItemStack tool, Block block, int metadata, EffectiveTool effectiveTool) {
         if (Mods.TCONSTUCT.isLoaded() && tool.getItem() instanceof HarvestTool harvestTool) {
-            List<String> harvestTypes = new ArrayList<String>();
+            EffectiveTool firstType = null;
             try {
-                harvestTypes.add((String) getHarvestType.invoke(harvestTool));
+                firstType = new EffectiveTool((String) getHarvestType.invoke(harvestTool), null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            EffectiveTool secondType = null;
             if (harvestTool instanceof DualHarvestTool) {
                 try {
-                    harvestTypes.add((String) getSecondHarvestType.invoke(harvestTool));
+                    secondType = new EffectiveTool((String) getSecondHarvestType.invoke(harvestTool), null);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
 
-            return harvestTypes.contains(effectiveToolClass);
+            return (firstType != null && effectiveTool.isSameTool(firstType)) ||
+                    (secondType != null && effectiveTool.isSameTool(secondType));
         }
-        return BaseHarvestLogicHandler.isToolEffectiveAgainst(tool, block, metadata, effectiveToolClass);
+        return BaseHarvestLogicHandler.isToolEffectiveAgainst(tool, block, metadata, effectiveTool);
     }
 
     public static boolean canToolHarvestLevel(ItemStack tool, Block block, int metadata, int harvestLevel) {
@@ -94,25 +119,6 @@ public class ProxyTinkersConstruct {
 
     public static String getTicHarvestLevelName(int num) {
         return HarvestLevels.getHarvestLevelName(num);
-    }
-
-    /**
-     * Gets the icon of the effective Pickaxe from config. Important note: the default config value is tuned for Iguana
-     * Tweaks with vanilla mode disabled. You have to edit the config in order to play with vanilla mode or TiC alone
-     * See: <a href=
-     * "https://github.com/GTNewHorizons/TinkersConstruct/blob/master/src/main/java/tconstruct/tools/TinkerTools.java#L1771">...</a>
-     */
-    public static ItemStack getEffectivePickaxeIcon(int num) {
-        PluginsConfig.Harvestability.TinkersConstruct tiCConfig = PluginsConfig.harvestability.tinkersConstruct;
-        return switch (num) {
-            case 0 -> defaultPickaxes.get(tiCConfig.harvestLevel0);
-            case 1 -> defaultPickaxes.get(tiCConfig.harvestLevel1);
-            case 2 -> defaultPickaxes.get(tiCConfig.harvestLevel2);
-            case 3 -> defaultPickaxes.get(tiCConfig.harvestLevel3);
-            case 4 -> defaultPickaxes.get(tiCConfig.harvestLevel4);
-            case 5 -> defaultPickaxes.get(tiCConfig.harvestLevel5);
-            default -> null;
-        };
     }
 
     /**

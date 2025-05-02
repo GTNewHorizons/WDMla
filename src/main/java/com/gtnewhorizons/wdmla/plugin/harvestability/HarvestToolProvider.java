@@ -98,7 +98,7 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
         }
 
         if((PluginsConfig.harvestability.condition.unHarvestableOnly && info.canHarvest)
-                || (PluginsConfig.harvestability.condition.toolRequiredOnly && info.effectiveTool == null)) {
+                || (PluginsConfig.harvestability.condition.toolRequiredOnly && !info.effectiveTool.isValid())) {
             return;
         }
 
@@ -147,14 +147,7 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
             return info;
         }
 
-        if (!fireHarvestTest(HarvestabilityTestPhase.EFFECTIVE_TOOL_ICON,
-                player, block, meta, position, handlers, info)) {
-            return info;
-        }
-
-        if (info.effectiveTool != null && info.effectiveToolIcon == null) {
-            info.effectiveToolIcon = new ItemStack(Blocks.iron_bars);
-        }
+        info.effectiveToolIcon = info.effectiveTool.getIcon(info.harvestLevel);
 
         if (!fireHarvestTest(HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON,
                 player, block, meta, position, handlers, info)) {
@@ -195,7 +188,7 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
         IComponent currentlyHarvestableIcon;
         if(info.canHarvest) {
             currentlyHarvestableIcon = !PluginsConfig.harvestability.icon.colorIconWithEffectiveness || info.isHeldToolEffective
-                    || info.effectiveTool == null
+                    || !info.effectiveTool.isValid()
                     ? ThemeHelper.INSTANCE.success(PluginsConfig.harvestability.icon.currentlyHarvestableString)
                     : ThemeHelper.INSTANCE.info(PluginsConfig.harvestability.icon.currentlyHarvestableString);
         }
@@ -243,20 +236,13 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
             lines.child(harvestLevelText);
         }
 
-        if (PluginsConfig.harvestability.text.effectiveToolLine && info.effectiveTool != null) {
-            String effectiveToolString;
-            if (StatCollector.canTranslate("hud.msg.wdmla.toolclass." + info.effectiveTool)) {
-                effectiveToolString = StatCollector.translateToLocal("hud.msg.wdmla.toolclass." + info.effectiveTool);
-            }
-            else {
-                effectiveToolString = info.effectiveTool.substring(0, 1).toUpperCase() + info.effectiveTool.substring(1);
-            }
+        if (PluginsConfig.harvestability.text.effectiveToolLine && info.effectiveTool.isValid()) {
             ITooltip effectiveToolPanel = new HPanelComponent();
             effectiveToolPanel.text(StatCollector.translateToLocal("hud.msg.wdmla.effectivetool") + ": ");
             if (info.isHeldToolEffective) {
-                effectiveToolPanel.child(ThemeHelper.INSTANCE.success(effectiveToolString));
+                effectiveToolPanel.child(ThemeHelper.INSTANCE.success(info.effectiveTool.getLocalizedName()));
             } else {
-                effectiveToolPanel.child(ThemeHelper.INSTANCE.failure(effectiveToolString));
+                effectiveToolPanel.child(ThemeHelper.INSTANCE.failure(info.effectiveTool.getLocalizedName()));
             }
             lines.child(effectiveToolPanel);
         }
