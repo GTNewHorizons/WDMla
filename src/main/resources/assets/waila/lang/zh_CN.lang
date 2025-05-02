@@ -58,7 +58,7 @@ hud.msg.wdmla.hours=h
 hud.msg.wdmla.blocks=方块
 hud.msg.wdmla.blockspersecond=方块/秒
 hud.msg.wdmla.item.count=x
-hud.wdmla.msg.millibucket=mb
+hud.wdmla.msg.millibucket=mB
 
 # information
 hud.msg.wdmla.growth=生长状态
