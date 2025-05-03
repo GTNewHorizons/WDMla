@@ -39,6 +39,12 @@ public class HarvestLevel {
     }
 
     public ItemStack getIconFromList(List<ItemStack> iconList) {
+        if (iconList == null || iconList.isEmpty()) {
+            return null;
+        }
+        if (iconList.size() <= value) {
+            return iconList.get(iconList.size() - 1);
+        }
         return iconList.get(value);
     }
 

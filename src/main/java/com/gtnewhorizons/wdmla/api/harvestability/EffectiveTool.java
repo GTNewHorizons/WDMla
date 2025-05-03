@@ -53,7 +53,7 @@ public class EffectiveTool {
             return null;
         }
         else {
-            ItemStack icon = iconList != null ? harvestLevel.getIconFromList(iconList) : null;
+            ItemStack icon = harvestLevel.getIconFromList(iconList);
             if (icon == null && !isSameTool(CANNOT_HARVEST)) {
                 icon = new ItemStack(Blocks.iron_bars);
             }
