@@ -13,6 +13,7 @@ import java.util.Objects;
 public class EffectiveTool {
 
     public static final EffectiveTool NO_TOOL = new EffectiveTool(null, null);
+    public static final EffectiveTool CANNOT_HARVEST = new EffectiveTool("none", null);
 
     protected final String value;
     /**
@@ -30,6 +31,9 @@ public class EffectiveTool {
     }
 
     public HarvestLevel getHarvestLevel(Block block, int meta) {
+        if (isSameTool(CANNOT_HARVEST)) {
+            return HarvestLevel.NO_TOOL;
+        }
         int rawLevel = block.getHarvestLevel(meta);
         if (isValid() && rawLevel < 0) rawLevel = 0;
         return new HarvestLevel(rawLevel);
@@ -53,7 +57,7 @@ public class EffectiveTool {
         }
         else {
             ItemStack icon = iconList != null ? harvestLevel.getIconFromList(iconList) : null;
-            if (icon == null) {
+            if (icon == null && !isSameTool(CANNOT_HARVEST)) {
                 icon = new ItemStack(Blocks.iron_bars);
             }
             return icon;

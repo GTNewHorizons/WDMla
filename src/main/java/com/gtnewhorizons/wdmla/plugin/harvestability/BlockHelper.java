@@ -1,9 +1,7 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability;
 
-import java.util.Map;
 import java.util.Random;
 
-import com.google.common.collect.Maps;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -39,7 +37,7 @@ public class BlockHelper {
     }
 
     public static HarvestabilityInfo.AdditionalToolInfo getSilktouchAbility(EntityPlayer player, Block block, int meta,
-                                                                    MovingObjectPosition position) {
+                                                                                MovingObjectPosition position) {
         if (block.canSilkHarvest(player.worldObj, player, position.blockX, position.blockY, position.blockZ, meta)) {
             Item itemDropped = block.getItemDropped(meta, new Random(), 0);
             boolean silkTouchMatters = (itemDropped instanceof ItemBlock && itemDropped != Item.getItemFromBlock(block))

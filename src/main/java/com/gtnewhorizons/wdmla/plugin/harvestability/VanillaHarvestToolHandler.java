@@ -5,7 +5,6 @@ import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.provider.HarvestHandler;
 import com.gtnewhorizons.wdmla.config.PluginsConfig;
-import com.gtnewhorizons.wdmla.plugin.vanilla.VanillaIdentifiers;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -45,7 +44,7 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
     @Override
     public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
                                EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
-        if(phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
+        if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (!info.getEffectiveTool().isValid()) {
                 float hardness = block.getBlockHardness(player.worldObj, position.blockX, position.blockY, position.blockZ);
                 if (hardness > 0f) {
@@ -89,7 +88,7 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
 
     @Override
     public ResourceLocation getUid() {
-        return VanillaIdentifiers.HARVEST_TOOL;
+        return HarvestabilityIdentifiers.VANILLA;
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
+import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfoImpl;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.provider.HarvestHandler;
 import com.gtnewhorizons.wdmla.impl.ObjectDataCenter;
@@ -129,7 +130,7 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
         // block.getHarvestLevel/getHarvestTool are only 16 elements big
         if (meta >= 16) meta = 0;
 
-        HarvestabilityInfo info = new HarvestabilityInfo();
+        HarvestabilityInfo info = new HarvestabilityInfoImpl();
         if (!fireHarvestTest(HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME,
                 player, block, meta, position, handlers, info)) {
             return info;
@@ -219,7 +220,7 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
                 (PluginsConfig.harvestability.text.harvestLevelNum || PluginsConfig.harvestability.text.harvestLevelName)) {
             String harvestLevelString = PluginsConfig.harvestability.text.harvestLevelName ?
                     DisplayUtil.stripSymbols(info.getHarvestLevel().getName())
-                    : String.valueOf(info.getHarvestLevel());
+                    : String.valueOf(info.getHarvestLevel().getDisplayNum());
             IComponent harvestLevelText = new HPanelComponent().tag(HarvestabilityIdentifiers.HARVESTABILITY_TEXT)
                     .text(String.format("%s: ", StatCollector.translateToLocal("hud.msg.wdmla.harvestlevel"))).child(
                             info.isCurrentlyHarvestable() ? ThemeHelper.INSTANCE.success(harvestLevelString)

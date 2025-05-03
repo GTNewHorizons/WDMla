@@ -46,7 +46,6 @@ public class VanillaIdentifiers {
     public static final ResourceLocation SNOW_LAYER = MC("snow_layer");
     public static final ResourceLocation ENDER_DRAGON_HEADER = MC("ender_dragon_header");
     public static final ResourceLocation END_PORTAL_HEADER = MC("end_portal_header");
-    public static final ResourceLocation HARVEST_TOOL = MC("harvest_tool");
 
     public static final String NAMESPACE_MINECRAFT = "minecraft";
 

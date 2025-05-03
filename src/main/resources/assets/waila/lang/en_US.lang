@@ -25,6 +25,8 @@ hud.msg.wdmla.toolclass.crowbar=Crowbar
 hud.msg.wdmla.toolclass.sword=Sword
 hud.msg.wdmla.toolclass.wrench=Wrench
 hud.msg.wdmla.toolclass.cutter=Wire Cutter
+hud.msg.wdmla.toolclass.bucket=Bucket
+hud.msg.wdmla.toolclass.none=None
 
 # profession
 hud.msg.wdmla.villager.profession.farmer=Farmer

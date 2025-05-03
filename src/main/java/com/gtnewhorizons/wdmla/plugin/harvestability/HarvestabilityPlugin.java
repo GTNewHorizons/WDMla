@@ -2,6 +2,7 @@ package com.gtnewhorizons.wdmla.plugin.harvestability;
 
 import com.gtnewhorizons.wdmla.api.Mods;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraftforge.common.config.Configuration;
 
 import com.gtnewhorizons.wdmla.api.IWDMlaClientRegistration;
@@ -31,6 +32,7 @@ public class HarvestabilityPlugin implements IWDMlaPlugin {
         if (Mods.GREGTECH.isLoaded()) {
             registration.registerHarvest(GregTechHarvestHandler.INSTANCE, Block.class);
         }
+        registration.registerHarvest(LiquidHarvestHandler.INSTANCE, BlockLiquid.class);
 
         WDMlaConfig.instance()
                 .getCategory(

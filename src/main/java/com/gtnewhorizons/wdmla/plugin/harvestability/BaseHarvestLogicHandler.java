@@ -23,33 +23,29 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (!player.isCurrentToolAdventureModeExempt(position.blockX, position.blockY, position.blockZ)
                     || isBlockUnbreakable(block, player.worldObj, position.blockX, position.blockY, position.blockZ)) {
-                info.setEffectiveTool(EffectiveTool.NO_TOOL);
-                info.setCurrentlyHarvestable(false);
-                info.setHarvestLevel(HarvestLevel.NO_TOOL);
-                return false;
+                info.setEffectiveTool(EffectiveTool.CANNOT_HARVEST);
             }
-
-            info.setEffectiveTool(new EffectiveTool(block.getHarvestTool(meta), null));
+            else {
+                info.setEffectiveTool(new EffectiveTool(block.getHarvestTool(meta), null));
+            }
         }
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
             info.setHarvestLevel(info.getEffectiveTool().getHarvestLevel(block, meta));
         }
-        else if (phase == HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON) {
-            HarvestabilityInfo.AdditionalToolInfo canShear = BlockHelper.getShearability(player, block, meta, position);
-            HarvestabilityInfo.AdditionalToolInfo canSilkTouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
-
-            if (canInstaBreak(info.getHarvestLevel(), info.getEffectiveTool(), block, canShear != null, canSilkTouch != null)) {
+        else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
+            if (info.getEffectiveTool().isSameTool(EffectiveTool.CANNOT_HARVEST)) {
+                info.setCurrentlyHarvestable(false);
+                info.setHarvestLevel(HarvestLevel.NO_TOOL);
+                return false;
+            } else if (canInstaBreak(info.getHarvestLevel(), info.getEffectiveTool().isValid(), block, !info.getAdditionalToolsInfo().isEmpty())) {
                 info.setEffectiveTool(EffectiveTool.NO_TOOL);
                 info.setCurrentlyHarvestable(true);
                 info.setHarvestLevel(HarvestLevel.NO_TOOL);
+                info.setHeldToolEffective(true);
                 return false;
-            }
-        }
-        else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
-            if (player.getHeldItem() == null) {
+            } else if (player.getHeldItem() == null) {
                 info.setCurrentlyHarvestable(ForgeHooks.canHarvestBlock(block, player, meta));
-            }
-            else {
+            } else {
                 info.setCurrentlyHarvestable(isCurrentlyHarvestable(player, block, meta, player.getHeldItem()));
             }
         }
@@ -78,10 +74,9 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         return block.getBlockHardness(world, x, y, z) == -1.0f;
     }
 
-    public boolean canInstaBreak(HarvestLevel harvestLevel, EffectiveTool effectiveTool, Block block, boolean canShear,
-                                         boolean canSilkTouch) {
-        boolean blockHasEffectiveTools = harvestLevel.isToolRequired() && effectiveTool.isValid();
-        return block.getMaterial().isToolNotRequired() && !blockHasEffectiveTools && !canShear && !canSilkTouch;
+    public boolean canInstaBreak(HarvestLevel harvestLevel, boolean hasEffectiveTool, Block block, boolean hasAdditionalInfo) {
+        boolean blockHasEffectiveTools = harvestLevel.isToolRequired() && hasEffectiveTool;
+        return block.getMaterial().isToolNotRequired() && !blockHasEffectiveTools && !hasAdditionalInfo;
     }
 
     //vanilla simplified check handler

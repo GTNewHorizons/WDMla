@@ -23,6 +23,10 @@ public class HarvestLevel {
         return value != -1;
     }
 
+    public String getDisplayNum() {
+        return isToolRequired() ? String.valueOf(value) : null;
+    }
+
     public String getName() {
         String unlocalized = "hud.msg.wdmla.harvestlevel" + (value + 1);
 
