@@ -10,20 +10,17 @@ public class HarvestLevel {
     public static final HarvestLevel NO_TOOL = new HarvestLevel(-1);
 
     protected final int value;
-    protected final boolean requireTool;
 
     public HarvestLevel(int level) {
         this.value = level;
-        this.requireTool = value != -1;
     }
 
     public HarvestLevel(HarvestLevel level) {
         this.value = level.value;
-        this.requireTool = level.requireTool;
     }
 
     public boolean isToolRequired() {
-        return requireTool;
+        return value != -1;
     }
 
     public String getName() {

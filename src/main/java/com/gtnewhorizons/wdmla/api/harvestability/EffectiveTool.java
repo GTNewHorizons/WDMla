@@ -15,18 +15,16 @@ public class EffectiveTool {
     public static final EffectiveTool NO_TOOL = new EffectiveTool(null, null);
 
     protected final String value;
-    protected final boolean isValid;
     //TODO: make it List
     private final @Nullable Map<Integer, ItemStack> iconMap;
 
     public EffectiveTool(String value, @Nullable Map<Integer, ItemStack> iconMap) {
         this.value = value;
-        this.isValid = !Strings.isNullOrEmpty(value) && value.length() > 1;
         this.iconMap = iconMap;
     }
 
     public boolean isValid() {
-        return isValid;
+        return !Strings.isNullOrEmpty(value) && value.length() > 1;
     }
 
     public HarvestLevel getHarvestLevel(Block block, int meta) {
@@ -48,7 +46,7 @@ public class EffectiveTool {
     }
 
     public ItemStack getIcon(HarvestLevel harvestLevel) {
-        if (!harvestLevel.isToolRequired() || !isValid) {
+        if (!harvestLevel.isToolRequired() || !isValid()) {
             return null;
         }
         else {
@@ -64,7 +62,7 @@ public class EffectiveTool {
         if (StatCollector.canTranslate("hud.msg.wdmla.toolclass." + value)) {
             return StatCollector.translateToLocal("hud.msg.wdmla.toolclass." + value);
         }
-        else if (isValid) {
+        else if (isValid()) {
             return value.substring(0, 1).toUpperCase() + value.substring(1);
         }
         else {
