@@ -6,7 +6,7 @@ import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.provider.HarvestHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDynamicLiquid;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +30,8 @@ public enum LiquidHarvestHandler implements HarvestHandler {
             if (isStaticWaterOrLava(block)) {
                 info.setEffectiveTool(BUCKET);
             }
-            else if (isFlowingLiquid(block)) {
+            //flowing liquids and mod fluids
+            else if (block instanceof BlockLiquid) {
                 info.setEffectiveTool(EffectiveTool.CANNOT_HARVEST);
             }
         }
@@ -38,7 +39,7 @@ public enum LiquidHarvestHandler implements HarvestHandler {
             if (isStaticWaterOrLava(block)) {
                 info.setCurrentlyHarvestable(player.getHeldItem() != null && player.getHeldItem().getItem() == Items.bucket);
             }
-            else if (isFlowingLiquid(block)) {
+            else if (block instanceof BlockLiquid) {
                 info.setCurrentlyHarvestable(false);
             }
         }
@@ -46,7 +47,7 @@ public enum LiquidHarvestHandler implements HarvestHandler {
             if (isStaticWaterOrLava(block)) {
                 info.setHeldToolEffective(player.getHeldItem() != null && player.getHeldItem().getItem() == Items.bucket);
             }
-            else if (isFlowingLiquid(block)) {
+            else if (block instanceof BlockLiquid) {
                 info.setHeldToolEffective(false);
             }
         }
@@ -60,10 +61,6 @@ public enum LiquidHarvestHandler implements HarvestHandler {
         }
 
         return false;
-    }
-
-    private boolean isFlowingLiquid(Block block) {
-        return block instanceof BlockDynamicLiquid;
     }
 
     @Override
