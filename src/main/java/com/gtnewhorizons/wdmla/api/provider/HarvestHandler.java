@@ -9,7 +9,8 @@ import net.minecraft.util.MovingObjectPosition;
 
 public interface HarvestHandler extends IWDMlaProvider {
 
-    void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta,
+    //return: continue testing
+    boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta,
                              MovingObjectPosition position);
 
     /**

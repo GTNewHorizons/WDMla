@@ -43,8 +43,8 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
     }
 
     @Override
-    public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
-                            EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
+    public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
+                               EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if(phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (!info.effectiveTool.isValid()) {
                 float hardness = block.getBlockHardness(player.worldObj, position.blockX, position.blockY, position.blockZ);
@@ -72,18 +72,19 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
         }
         else if (phase == HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON) {
             if (PluginsConfig.harvestability.icon.showShearabilityIcon) {
-                Map.Entry<ItemStack, Boolean> canShear = BlockHelper.getShearability(player, block, meta, position);
+                HarvestabilityInfo.AdditionalToolInfo canShear = BlockHelper.getShearability(player, block, meta, position);
                 if (canShear != null) {
-                    info.additionalToolsIcon.add(canShear);
+                    info.additionalToolsInfo.add(canShear);
                 }
             }
             if (PluginsConfig.harvestability.icon.showSilkTouchabilityIcon) {
-                Map.Entry<ItemStack, Boolean> canSilktouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
+                HarvestabilityInfo.AdditionalToolInfo canSilktouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
                 if (canSilktouch != null) {
-                    info.additionalToolsIcon.add(canSilktouch);
+                    info.additionalToolsInfo.add(canSilktouch);
                 }
             }
         }
+        return true;
     }
 
     @Override

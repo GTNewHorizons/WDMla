@@ -13,7 +13,6 @@ import com.gtnewhorizons.wdmla.impl.ui.component.VPanelComponent;
 import mcp.mobius.waila.overlay.DisplayUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
@@ -161,13 +160,12 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
     private static boolean fireHarvestTest(HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta,
                                            MovingObjectPosition position, List<HarvestHandler> handlers, HarvestabilityInfo info) {
         for (HarvestHandler handler : handlers) {
-            if(info.stopFurtherTesting) {
-                break;
+            if(!handler.testHarvest(info, phase, player, block, meta, position)) {
+                return false;
             }
-            handler.testHarvest(info, phase, player, block, meta, position);
         }
 
-        return !info.stopFurtherTesting;
+        return true;
     }
 
     private static @NotNull ITooltip assembleHarvestabilityIcon(HarvestabilityInfo info) {
@@ -206,10 +204,10 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
             harvestabilityComponent.child(currentlyHarvestableIcon);
         }
 
-        for (Map.Entry<ItemStack, Boolean> additionalTool : info.additionalToolsIcon) {
-            if (additionalTool.getValue() || PluginsConfig.harvestability.icon.alwaysShowAdditionalTools) {
+        for (HarvestabilityInfo.AdditionalToolInfo additionalTool : info.additionalToolsInfo) {
+            if (additionalTool.isHolding || PluginsConfig.harvestability.icon.alwaysShowAdditionalTools) {
                 harvestabilityComponent.child(
-                        new ItemComponent(additionalTool.getKey()).doDrawOverlay(false)
+                        new ItemComponent(additionalTool.icon).doDrawOverlay(false)
                                 .size(new Size(10, 10)));
             }
         }

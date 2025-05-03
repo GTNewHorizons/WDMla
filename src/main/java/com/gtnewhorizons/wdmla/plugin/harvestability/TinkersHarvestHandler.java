@@ -13,13 +13,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 
-import static com.gtnewhorizons.wdmla.plugin.harvestability.VanillaHarvestToolHandler.TOOL_PICKAXE;
-
 public enum TinkersHarvestHandler implements HarvestHandler {
     INSTANCE;
 
     @Override
-    public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
+    public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (info.effectiveTool.isSameTool(ProxyTinkersConstruct.pickaxe)) {
                 //override vanilla pickaxe icon
@@ -42,6 +40,8 @@ public enum TinkersHarvestHandler implements HarvestHandler {
                 info.isHeldToolEffective = isEffective && (!isHoldingTinkersTool || info.canHarvest);
             }
         }
+
+        return true;
     }
 
     @Override

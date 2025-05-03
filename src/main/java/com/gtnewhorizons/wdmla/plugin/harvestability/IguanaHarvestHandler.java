@@ -13,7 +13,7 @@ public enum IguanaHarvestHandler implements HarvestHandler {
     INSTANCE;
 
     @Override
-    public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
+    public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (info.effectiveTool.isSameTool(ProxyIguanaTweaks.pickaxe)) {
                 //override tic pickaxe
@@ -23,6 +23,8 @@ public enum IguanaHarvestHandler implements HarvestHandler {
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
             info.harvestLevel = new ProxyIguanaTweaks.IguanaHarvestLevel(info.harvestLevel);
         }
+
+        return true;
     }
 
     @Override

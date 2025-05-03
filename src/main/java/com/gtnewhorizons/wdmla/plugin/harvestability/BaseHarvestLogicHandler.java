@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
@@ -22,14 +21,14 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
     INSTANCE;
 
     @Override
-    public void testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
+    public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (!player.isCurrentToolAdventureModeExempt(position.blockX, position.blockY, position.blockZ)
                     || isBlockUnbreakable(block, player.worldObj, position.blockX, position.blockY, position.blockZ)) {
                 info.effectiveTool = EffectiveTool.NO_TOOL;
                 info.canHarvest = false;
                 info.harvestLevel = HarvestLevel.NO_TOOL;
-                info.stopFurtherTesting = true;
+                return false;
             }
 
             info.effectiveTool = new EffectiveTool(block.getHarvestTool(meta), null);
@@ -38,14 +37,14 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
             info.harvestLevel = info.effectiveTool.getHarvestLevel(block, meta);
         }
         else if (phase == HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON) {
-            Map.Entry<ItemStack, Boolean> canShear = BlockHelper.getShearability(player, block, meta, position);
-            Map.Entry<ItemStack, Boolean> canSilkTouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
+            HarvestabilityInfo.AdditionalToolInfo canShear = BlockHelper.getShearability(player, block, meta, position);
+            HarvestabilityInfo.AdditionalToolInfo canSilkTouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
 
             if (canInstaBreak(info.harvestLevel, info.effectiveTool, block, canShear != null, canSilkTouch != null)) {
                 info.effectiveTool = EffectiveTool.NO_TOOL;
                 info.canHarvest = true;
                 info.harvestLevel = HarvestLevel.NO_TOOL;
-                info.stopFurtherTesting = true;
+                return false;
             }
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
@@ -63,6 +62,8 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
                 info.isHeldToolEffective = isEffective && info.canHarvest;
             }
         }
+
+        return true;
     }
 
     @Override

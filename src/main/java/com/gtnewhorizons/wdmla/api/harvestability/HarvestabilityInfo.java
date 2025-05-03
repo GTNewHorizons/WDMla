@@ -1,7 +1,5 @@
 package com.gtnewhorizons.wdmla.api.harvestability;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,10 +9,6 @@ import java.util.Map;
 
 //TODO: encapsulation
 public class HarvestabilityInfo {
-    @NotNull
-    public Block block = Blocks.air;
-    public int meta = 0;
-
     /**
      * the primary harvest tool (pickaxe for hopper, shovel for dirt...)
      */
@@ -33,9 +27,23 @@ public class HarvestabilityInfo {
     /**
      * the secondary harvest tool (wrench for hopper, shears for leaves)
      */
-    public List<Map.Entry<ItemStack, Boolean>> additionalToolsIcon = new ArrayList<>();
+    public List<AdditionalToolInfo> additionalToolsInfo = new ArrayList<>();
 
-    public boolean stopFurtherTesting = false;
-
+    /**
+     * can current held tool mine the block faster?
+     */
     public boolean isHeldToolEffective = false;
+
+    /**
+     * stores information of additional tools relate to harvest
+     */
+    public static class AdditionalToolInfo {
+        public final ItemStack icon;
+        public final boolean isHolding;
+
+        public AdditionalToolInfo(ItemStack icon, boolean isHolding) {
+            this.icon = icon;
+            this.isHolding = isHolding;
+        }
+    }
 }
