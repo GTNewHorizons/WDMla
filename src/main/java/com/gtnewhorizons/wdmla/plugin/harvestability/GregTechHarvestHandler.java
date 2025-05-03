@@ -1,6 +1,7 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability;
 
 import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
+import com.gtnewhorizons.wdmla.api.harvestability.HarvestLevel;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.provider.HarvestHandler;
@@ -64,7 +65,7 @@ public enum GregTechHarvestHandler implements HarvestHandler {
 
     // run full check
     public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld,
-                                          EffectiveTool effectiveTool, int harvestLevel) {
+                                          EffectiveTool effectiveTool, HarvestLevel harvestLevel) {
         boolean isHoldingTinkersTool = ProxyTinkersConstruct.hasToolTag(itemHeld);
         boolean isHeldToolCorrect = isHeldToolCorrect(
                 player,

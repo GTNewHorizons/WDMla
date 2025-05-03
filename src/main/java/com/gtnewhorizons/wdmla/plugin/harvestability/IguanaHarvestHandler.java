@@ -20,8 +20,8 @@ public enum IguanaHarvestHandler implements HarvestHandler {
                 info.effectiveTool = ProxyIguanaTweaks.pickaxe;
             }
         }
-        else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL_NAME) {
-            info.harvestLevelName = ProxyIguanaTweaks.getHarvestLevelName(info.harvestLevel);
+        else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
+            info.harvestLevel = new ProxyIguanaTweaks.IguanaHarvestLevel(info.harvestLevel);
         }
     }
 

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
+import com.gtnewhorizons.wdmla.api.harvestability.HarvestLevel;
 import com.gtnewhorizons.wdmla.plugin.harvestability.BaseHarvestLogicHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -73,12 +74,12 @@ public class ProxyTinkersConstruct {
         return tag;
     }
 
-    public static int getPrimaryHarvestLevel(NBTTagCompound toolTag) {
-        return toolTag.getInteger("HarvestLevel");
+    public static HarvestLevel getPrimaryHarvestLevel(NBTTagCompound toolTag) {
+        return new HarvestLevel(toolTag.getInteger("HarvestLevel"));
     }
 
-    public static int getSecondaryHarvestLevel(NBTTagCompound toolTag) {
-        return toolTag.getInteger("HarvestLevel2");
+    public static HarvestLevel getSecondaryHarvestLevel(NBTTagCompound toolTag) {
+        return new HarvestLevel(toolTag.getInteger("HarvestLevel2"));
     }
 
     public static boolean isToolEffectiveAgainst(ItemStack tool, Block block, int metadata, EffectiveTool effectiveTool) {
@@ -105,20 +106,16 @@ public class ProxyTinkersConstruct {
         return BaseHarvestLogicHandler.isToolEffectiveAgainst(tool, block, metadata, effectiveTool);
     }
 
-    public static boolean canToolHarvestLevel(ItemStack tool, Block block, int metadata, int harvestLevel) {
+    public static boolean canToolHarvestLevel(ItemStack tool, Block block, int metadata, HarvestLevel harvestLevel) {
         boolean canTinkersToolHarvestBlock = false;
 
         NBTTagCompound toolTag = getToolTag(tool);
         if (toolTag != null) {
-            int toolHarvestLevel = Math.max(getPrimaryHarvestLevel(toolTag), getSecondaryHarvestLevel(toolTag));
-            canTinkersToolHarvestBlock = toolHarvestLevel >= harvestLevel;
+            canTinkersToolHarvestBlock = getPrimaryHarvestLevel(toolTag).doesSatisfy(harvestLevel)
+                    || getSecondaryHarvestLevel(toolTag).doesSatisfy(harvestLevel);
         }
 
         return canTinkersToolHarvestBlock || ForgeHooks.canToolHarvestBlock(block, metadata, tool);
-    }
-
-    public static String getTicHarvestLevelName(int num) {
-        return HarvestLevels.getHarvestLevelName(num);
     }
 
     /**
@@ -139,5 +136,17 @@ public class ProxyTinkersConstruct {
         }
 
         return tool;
+    }
+
+    public static class TiCHarvestLevel extends HarvestLevel {
+
+        public TiCHarvestLevel(HarvestLevel vanillaLevel) {
+            super(vanillaLevel);
+        }
+
+        @Override
+        public String getName() {
+            return HarvestLevels.getHarvestLevelName(value);
+        }
     }
 }

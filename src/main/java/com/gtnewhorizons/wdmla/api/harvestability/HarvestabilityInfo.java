@@ -15,19 +15,15 @@ public class HarvestabilityInfo {
     public Block block = Blocks.air;
     public int meta = 0;
 
-    public @NotNull EffectiveTool effectiveTool = new EffectiveTool(null, null);
-    /**
-     * if -1: hand(no tool)
-     */
-    public int harvestLevel = -1;
-
-    public String harvestLevelName = "";
-
     /**
      * the primary harvest tool (pickaxe for hopper, shovel for dirt...)
      */
-    //pending removal
-    public ItemStack effectiveToolIcon = null;
+    public @NotNull EffectiveTool effectiveTool = EffectiveTool.NO_TOOL;
+
+    /**
+     * if -1: hand(no tool)
+     */
+    public @NotNull HarvestLevel harvestLevel = HarvestLevel.NO_TOOL;
 
     /**
      * can the block be harvested by player currently?

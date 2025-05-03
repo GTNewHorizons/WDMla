@@ -1,6 +1,7 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability;
 
 import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
+import com.gtnewhorizons.wdmla.api.harvestability.HarvestLevel;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.TooltipPosition;
@@ -25,9 +26,9 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (!player.isCurrentToolAdventureModeExempt(position.blockX, position.blockY, position.blockZ)
                     || isBlockUnbreakable(block, player.worldObj, position.blockX, position.blockY, position.blockZ)) {
-                info.effectiveToolIcon = null;
+                info.effectiveTool = EffectiveTool.NO_TOOL;
                 info.canHarvest = false;
-                info.harvestLevel = -1;
+                info.harvestLevel = HarvestLevel.NO_TOOL;
                 info.stopFurtherTesting = true;
             }
 
@@ -36,24 +37,14 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
             info.harvestLevel = info.effectiveTool.getHarvestLevel(block, meta);
         }
-        else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL_NAME) {
-            String unlocalized = "hud.msg.wdmla.harvestlevel" + (info.harvestLevel + 1);
-
-            if (StatCollector.canTranslate(unlocalized)) {
-                info.harvestLevelName = StatCollector.translateToLocal(unlocalized);
-            }
-            else {
-                info.harvestLevelName = String.valueOf(info.harvestLevel);
-            }
-        }
         else if (phase == HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON) {
             Map.Entry<ItemStack, Boolean> canShear = BlockHelper.getShearability(player, block, meta, position);
             Map.Entry<ItemStack, Boolean> canSilkTouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
 
             if (canInstaBreak(info.harvestLevel, info.effectiveTool, block, canShear != null, canSilkTouch != null)) {
-                info.effectiveToolIcon = null;
+                info.effectiveTool = EffectiveTool.NO_TOOL;
                 info.canHarvest = true;
-                info.harvestLevel = -1;
+                info.harvestLevel = HarvestLevel.NO_TOOL;
                 info.stopFurtherTesting = true;
             }
         }
@@ -88,9 +79,9 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         return block.getBlockHardness(world, x, y, z) == -1.0f;
     }
 
-    public boolean canInstaBreak(int harvestLevel, EffectiveTool effectiveTool, Block block, boolean canShear,
+    public boolean canInstaBreak(HarvestLevel harvestLevel, EffectiveTool effectiveTool, Block block, boolean canShear,
                                          boolean canSilkTouch) {
-        boolean blockHasEffectiveTools = harvestLevel >= 0 && effectiveTool.isValid();
+        boolean blockHasEffectiveTools = harvestLevel.isToolRequired() && effectiveTool.isValid();
         return block.getMaterial().isToolNotRequired() && !blockHasEffectiveTools && !canShear && !canSilkTouch;
     }
 

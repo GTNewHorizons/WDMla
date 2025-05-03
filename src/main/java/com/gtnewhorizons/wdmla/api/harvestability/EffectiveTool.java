@@ -12,8 +12,11 @@ import java.util.Objects;
 
 public class EffectiveTool {
 
-    private final String value;
-    private final boolean isValid;
+    public static final EffectiveTool NO_TOOL = new EffectiveTool(null, null);
+
+    protected final String value;
+    protected final boolean isValid;
+    //TODO: make it List
     private final @Nullable Map<Integer, ItemStack> iconMap;
 
     public EffectiveTool(String value, @Nullable Map<Integer, ItemStack> iconMap) {
@@ -26,10 +29,10 @@ public class EffectiveTool {
         return isValid;
     }
 
-    public int getHarvestLevel(Block block, int meta) {
-        int harvestLevel = block.getHarvestLevel(meta);
-        if (isValid() && harvestLevel < 0) harvestLevel = 0;
-        return harvestLevel;
+    public HarvestLevel getHarvestLevel(Block block, int meta) {
+        int rawLevel = block.getHarvestLevel(meta);
+        if (isValid() && rawLevel < 0) rawLevel = 0;
+        return new HarvestLevel(rawLevel);
     }
 
     public boolean isToolInstance(ItemStack tool) {
@@ -44,12 +47,12 @@ public class EffectiveTool {
         return iconMap != null;
     }
 
-    public ItemStack getIcon(int harvestLevel) {
-        if (harvestLevel == -1 || !isValid) {
+    public ItemStack getIcon(HarvestLevel harvestLevel) {
+        if (!harvestLevel.isToolRequired() || !isValid) {
             return null;
         }
         else {
-            ItemStack icon = iconMap != null ? iconMap.get(harvestLevel) : null;
+            ItemStack icon = iconMap != null ? harvestLevel.getIconFromMap(iconMap) : null;
             if (icon == null) {
                 icon = new ItemStack(Blocks.iron_bars);
             }

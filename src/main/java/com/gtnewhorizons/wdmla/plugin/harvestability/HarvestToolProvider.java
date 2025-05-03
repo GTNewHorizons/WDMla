@@ -142,13 +142,6 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
             return info;
         }
 
-        if (!fireHarvestTest(HarvestabilityTestPhase.HARVEST_LEVEL_NAME,
-                player, block, meta, position, handlers, info)) {
-            return info;
-        }
-
-        info.effectiveToolIcon = info.effectiveTool.getIcon(info.harvestLevel);
-
         if (!fireHarvestTest(HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON,
                 player, block, meta, position, handlers, info)) {
             return info;
@@ -196,8 +189,9 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
             currentlyHarvestableIcon = ThemeHelper.INSTANCE.failure(PluginsConfig.harvestability.icon.notCurrentlyHarvestableString);
         }
 
-        if (info.effectiveToolIcon != null) {
-            ITooltip effectiveToolIconComponent = new ItemComponent(info.effectiveToolIcon).doDrawOverlay(false)
+        ItemStack effectiveToolIcon = info.effectiveTool.getIcon(info.harvestLevel);
+        if (effectiveToolIcon != null) {
+            ITooltip effectiveToolIconComponent = new ItemComponent(effectiveToolIcon).doDrawOverlay(false)
                     .size(new Size(10, 10));
 
             if (PluginsConfig.harvestability.icon.effectiveToolIcon) {
@@ -224,10 +218,10 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
 
     private static @Nullable IComponent assembleHarvestabilityText(HarvestabilityInfo info) {
         ITooltip lines = new VPanelComponent();
-        if (info.harvestLevel >= 1 &&
+        if (info.harvestLevel.isToolRequired() &&
                 (PluginsConfig.harvestability.text.harvestLevelNum || PluginsConfig.harvestability.text.harvestLevelName)) {
             String harvestLevelString = PluginsConfig.harvestability.text.harvestLevelName ?
-                    DisplayUtil.stripSymbols(info.harvestLevelName)
+                    DisplayUtil.stripSymbols(info.harvestLevel.getName())
                     : String.valueOf(info.harvestLevel);
             IComponent harvestLevelText = new HPanelComponent().tag(HarvestabilityIdentifiers.HARVESTABILITY_TEXT)
                     .text(String.format("%s: ", StatCollector.translateToLocal("hud.msg.wdmla.harvestlevel"))).child(

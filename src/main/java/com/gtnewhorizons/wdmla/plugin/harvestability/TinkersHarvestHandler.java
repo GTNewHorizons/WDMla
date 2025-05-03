@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability;
 
+import com.gtnewhorizons.wdmla.api.harvestability.HarvestLevel;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityInfo;
 import com.gtnewhorizons.wdmla.api.harvestability.HarvestabilityTestPhase;
 import com.gtnewhorizons.wdmla.api.provider.HarvestHandler;
@@ -25,8 +26,8 @@ public enum TinkersHarvestHandler implements HarvestHandler {
                 info.effectiveTool = ProxyTinkersConstruct.pickaxe;
             }
         }
-        else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL_NAME) {
-            info.harvestLevelName = ProxyTinkersConstruct.getTicHarvestLevelName(info.harvestLevel);
+        else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
+            info.harvestLevel = new ProxyTinkersConstruct.TiCHarvestLevel(info.harvestLevel);
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
             if (player.getHeldItem() != null) {
@@ -54,7 +55,7 @@ public enum TinkersHarvestHandler implements HarvestHandler {
     }
 
     //TiCon simplified check handler
-    public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld, int harvestLevel) {
+    public boolean isCurrentlyHarvestable(EntityPlayer player, Block block, int meta, @NotNull ItemStack itemHeld, HarvestLevel harvestLevel) {
         boolean isHoldingTinkersTool = ProxyTinkersConstruct.hasToolTag(itemHeld);
         boolean isHeldToolCorrect = BaseHarvestLogicHandler.canToolHarvestBlock(itemHeld, block)
                 || (!isHoldingTinkersTool && block.canHarvestBlock(player, meta));

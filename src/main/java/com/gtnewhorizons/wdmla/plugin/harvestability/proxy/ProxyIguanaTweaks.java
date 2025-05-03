@@ -1,8 +1,10 @@
 package com.gtnewhorizons.wdmla.plugin.harvestability.proxy;
 
 import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
+import com.gtnewhorizons.wdmla.api.harvestability.HarvestLevel;
 import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import net.minecraft.item.ItemStack;
+import tconstruct.library.util.HarvestLevels;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -49,15 +51,23 @@ public class ProxyIguanaTweaks {
         });
     }
 
-    public static String getHarvestLevelName(int num) {
-        String harvestLevelName = "<Unknown>";
+    public static class IguanaHarvestLevel extends HarvestLevel {
 
-        try {
-            harvestLevelName = (String) proxyGetHarvestLevelName.invoke(null, num);
-        } catch (Exception e) {
-            e.printStackTrace();
+        public IguanaHarvestLevel(HarvestLevel vanillaLevel) {
+            super(vanillaLevel);
         }
 
-        return harvestLevelName;
+        @Override
+        public String getName() {
+            String harvestLevelName = "<Unknown>";
+
+            try {
+                harvestLevelName = (String) proxyGetHarvestLevelName.invoke(null, value);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return harvestLevelName;
+        }
     }
 }
