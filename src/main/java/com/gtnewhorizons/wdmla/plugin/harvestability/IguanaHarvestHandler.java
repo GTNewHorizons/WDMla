@@ -15,13 +15,13 @@ public enum IguanaHarvestHandler implements HarvestHandler {
     @Override
     public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
-            if (info.effectiveTool.isSameTool(ProxyIguanaTweaks.pickaxe)) {
+            if (info.getEffectiveTool().isSameTool(ProxyIguanaTweaks.pickaxe)) {
                 //override tic pickaxe
-                info.effectiveTool = ProxyIguanaTweaks.pickaxe;
+                info.setEffectiveTool(ProxyIguanaTweaks.pickaxe);
             }
         }
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
-            info.harvestLevel = new ProxyIguanaTweaks.IguanaHarvestLevel(info.harvestLevel);
+            info.setHarvestLevel(new ProxyIguanaTweaks.IguanaHarvestLevel(info.getHarvestLevel()));
         }
 
         return true;

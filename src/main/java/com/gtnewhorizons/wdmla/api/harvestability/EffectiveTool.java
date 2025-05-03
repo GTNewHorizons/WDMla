@@ -16,7 +16,7 @@ public class EffectiveTool {
 
     protected final String value;
     /**
-     * icons indexed by harvest level (0~)
+     * icons of the tool indexed by harvest level (0~)
      */
     private final @Nullable List<ItemStack> iconList;
 

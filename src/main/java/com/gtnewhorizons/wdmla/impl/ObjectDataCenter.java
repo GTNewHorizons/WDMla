@@ -127,6 +127,6 @@ public final class ObjectDataCenter {
     }
 
     public static boolean canCurrentTargetBeHarvested() {
-        return harvestabilityInfo == null || harvestabilityInfo.canHarvest;
+        return harvestabilityInfo == null || harvestabilityInfo.isCurrentlyHarvestable();
     }
 }

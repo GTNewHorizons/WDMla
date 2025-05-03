@@ -46,14 +46,14 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
     public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
                                EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if(phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
-            if (!info.effectiveTool.isValid()) {
+            if (!info.getEffectiveTool().isValid()) {
                 float hardness = block.getBlockHardness(player.worldObj, position.blockX, position.blockY, position.blockZ);
                 if (hardness > 0f) {
                     for (Map.Entry<EffectiveTool, ItemStack> testToolEntry : testTools.entrySet()) {
                         ItemStack testTool = testToolEntry.getValue();
                         if (testTool.func_150997_a(block) >= ((ItemTool) testTool.getItem()).func_150913_i()
                                 .getEfficiencyOnProperMaterial()) {
-                            info.effectiveTool = testToolEntry.getKey();
+                            info.setEffectiveTool(testToolEntry.getKey());
                             break;
                         }
                     }
@@ -61,12 +61,12 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
             }
             else {
                 for (Map.Entry<EffectiveTool, ItemStack> testTool : testTools.entrySet()) {
-                    if (info.effectiveTool.isSameTool(testTool.getKey())) {
-                        info.effectiveTool = testTool.getKey();
+                    if (info.getEffectiveTool().isSameTool(testTool.getKey())) {
+                        info.setEffectiveTool(testTool.getKey());
                     }
                 }
-                if (info.effectiveTool.isSameTool(TOOL_SWORD)) {
-                    info.effectiveTool = TOOL_SWORD;
+                if (info.getEffectiveTool().isSameTool(TOOL_SWORD)) {
+                    info.setEffectiveTool(TOOL_SWORD);
                 }
             }
         }
@@ -74,13 +74,13 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
             if (PluginsConfig.harvestability.icon.showShearabilityIcon) {
                 HarvestabilityInfo.AdditionalToolInfo canShear = BlockHelper.getShearability(player, block, meta, position);
                 if (canShear != null) {
-                    info.additionalToolsInfo.add(canShear);
+                    info.registerAdditionalToolInfo(canShear);
                 }
             }
             if (PluginsConfig.harvestability.icon.showSilkTouchabilityIcon) {
                 HarvestabilityInfo.AdditionalToolInfo canSilktouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
                 if (canSilktouch != null) {
-                    info.additionalToolsInfo.add(canSilktouch);
+                    info.registerAdditionalToolInfo(canSilktouch);
                 }
             }
         }

@@ -23,16 +23,17 @@ public enum GregTechHarvestHandler implements HarvestHandler {
     public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase,
                                EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
-            if(info.effectiveTool.isSameTool(ProxyGregTech.toolWrench)) {
-                info.effectiveTool = ProxyGregTech.toolWrench;
+            if(info.getEffectiveTool().isSameTool(ProxyGregTech.toolWrench)) {
+                info.setEffectiveTool(ProxyGregTech.toolWrench);
             }
-            else if (info.effectiveTool.isSameTool(ProxyGregTech.toolWireCutter)) {
-                info.effectiveTool = ProxyGregTech.toolWireCutter;
+            else if (info.getEffectiveTool().isSameTool(ProxyGregTech.toolWireCutter)) {
+                info.setEffectiveTool(ProxyGregTech.toolWireCutter);
             }
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
             if (player.getHeldItem() != null) {
-                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.effectiveTool, info.harvestLevel);
+                info.setCurrentlyHarvestable(
+                        isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.getEffectiveTool(), info.getHarvestLevel()));
             }
         }
 

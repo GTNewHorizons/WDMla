@@ -15,8 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-
 public enum BaseHarvestLogicHandler implements HarvestHandler {
     INSTANCE;
 
@@ -25,41 +23,41 @@ public enum BaseHarvestLogicHandler implements HarvestHandler {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
             if (!player.isCurrentToolAdventureModeExempt(position.blockX, position.blockY, position.blockZ)
                     || isBlockUnbreakable(block, player.worldObj, position.blockX, position.blockY, position.blockZ)) {
-                info.effectiveTool = EffectiveTool.NO_TOOL;
-                info.canHarvest = false;
-                info.harvestLevel = HarvestLevel.NO_TOOL;
+                info.setEffectiveTool(EffectiveTool.NO_TOOL);
+                info.setCurrentlyHarvestable(false);
+                info.setHarvestLevel(HarvestLevel.NO_TOOL);
                 return false;
             }
 
-            info.effectiveTool = new EffectiveTool(block.getHarvestTool(meta), null);
+            info.setEffectiveTool(new EffectiveTool(block.getHarvestTool(meta), null));
         }
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
-            info.harvestLevel = info.effectiveTool.getHarvestLevel(block, meta);
+            info.setHarvestLevel(info.getEffectiveTool().getHarvestLevel(block, meta));
         }
         else if (phase == HarvestabilityTestPhase.ADDITIONAL_TOOLS_ICON) {
             HarvestabilityInfo.AdditionalToolInfo canShear = BlockHelper.getShearability(player, block, meta, position);
             HarvestabilityInfo.AdditionalToolInfo canSilkTouch = BlockHelper.getSilktouchAbility(player, block, meta, position);
 
-            if (canInstaBreak(info.harvestLevel, info.effectiveTool, block, canShear != null, canSilkTouch != null)) {
-                info.effectiveTool = EffectiveTool.NO_TOOL;
-                info.canHarvest = true;
-                info.harvestLevel = HarvestLevel.NO_TOOL;
+            if (canInstaBreak(info.getHarvestLevel(), info.getEffectiveTool(), block, canShear != null, canSilkTouch != null)) {
+                info.setEffectiveTool(EffectiveTool.NO_TOOL);
+                info.setCurrentlyHarvestable(true);
+                info.setHarvestLevel(HarvestLevel.NO_TOOL);
                 return false;
             }
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
             if (player.getHeldItem() == null) {
-                info.canHarvest = ForgeHooks.canHarvestBlock(block, player, meta);
+                info.setCurrentlyHarvestable(ForgeHooks.canHarvestBlock(block, player, meta));
             }
             else {
-                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem());
+                info.setCurrentlyHarvestable(isCurrentlyHarvestable(player, block, meta, player.getHeldItem()));
             }
         }
         else if (phase == HarvestabilityTestPhase.IS_HELD_TOOL_EFFECTIVE) {
             ItemStack tool = player.getHeldItem();
             if (tool != null) {
-                boolean isEffective = isToolEffectiveAgainst(tool, block, meta, info.effectiveTool);
-                info.isHeldToolEffective = isEffective && info.canHarvest;
+                boolean isEffective = isToolEffectiveAgainst(tool, block, meta, info.getEffectiveTool());
+                info.setHeldToolEffective(isEffective && info.isCurrentlyHarvestable());
             }
         }
 

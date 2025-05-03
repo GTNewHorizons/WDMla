@@ -19,25 +19,25 @@ public enum TinkersHarvestHandler implements HarvestHandler {
     @Override
     public boolean testHarvest(HarvestabilityInfo info, HarvestabilityTestPhase phase, EntityPlayer player, Block block, int meta, MovingObjectPosition position) {
         if (phase == HarvestabilityTestPhase.EFFECTIVE_TOOL_NAME) {
-            if (info.effectiveTool.isSameTool(ProxyTinkersConstruct.pickaxe)) {
+            if (info.getEffectiveTool().isSameTool(ProxyTinkersConstruct.pickaxe)) {
                 //override vanilla pickaxe icon
-                info.effectiveTool = ProxyTinkersConstruct.pickaxe;
+                info.setEffectiveTool(ProxyTinkersConstruct.pickaxe);
             }
         }
         else if (phase == HarvestabilityTestPhase.HARVEST_LEVEL) {
-            info.harvestLevel = new ProxyTinkersConstruct.TiCHarvestLevel(info.harvestLevel);
+            info.setHarvestLevel(new ProxyTinkersConstruct.TiCHarvestLevel(info.getHarvestLevel()));
         }
         else if (phase == HarvestabilityTestPhase.CURRENTLY_HARVESTABLE) {
             if (player.getHeldItem() != null) {
-                info.canHarvest = isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.harvestLevel);
+                info.setCurrentlyHarvestable(isCurrentlyHarvestable(player, block, meta, player.getHeldItem(), info.getHarvestLevel()));
             }
         }
         else if (phase == HarvestabilityTestPhase.IS_HELD_TOOL_EFFECTIVE) {
             ItemStack tool = player.getHeldItem();
             if (tool != null) {
                 boolean isHoldingTinkersTool = ProxyTinkersConstruct.hasToolTag(tool);
-                boolean isEffective = ProxyTinkersConstruct.isToolEffectiveAgainst(tool, block, meta, info.effectiveTool);
-                info.isHeldToolEffective = isEffective && (!isHoldingTinkersTool || info.canHarvest);
+                boolean isEffective = ProxyTinkersConstruct.isToolEffectiveAgainst(tool, block, meta, info.getEffectiveTool());
+                info.setHeldToolEffective(isEffective && (!isHoldingTinkersTool || info.isCurrentlyHarvestable()));
             }
         }
 
