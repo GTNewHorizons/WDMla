@@ -1,5 +1,6 @@
 package com.gtnewhorizons.wdmla.plugin.vanilla;
 
+import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -22,8 +23,7 @@ public enum VillagerProfessionProvider implements IEntityComponentProvider {
         if (accessor.getEntity() instanceof EntityVillager villager) {
             String name = getVillagerName(villager.getProfession());
             tooltip.child(
-                    ThemeHelper.INSTANCE
-                            .info(StatCollector.translateToLocal("hud.msg.wdmla.villager.profession." + name))
+                    new TextComponent(StatCollector.translateToLocal("hud.msg.wdmla.villager.profession." + name))
                             .tag(VanillaIdentifiers.VILLAGER_PROFESSION));
         }
     }

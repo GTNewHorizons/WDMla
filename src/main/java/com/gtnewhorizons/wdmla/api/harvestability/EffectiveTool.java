@@ -31,9 +31,6 @@ public class EffectiveTool {
     }
 
     public HarvestLevel getHarvestLevel(Block block, int meta) {
-        if (isSameTool(CANNOT_HARVEST)) {
-            return HarvestLevel.NO_TOOL;
-        }
         int rawLevel = block.getHarvestLevel(meta);
         if (isValid() && rawLevel < 0) rawLevel = 0;
         return new HarvestLevel(rawLevel);
