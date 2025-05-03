@@ -3,7 +3,7 @@ package com.gtnewhorizons.wdmla.api.harvestability;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-import java.util.Map;
+import java.util.List;
 
 public class HarvestLevel {
 
@@ -34,8 +34,8 @@ public class HarvestLevel {
         }
     }
 
-    public ItemStack getIconFromMap(Map<Integer, ItemStack> levelIconMap) {
-        return levelIconMap.get(value);
+    public ItemStack getIconFromList(List<ItemStack> iconList) {
+        return iconList.get(value);
     }
 
     public boolean doesSatisfy(HarvestLevel otherHarvestLevel) {

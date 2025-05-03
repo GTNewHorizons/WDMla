@@ -5,8 +5,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.gtnewhorizons.wdmla.api.harvestability.EffectiveTool;
@@ -64,22 +63,20 @@ public class ProxyGregTech {
             iconIronWireCutter = (ItemStack) getToolWithStatsMethod
                     .invoke(metaTool01, wireCutterID, 1, ironMaterial, ironMaterial, null);
 
-            toolWrench = new EffectiveTool("wrench", new HashMap<>() {
-                {
-                    put(0, iconIronWrench);
-                    put(1, iconIronWrench);
-                    put(2, iconIronWrench);
-                    put(3, iconSteelWrench);
-                    put(4, iconSteelWrench); // idk does 4 actually exist though.
-                }
-            });
-            toolWireCutter = new EffectiveTool("cutter", new HashMap<>() {
-                {
-                    put(0, iconIronWireCutter);
-                    put(1, iconIronWireCutter);
-                    put(2, iconIronWireCutter);
-                }
-            });
+            toolWrench = new EffectiveTool("wrench",
+                    Arrays.asList(
+                            iconIronWrench,
+                            iconIronWrench,
+                            iconIronWrench,
+                            iconSteelWrench,
+                            iconSteelWrench
+                    ));
+            toolWireCutter = new EffectiveTool("cutter",
+                    Arrays.asList(
+                            iconIronWireCutter,
+                            iconIronWireCutter,
+                            iconIronWireCutter
+                    ));
 
         } catch (Exception e) {
             e.printStackTrace();

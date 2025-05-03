@@ -14,6 +14,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,29 +23,18 @@ public enum VanillaHarvestToolHandler implements HarvestHandler {
 
     private static final HashMap<EffectiveTool, ItemStack> testTools = new HashMap<>();
 
-    public static final EffectiveTool TOOL_PICKAXE = new EffectiveTool("pickaxe", new HashMap<>() {
-        {
-            put(0, new ItemStack(Items.wooden_pickaxe));
-            put(1, new ItemStack(Items.stone_pickaxe));
-            put(2, new ItemStack(Items.iron_pickaxe));
-            put(3, new ItemStack(Items.diamond_pickaxe));
-        }
-    });
-    public static final EffectiveTool TOOL_SHOVEL = new EffectiveTool("shovel", new HashMap<>() {
-        {
-            put(0, new ItemStack(Items.wooden_shovel));
-        }
-    });
-    public static final EffectiveTool TOOL_AXE = new EffectiveTool("axe", new HashMap<>() {
-        {
-            put(0, new ItemStack(Items.wooden_axe));
-        }
-    });
-    public static final EffectiveTool TOOL_SWORD = new EffectiveTool("sword", new HashMap<>() {
-        {
-            put(0, new ItemStack(Items.wooden_sword));
-        }
-    });
+    public static final EffectiveTool TOOL_PICKAXE = new EffectiveTool("pickaxe",
+            Arrays.asList(
+                    new ItemStack(Items.wooden_pickaxe),
+                    new ItemStack(Items.stone_pickaxe),
+                    new ItemStack(Items.iron_pickaxe),
+                    new ItemStack(Items.diamond_pickaxe)));
+    public static final EffectiveTool TOOL_SHOVEL = new EffectiveTool("shovel",
+            Arrays.asList(new ItemStack(Items.wooden_shovel)));
+    public static final EffectiveTool TOOL_AXE = new EffectiveTool("axe",
+            Arrays.asList(new ItemStack(Items.wooden_axe)));
+    public static final EffectiveTool TOOL_SWORD = new EffectiveTool("sword",
+            Arrays.asList(new ItemStack(Items.wooden_sword)));
 
     static {
         testTools.put(TOOL_PICKAXE, new ItemStack(Items.wooden_pickaxe));

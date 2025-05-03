@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 public class EffectiveTool {
@@ -15,12 +15,14 @@ public class EffectiveTool {
     public static final EffectiveTool NO_TOOL = new EffectiveTool(null, null);
 
     protected final String value;
-    //TODO: make it List
-    private final @Nullable Map<Integer, ItemStack> iconMap;
+    /**
+     * icons indexed by harvest level (0~)
+     */
+    private final @Nullable List<ItemStack> iconList;
 
-    public EffectiveTool(String value, @Nullable Map<Integer, ItemStack> iconMap) {
-        this.value = value;
-        this.iconMap = iconMap;
+    public EffectiveTool(String name, @Nullable List<ItemStack> iconList) {
+        this.value = name;
+        this.iconList = iconList;
     }
 
     public boolean isValid() {
@@ -42,7 +44,7 @@ public class EffectiveTool {
     }
 
     public boolean hasIconRegistered() {
-        return iconMap != null;
+        return iconList != null;
     }
 
     public ItemStack getIcon(HarvestLevel harvestLevel) {
@@ -50,7 +52,7 @@ public class EffectiveTool {
             return null;
         }
         else {
-            ItemStack icon = iconMap != null ? harvestLevel.getIconFromMap(iconMap) : null;
+            ItemStack icon = iconList != null ? harvestLevel.getIconFromList(iconList) : null;
             if (icon == null) {
                 icon = new ItemStack(Blocks.iron_bars);
             }

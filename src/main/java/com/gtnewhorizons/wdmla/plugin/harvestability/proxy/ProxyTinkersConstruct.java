@@ -2,6 +2,7 @@ package com.gtnewhorizons.wdmla.plugin.harvestability.proxy;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,23 +46,22 @@ public class ProxyTinkersConstruct {
     }
 
     /**
-     * Gets the icon of the effective Pickaxe from config. Important note: the default config value is tuned for Iguana
+     * Sets the icon of the effective Pickaxe from config. Important note: the default config value is tuned for Iguana
      * Tweaks with vanilla mode disabled. You have to edit the config in order to play with vanilla mode or TiC alone
      * See: <a href=
      * "https://github.com/GTNewHorizons/TinkersConstruct/blob/master/src/main/java/tconstruct/tools/TinkerTools.java#L1771">...</a>
      */
     public static void initPickaxeTool() {
         PluginsConfig.Harvestability.TinkersConstruct tiCConfig = PluginsConfig.harvestability.tinkersConstruct;
-        pickaxe = new EffectiveTool("pickaxe", new HashMap<>() {
-            {
-                put(0, defaultPickaxes.get(tiCConfig.harvestLevel0));
-                put(1, defaultPickaxes.get(tiCConfig.harvestLevel1));
-                put(2, defaultPickaxes.get(tiCConfig.harvestLevel2));
-                put(3, defaultPickaxes.get(tiCConfig.harvestLevel3));
-                put(4, defaultPickaxes.get(tiCConfig.harvestLevel4));
-                put(5, defaultPickaxes.get(tiCConfig.harvestLevel5));
-            }
-        });
+        pickaxe = new EffectiveTool("pickaxe",
+                Arrays.asList(
+                        defaultPickaxes.get(tiCConfig.harvestLevel0),
+                        defaultPickaxes.get(tiCConfig.harvestLevel1),
+                        defaultPickaxes.get(tiCConfig.harvestLevel2),
+                        defaultPickaxes.get(tiCConfig.harvestLevel3),
+                        defaultPickaxes.get(tiCConfig.harvestLevel4),
+                        defaultPickaxes.get(tiCConfig.harvestLevel5)
+                ));
     }
 
     public static boolean hasToolTag(ItemStack itemStack) {

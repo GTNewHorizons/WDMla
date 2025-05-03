@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import tconstruct.library.util.HarvestLevels;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.gtnewhorizons.wdmla.plugin.harvestability.proxy.ProxyTinkersConstruct.defaultPickaxes;
@@ -29,26 +30,25 @@ public class ProxyIguanaTweaks {
     }
 
     /**
-     * Gets the icon of the effective Pickaxe from config.
+     * Sets the icon of the effective Pickaxe from config.
      *
      * @see ProxyTinkersConstruct#initPickaxeTool()
      */
     public static void initPickaxeTool() {
         PluginsConfig.Harvestability.IguanaTweaks iguanaConfig = PluginsConfig.harvestability.iguanaTweaks;
-        pickaxe = new EffectiveTool("pickaxe", new HashMap<>() {
-            {
-                put(0, defaultPickaxes.get(iguanaConfig.harvestLevel0));
-                put(1, defaultPickaxes.get(iguanaConfig.harvestLevel1));
-                put(2, defaultPickaxes.get(iguanaConfig.harvestLevel2));
-                put(3, defaultPickaxes.get(iguanaConfig.harvestLevel3));
-                put(4, defaultPickaxes.get(iguanaConfig.harvestLevel4));
-                put(5, defaultPickaxes.get(iguanaConfig.harvestLevel5));
-                put(6, defaultPickaxes.get(iguanaConfig.harvestLevel6));
-                put(7, defaultPickaxes.get(iguanaConfig.harvestLevel7));
-                put(8, defaultPickaxes.get(iguanaConfig.harvestLevel8));
-                put(9, defaultPickaxes.get(iguanaConfig.harvestLevel9));
-            }
-        });
+        pickaxe = new EffectiveTool("pickaxe",
+                Arrays.asList(
+                        defaultPickaxes.get(iguanaConfig.harvestLevel0),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel1),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel2),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel3),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel4),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel5),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel6),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel7),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel8),
+                        defaultPickaxes.get(iguanaConfig.harvestLevel9)
+                ));
     }
 
     public static class IguanaHarvestLevel extends HarvestLevel {
