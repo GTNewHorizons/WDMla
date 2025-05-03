@@ -13,7 +13,7 @@ import java.util.Objects;
 public class EffectiveTool {
 
     public static final EffectiveTool NO_TOOL = new EffectiveTool(null, null);
-    public static final EffectiveTool CANNOT_HARVEST = new EffectiveTool("none", null);
+    public static final EffectiveTool CANNOT_HARVEST = new EffectiveTool("unbreakable", null);
 
     protected final String value;
     /**

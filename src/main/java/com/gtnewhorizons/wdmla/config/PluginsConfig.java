@@ -233,26 +233,32 @@ public class PluginsConfig {
         public static class TinkersConstruct {
             @Config.DefaultInt(0)
             @Config.Comment("default: wood")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel0;
 
             @Config.DefaultInt(1)
             @Config.Comment("default: stone")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel1;
 
             @Config.DefaultInt(2)
             @Config.Comment("default: iron")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel2;
 
             @Config.DefaultInt(6)
             @Config.Comment("default: obsidian")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel3;
 
             @Config.DefaultInt(10)
             @Config.Comment("default: cobalt")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel4;
 
             @Config.DefaultInt(12)
             @Config.Comment("default: manyullyn")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel5;
         }
 
@@ -262,42 +268,52 @@ public class PluginsConfig {
         public static final class IguanaTweaks {
             @Config.DefaultInt(0)
             @Config.Comment("default: wood")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel0;
 
             @Config.DefaultInt(13)
             @Config.Comment("default: copper")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel1;
 
             @Config.DefaultInt(2)
             @Config.Comment("default: iron")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel2;
 
             @Config.DefaultInt(14)
             @Config.Comment("default: tin")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel3;
 
             @Config.DefaultInt(16)
             @Config.Comment("default: redstone")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel4;
 
             @Config.DefaultInt(6)
             @Config.Comment("default: obsidian")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel5;
 
             @Config.DefaultInt(11)
             @Config.Comment("default: ardite")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel6;
 
             @Config.DefaultInt(10)
             @Config.Comment("default: cobalt")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel7;
 
             @Config.DefaultInt(12)
             @Config.Comment("default: manyullyn")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel8;
 
             @Config.DefaultInt(12)
             @Config.Comment("default: manyullynplus")
+            @Config.RangeInt(min = 1, max = 100)
             public int harvestLevel9;
         }
 
