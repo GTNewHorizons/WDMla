@@ -70,6 +70,6 @@ public enum LiquidHarvestHandler implements HarvestHandler {
 
     @Override
     public int getDefaultPriority() {
-        return TooltipPosition.TAIL;
+        return TooltipPosition.TAIL - 100;
     }
 }
