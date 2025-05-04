@@ -134,7 +134,7 @@ hud.msg.wdmla.insufficient.energy=能量不足
 hud.msg.wdmla.insufficient.fuel=燃料不足
 hud.msg.wdmla.near.water=靠近水源
 hud.msg.wdmla.cannot.hoe=无法锄地
-hud.msg.wdmla.locked=Locked
+hud.msg.wdmla.locked=已锁定
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
