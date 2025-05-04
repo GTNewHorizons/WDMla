@@ -25,6 +25,8 @@ hud.msg.wdmla.toolclass.crowbar=撬棍
 hud.msg.wdmla.toolclass.sword=剑
 hud.msg.wdmla.toolclass.wrench=扳手
 hud.msg.wdmla.toolclass.cutter=剪线钳
+hud.msg.wdmla.toolclass.bucket=桶
+hud.msg.wdmla.toolclass.unbreakable=不可破坏
 
 # profession
 hud.msg.wdmla.villager.profession.farmer=农民
@@ -132,6 +134,7 @@ hud.msg.wdmla.insufficient.energy=能量不足
 hud.msg.wdmla.insufficient.fuel=燃料不足
 hud.msg.wdmla.near.water=靠近水源
 hud.msg.wdmla.cannot.hoe=无法锄地
+hud.msg.wdmla.locked=Locked
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
@@ -239,8 +242,11 @@ provider.wdmla.minecraft.ender.dragon.header=末影龙标题
 provider.wdmla.minecraft.end.portal.header=末地传送门标题
 
 provider.wdmla.harvestability.category=Waila Harvestability
-provider.wdmla.harvestability.legacy=旧版模式
-provider.wdmla.harvestability.modern=现代模式
+provider.wdmla.harvestability.tinkersconstruct=Tinkers Construct
+provider.wdmla.harvestability.iguanatweaks=Iguana Tweaks
+provider.wdmla.harvestability.icon=图标
+provider.wdmla.harvestability.text=文本
+provider.wdmla.harvestability.condition=条件
 
 provider.wdmla.debug.category=调试
 provider.wdmla.debug.hardness=方块硬度
@@ -259,6 +265,11 @@ provider.wdmla.harvestcraft.fruit.growth.rate=水果生长速率
 provider.wdmla.harvestcraft.animal.trap=捕兽笼
 provider.wdmla.harvestcraft.fish.trap=渔栅
 
+provider.wdmla.natura.berry.bush=浆果丛
+provider.wdmla.natura.crop.header=作物标题
+provider.wdmla.natura.growth.rate=生长速率
+provider.wdmla.natura.leaves=树叶
+
 # options
 
 # general options
@@ -269,6 +280,8 @@ option.wdmla.general.theme=主题预设
 option.wdmla.general.previewincfg=配置预览
 option.wdmla.general.customnameoverride=自定义名称覆盖
 option.wdmla.general.maxnamelengthpixel=最大名称长度（像素）
+option.wdmla.general.align.icon.right.top=图标对齐右上角
+option.wdmla.general.override.waila.tooltips=覆盖Waila提示
 
 option.wdmla.textcolor.category=文本颜色
 option.wdmla.general.textcolor.info=信息颜色
@@ -330,23 +343,15 @@ option.wdmla.vanilla.comparator=显示比较器模式
 option.wdmla.vanilla.max.command.length=最大命令长度
 
 # waila harvestability options
-option.wdmla.harvestability.harvestlevel=挖掘等级
-option.wdmla.harvestability.effectivetool=所需工具
-option.wdmla.harvestability.currentlyharvestable=能否挖掘
+option.wdmla.harvestability.harvestlevelname=挖掘等级名称
+option.wdmla.harvestability.effectivetool.line=有效工具行
+option.wdmla.harvestability.currentlyharvestable.line=当前可挖掘行
 option.wdmla.harvestability.oresonly=仅显示矿石挖掘信息
-option.wdmla.harvestability.harvestlevel.sneakingonly=仅潜行时显示: 挖掘等级
-option.wdmla.harvestability.effectivetool.sneakingonly=仅潜行时显示: 所需工具
-option.wdmla.harvestability.currentlyharvestable.sneakingonly=仅潜行时显示: 能否挖掘
-option.wdmla.harvestability.minimal=极简模式
 option.wdmla.harvestability.unharvestableonly=仅显示不可采集
 option.wdmla.harvestability.toolrequiredonly=仅需工具时显示
 option.wdmla.harvestability.shearability=能否用剪刀采集
-option.wdmla.harvestability.shearability.sneakingonly=仅潜行时显示: 能否用剪刀采集
 option.wdmla.harvestability.silktouchability=能否精准采集
-option.wdmla.harvestability.silktouchability.sneakingonly=仅潜行时显示: 能否精准采集
 option.wdmla.harvestability.harvestlevelnum=采集等级
-option.wdmla.harvestability.harvestlevelnum.sneakingonly=仅潜行时显示: 采集等级
-option.wdmla.harvestability.minimalseparator.string=极简模式分隔符文本
 option.wdmla.harvestability.currentlyharvestable.string=可采集提示文本
 option.wdmla.harvestability.notcurrentlyharvestable.string=不可采集提示文本
 option.wdmla.harvestability.shearability.string=剪刀采集提示文本
@@ -357,6 +362,9 @@ option.wdmla.harvestability.currentlyHarvestable.icon=当前可采集图标
 option.wdmla.harvestability.effectivetool.icon=有效工具图标
 option.wdmla.harvestability.shearability.icon=剪刀采集图标
 option.wdmla.harvestability.silktouchability.icon=精准采集图标
+option.wdmla.harvestability.textdetailsonly=仅显示详细文本
+option.wdmla.harvestability.coloriconwitheffectiveness=根据有效性着色图标
+option.wdmla.harvestability.always.show.additional.tools=始终显示额外工具
 
 # debug options
 option.wdmla.debug.entity.registry.data=显示实体注册表数据
@@ -451,6 +459,7 @@ waila.keybind.recipe=[Waila]显示合成
 waila.keybind.usage=[Waila]显示可参与合成
 waila.keybind.testing=[Waila]测试
 waila.keybind.details=显示详细信息
+
 
 
 
