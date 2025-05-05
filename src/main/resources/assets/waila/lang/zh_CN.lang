@@ -111,6 +111,7 @@ hud.msg.wdmla.milk.cooldown=挤奶冷却
 hud.msg.wdmla.must.surround=必须被%s包围
 hud.msg.wdmla.dirt.or.grass=泥土或草方块
 hud.msg.wdmla.any.fluid=任意流体
+hud.msg.wdmla.stack.limit=堆叠上限
 
 # state
 hud.msg.wdmla.mature=成熟
@@ -135,6 +136,9 @@ hud.msg.wdmla.insufficient.fuel=燃料不足
 hud.msg.wdmla.near.water=靠近水源
 hud.msg.wdmla.cannot.hoe=无法锄地
 hud.msg.wdmla.locked=已锁定
+hud.msg.wdmla.no.access=无访问权限
+hud.msg.wdmla.access.protected=权限保护
+hud.msg.wdmla.void.overflow=溢出销毁
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
@@ -269,6 +273,8 @@ provider.wdmla.natura.berry.bush=浆果丛
 provider.wdmla.natura.crop.header=作物标题
 provider.wdmla.natura.growth.rate=生长速率
 provider.wdmla.natura.leaves=树叶
+
+provider.wdmla.storagedrawers.drawers=抽屉存储
 
 # options
 
