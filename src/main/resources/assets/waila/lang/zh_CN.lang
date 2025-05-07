@@ -139,6 +139,7 @@ hud.msg.wdmla.locked=已锁定
 hud.msg.wdmla.no.access=无访问权限
 hud.msg.wdmla.access.protected=权限保护
 hud.msg.wdmla.void.overflow=溢出销毁
+hud.msg.wdmla.sealed=Sealed
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
@@ -269,12 +270,15 @@ provider.wdmla.harvestcraft.fruit.growth.rate=水果生长速率
 provider.wdmla.harvestcraft.animal.trap=捕兽笼
 provider.wdmla.harvestcraft.fish.trap=渔栅
 
+provider.wdmla.natura.category=自然
 provider.wdmla.natura.berry.bush=浆果丛
 provider.wdmla.natura.crop.header=作物标题
 provider.wdmla.natura.growth.rate=生长速率
 provider.wdmla.natura.leaves=树叶
 
-provider.wdmla.storagedrawers.drawers=抽屉存储
+provider.wdmla.storagedrawers.category=存储抽屉
+provider.wdmla.storagedrawers.content=抽屉内容
+provider.wdmla.storagedrawers.property=抽屉属性
 
 # options
 
@@ -465,8 +469,3 @@ waila.keybind.recipe=[Waila]显示合成
 waila.keybind.usage=[Waila]显示可参与合成
 waila.keybind.testing=[Waila]测试
 waila.keybind.details=显示详细信息
-
-
-
-
-
