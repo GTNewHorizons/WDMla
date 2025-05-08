@@ -112,6 +112,7 @@ hud.msg.wdmla.must.surround=必须被%s包围
 hud.msg.wdmla.dirt.or.grass=泥土或草方块
 hud.msg.wdmla.any.fluid=任意流体
 hud.msg.wdmla.stack.limit=堆叠上限
+hud.msg.wdmla.cut.from=切割自：%s
 
 # state
 hud.msg.wdmla.mature=成熟
@@ -247,8 +248,8 @@ provider.wdmla.minecraft.ender.dragon.header=末影龙标题
 provider.wdmla.minecraft.end.portal.header=末地传送门标题
 
 provider.wdmla.harvestability.category=Waila Harvestability
-provider.wdmla.harvestability.tinkersconstruct=Tinkers Construct
-provider.wdmla.harvestability.iguanatweaks=Iguana Tweaks
+provider.wdmla.harvestability.tinkersconstruct=匠魂
+provider.wdmla.harvestability.iguanatweaks=蜥蜴微调
 provider.wdmla.harvestability.icon=图标
 provider.wdmla.harvestability.text=文本
 provider.wdmla.harvestability.condition=条件
@@ -279,6 +280,12 @@ provider.wdmla.natura.leaves=树叶
 provider.wdmla.storagedrawers.category=储物抽屉
 provider.wdmla.storagedrawers.content=抽屉内容
 provider.wdmla.storagedrawers.property=抽屉属性
+
+provider.wdmla.forestry.category=林业
+provider.wdmla.forestry.tool.harvest=工具采集
+
+provider.wdmla.architecturecraft.category=建筑师工艺
+provider.wdmla.architecturecraft.block.shape=造型方块
 
 # options
 
