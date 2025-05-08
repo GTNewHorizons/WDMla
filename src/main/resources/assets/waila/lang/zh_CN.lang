@@ -139,7 +139,7 @@ hud.msg.wdmla.locked=已锁定
 hud.msg.wdmla.no.access=无访问权限
 hud.msg.wdmla.access.protected=权限保护
 hud.msg.wdmla.void.overflow=溢出销毁
-hud.msg.wdmla.sealed=Sealed
+hud.msg.wdmla.sealed=已密封
 
 # dummy tooltip
 hud.msg.wdmla.cfg.dummy.1=将鼠标悬停于游戏内任意物体
