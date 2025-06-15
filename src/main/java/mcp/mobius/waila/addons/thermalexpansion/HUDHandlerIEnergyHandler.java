@@ -1,5 +1,6 @@
 package mcp.mobius.waila.addons.thermalexpansion;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,6 +17,12 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.utils.WailaExceptionHandler;
 
 public class HUDHandlerIEnergyHandler implements IWailaDataProvider {
+
+    private final DecimalFormat energyFormat;
+
+    public HUDHandlerIEnergyHandler() {
+        this.energyFormat = new DecimalFormat("###,###,###,###,###,###,###");
+    }
 
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -39,12 +46,22 @@ public class HUDHandlerIEnergyHandler implements IWailaDataProvider {
         int maxEnergy = accessor.getNBTInteger(accessor.getNBTData(), "MaxStorage");
         try {
             if ((maxEnergy != 0) && (((ITaggedList) currenttip).getEntries("RFEnergyStorage").size() == 0)) {
-                ((ITaggedList) currenttip).add(String.format("%d / %d RF", energy, maxEnergy), "RFEnergyStorage");
+                if (!config.getConfig("thermalexpansion.digitgrouping")) {
+                    ((ITaggedList) currenttip).add(String.format("%d / %d RF", energy, maxEnergy), "RFEnergyStorage");
+                } else {
+                    ((ITaggedList) currenttip).add(
+                        String.format(
+                            "%s / %s RF", 
+                            energyFormat.format(energy), 
+                            energyFormat.format(maxEnergy)
+                        ), 
+                        "RFEnergyStorage");
+                }
             }
         } catch (Exception e) {
             currenttip = WailaExceptionHandler.handleErr(e, accessor.getTileEntity().getClass().getName(), currenttip);
         }
-
+        
         return currenttip;
     }
 
