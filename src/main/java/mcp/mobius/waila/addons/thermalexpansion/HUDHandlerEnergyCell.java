@@ -1,6 +1,5 @@
 package mcp.mobius.waila.addons.thermalexpansion;
 
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 
