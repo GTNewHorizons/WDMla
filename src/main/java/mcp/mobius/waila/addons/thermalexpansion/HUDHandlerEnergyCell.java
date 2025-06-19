@@ -1,6 +1,7 @@
 package mcp.mobius.waila.addons.thermalexpansion;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -17,10 +18,11 @@ import mcp.mobius.waila.cbcore.LangUtil;
 public class HUDHandlerEnergyCell implements IWailaDataProvider {
 
 
-    private final DecimalFormat energyFormat;
-
-    public HUDHandlerEnergyCell() {
-        this.energyFormat = new DecimalFormat("###,###,###,###,###,###,###");
+    private static final NumberFormat energyFormat = NumberFormat.getInstance();
+    
+    static {
+        energyFormat.setGroupingUsed(true);
+        energyFormat.setMaximumFractionDigits(0);
     }
 
     @Override
