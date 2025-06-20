@@ -20,7 +20,8 @@ public interface HarvestHandler extends IWDMlaProvider {
      * 
      * @return The correct block used for harvest level and interaction calculation
      */
-    default Block getEffectiveBlock(Block block, ItemStack itemForm, int meta) {
+    default Block getEffectiveBlock(EntityPlayer player, Block block, ItemStack itemForm, int meta,
+            MovingObjectPosition position) {
         return null;
     }
 
@@ -29,7 +30,8 @@ public interface HarvestHandler extends IWDMlaProvider {
      * 
      * @return The correct meta used for harvest level and interaction calculation
      */
-    default Integer getEffectiveMeta(Block block, ItemStack itemForm, int meta) {
+    default Integer getEffectiveMeta(EntityPlayer player, Block block, ItemStack itemForm, int meta,
+            MovingObjectPosition position) {
         return null;
     }
 

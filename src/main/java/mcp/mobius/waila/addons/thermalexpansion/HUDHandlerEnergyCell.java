@@ -1,5 +1,6 @@
 package mcp.mobius.waila.addons.thermalexpansion;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -14,6 +15,14 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.cbcore.LangUtil;
 
 public class HUDHandlerEnergyCell implements IWailaDataProvider {
+
+
+    private static final NumberFormat energyFormat = NumberFormat.getInstance();
+    
+    static {
+        energyFormat.setGroupingUsed(true);
+        energyFormat.setMaximumFractionDigits(0);
+    }
 
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
@@ -33,14 +42,25 @@ public class HUDHandlerEnergyCell implements IWailaDataProvider {
 
         int energyReceive = accessor.getNBTInteger(accessor.getNBTData(), "Recv");
         int energySend = accessor.getNBTInteger(accessor.getNBTData(), "Send");
-
-        currenttip.add(
+        
+        if (!config.getConfig("thermalexpansion.digitgrouping")) {
+            currenttip.add(
                 String.format(
                         "%s/%s : %d / %d RF/t",
-                        LangUtil.translateG("hud.msg.in"),
-                        LangUtil.translateG("hud.msg.out"),
+                        LangUtil.translateG("hud.msg.input"),
+                        LangUtil.translateG("hud.msg.output"),
                         energyReceive,
                         energySend));
+        } else {
+            currenttip.add(
+                String.format(
+                        "%s/%s : %s / %s RF/t",
+                        LangUtil.translateG("hud.msg.input"),
+                        LangUtil.translateG("hud.msg.output"),
+                        energyFormat.format(energyReceive),
+                        energyFormat.format(energySend)));
+        }
+
 
         return currenttip;
     }

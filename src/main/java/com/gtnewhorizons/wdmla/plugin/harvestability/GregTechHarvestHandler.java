@@ -53,12 +53,14 @@ public enum GregTechHarvestHandler implements HarvestHandler {
     }
 
     @Override
-    public Block getEffectiveBlock(Block block, ItemStack itemForm, int meta) {
+    public Block getEffectiveBlock(EntityPlayer player, Block block, ItemStack itemForm, int meta,
+            MovingObjectPosition position) {
         return isDisguised(block, itemForm, meta) ? Block.getBlockFromItem(itemForm.getItem()) : null;
     }
 
     @Override
-    public Integer getEffectiveMeta(Block block, ItemStack itemForm, int meta) {
+    public Integer getEffectiveMeta(EntityPlayer player, Block block, ItemStack itemForm, int meta,
+            MovingObjectPosition position) {
         return isDisguised(block, itemForm, meta) ? itemForm.getItemDamage() : null;
     }
 

@@ -29,7 +29,7 @@ Remove
 - Waila (bundled)
 - Waila Harvestability (bundled)
 
-from your mods folder, than throw [GTNHLib](https://github.com/GTNewHorizons/GTNHLib/releases/latest) and this mod into it<br>
+from your mods folder, then throw [GTNHLib](https://github.com/GTNewHorizons/GTNHLib/releases/latest) and this mod into it<br>
 Your Waila config will be applied to WDMla automatically.<br>
 No, NEI is no longer required
 

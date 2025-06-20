@@ -73,13 +73,21 @@ public enum HarvestToolProvider implements IBlockComponentProvider {
 
         Block effectiveBlock = handlers.stream()
                 .map(
-                        handler -> handler
-                                .getEffectiveBlock(accessor.getBlock(), accessor.getItemForm(), accessor.getMetadata()))
+                        handler -> handler.getEffectiveBlock(
+                                accessor.getPlayer(),
+                                accessor.getBlock(),
+                                accessor.getItemForm(),
+                                accessor.getMetadata(),
+                                accessor.getHitResult()))
                 .filter(Objects::nonNull).findFirst().orElse(accessor.getBlock());
         int effectiveMeta = handlers.stream()
                 .map(
-                        handler -> handler
-                                .getEffectiveMeta(accessor.getBlock(), accessor.getItemForm(), accessor.getMetadata()))
+                        handler -> handler.getEffectiveMeta(
+                                accessor.getPlayer(),
+                                accessor.getBlock(),
+                                accessor.getItemForm(),
+                                accessor.getMetadata(),
+                                accessor.getHitResult()))
                 .filter(Objects::nonNull).findFirst().orElse(accessor.getMetadata());
 
         HarvestabilityInfo info = getHarvestability(
