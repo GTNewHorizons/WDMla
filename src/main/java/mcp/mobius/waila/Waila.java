@@ -34,7 +34,7 @@ import mcp.mobius.waila.overlay.DecoratorRenderer;
 import mcp.mobius.waila.server.ProxyServer;
 import mcp.mobius.waila.utils.ModIdentification;
 
-@Mod(modid = "Waila", name = "Waila", version = Tags.GRADLETOKEN_VERSION, acceptableRemoteVersions = "*")
+@Mod(modid = "Waila", name = "Waila", version = "1.9.5", acceptableRemoteVersions = "*")
 public class Waila {
 
     // The instance of your mod that Forge uses.

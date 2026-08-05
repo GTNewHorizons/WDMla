@@ -133,4 +133,9 @@ public class DisplayUtil {
         List<String> list = itemDisplayNameMultiline(itemstack);
         return list.get(0);
     }
+
+    @Deprecated
+    public static int getDisplayWidth(String s) {
+        return 0;
+    }
 }
