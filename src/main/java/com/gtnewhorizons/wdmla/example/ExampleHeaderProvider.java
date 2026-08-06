@@ -1,7 +1,5 @@
 package com.gtnewhorizons.wdmla.example;
 
-import static mcp.mobius.waila.api.SpecialChars.*;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -11,8 +9,8 @@ import com.gtnewhorizons.wdmla.api.TooltipPosition;
 import com.gtnewhorizons.wdmla.api.accessor.BlockAccessor;
 import com.gtnewhorizons.wdmla.api.provider.IBlockComponentProvider;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
+import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
-import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 
 public enum ExampleHeaderProvider implements IBlockComponentProvider {
 
@@ -32,8 +30,10 @@ public enum ExampleHeaderProvider implements IBlockComponentProvider {
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor) {
         ThemeHelper.INSTANCE.overrideTooltipIcon(tooltip, new ItemStack(Blocks.lit_furnace), true);
         ThemeHelper.INSTANCE.overrideTooltipTitle(tooltip, "Furnace");
-        tooltip.replaceChildWithTag(
-                Identifiers.MOD_NAME,
-                new TextComponent(BLUE + ITALIC + "WDMla").tag(Identifiers.MOD_NAME));
+        if (General.modName.hudShow) {
+            tooltip.replaceChildWithTag(
+                    Identifiers.MOD_NAME,
+                    ThemeHelper.INSTANCE.modName("WDMla").tag(Identifiers.MOD_NAME));
+        }
     }
 }

@@ -16,7 +16,9 @@ public enum DoublePlantHeaderProvider implements IBlockComponentProvider {
 
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor) {
-        if ((accessor.getMetadata() & 8) != 0) {
+        // Vanilla double plants store the actual variant only on the lower half.
+        // Modded subclasses such as Botania's tall mystical flowers handle their own item/name mapping.
+        if (accessor.getBlock() == Blocks.double_plant && (accessor.getMetadata() & 8) != 0) {
             int x = accessor.getHitResult().blockX;
             int y = accessor.getHitResult().blockY - 1;
             int z = accessor.getHitResult().blockZ;
