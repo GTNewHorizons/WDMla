@@ -3,7 +3,7 @@ package com.gtnewhorizons.wdmla.impl.ui.drawable;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.BossStatus;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,8 @@ public class EntityDrawable implements IDrawable {
                 / Math.max(entity.width, entity.height);
         GL11.glPushMatrix();
         try {
-            if (entity instanceof EntityLiving living) {
+            // Players also need GuiInventory's lightmap cleanup before HUD compositing.
+            if (entity instanceof EntityLivingBase living) {
                 String bossName = BossStatus.bossName;
                 int bossTimeout = BossStatus.statusBarTime;
                 boolean bossHasColorModifier = BossStatus.hasColorModifier;
