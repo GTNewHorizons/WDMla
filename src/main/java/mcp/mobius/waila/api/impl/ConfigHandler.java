@@ -176,6 +176,9 @@ public class ConfigHandler implements IWailaConfigHandler {
         OverlayConfig.scale = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_SCALE, 100).getInt()
                 / 100.0f;
 
+        OverlayConfig.fancyBlockScale = config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_FANCYBLOCK_SCALE, 100,
+                "Scale for the fancy block preview render (percent).").getInt() / 100.0f;
+
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_NHEARTS, 20).getInt();
         config.get(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MAXHP, 40).getInt();
 

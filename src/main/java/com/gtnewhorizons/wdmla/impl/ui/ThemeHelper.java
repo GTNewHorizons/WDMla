@@ -7,6 +7,8 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -32,6 +34,7 @@ import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
 import com.gtnewhorizons.wdmla.impl.ui.style.TextStyle;
 import com.gtnewhorizons.wdmla.overlay.WDMlaUIIcons;
 import com.gtnewhorizons.wdmla.plugin.vanilla.VanillaIdentifiers;
+import com.gtnewhorizons.wdmla.util.Color;
 import com.gtnewhorizons.wdmla.util.FormatUtil;
 
 import mcp.mobius.waila.overlay.DisplayUtil;
@@ -94,15 +97,21 @@ public class ThemeHelper {
 
     public void overrideEntityTooltipIcon(ITooltip root, @Nullable Entity newEntity) {
         if (PluginsConfig.core.defaultEntity.showEntity) {
-            if (!PluginsConfig.core.defaultEntity.fancyRenderer && !(newEntity instanceof EntityLiving)) {
-                root.replaceChildWithTag(Identifiers.ENTITY, new HPanelComponent().tag(Identifiers.ENTITY));
-            } else {
-                root.replaceChildWithTag(
-                        Identifiers.ENTITY,
-                        new EntityComponent(newEntity).padding(new Padding(6, 0, 10, 0)).size(new Size(12, 12))
-                                .tag(Identifiers.ENTITY));
-            }
+            root.replaceChildWithTag(Identifiers.ENTITY, entityIcon(newEntity).tag(Identifiers.ENTITY));
         }
+    }
+
+    public IComponent entityIcon(@Nullable Entity entity) {
+        if (entity instanceof EntityPainting) {
+            if (PluginsConfig.core.defaultEntity.paintingAsItemIcon) {
+                return new ItemComponent(new ItemStack(Items.painting)).doDrawOverlay(false);
+            }
+            return new EntityComponent(entity).padding(new Padding()).size(new Size(24, 24));
+        }
+        if (entity == null || (!PluginsConfig.core.defaultEntity.fancyRenderer && !(entity instanceof EntityLiving))) {
+            return new HPanelComponent();
+        }
+        return new EntityComponent(entity).padding(new Padding(6, 0, 10, 0)).size(new Size(12, 12));
     }
 
     public void overrideTooltipModName(ITooltip root, ItemStack newItemStack) {
@@ -110,9 +119,7 @@ public class ThemeHelper {
     }
 
     public void overrideTooltipModName(ITooltip root, String newName) {
-        Theme theme = General.currentTheme.get();
-        IComponent replacedModName = new TextComponent(ITALIC + newName)
-                .style(new TextStyle().color(theme.textColor(MessageType.MOD_NAME))).tag(Identifiers.MOD_NAME);
+        IComponent replacedModName = modName(newName).tag(Identifiers.MOD_NAME);
         root.replaceChildWithTag(Identifiers.MOD_NAME, replacedModName);
     }
 
@@ -120,6 +127,19 @@ public class ThemeHelper {
         overrideTooltipIcon(root, newItemStack, false);
         overrideTooltipTitle(root, newItemStack);
         overrideTooltipModName(root, newItemStack);
+    }
+
+    public IComponent modName(String modName) {
+        String content = modName == null ? "" : modName;
+        if (General.modName.hudItalic && !content.isEmpty()) {
+            content = ITALIC + content;
+        }
+        return new TextComponent(content).style(new TextStyle().color(resolveModNameColor()));
+    }
+
+    private int resolveModNameColor() {
+        int fallback = General.currentTheme.get().textColor(MessageType.MOD_NAME);
+        return Color.parseColor(General.modName.hudColorOverride, fallback);
     }
 
     public IComponent info(String content) {

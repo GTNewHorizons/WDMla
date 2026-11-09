@@ -340,6 +340,7 @@ option.wdmla.core.fancy.renderer=高级渲染器
 option.wdmla.core.renderer.rotation.speed=高级渲染器旋转速度
 option.wdmla.core.entity.icon.auto.scale=图标自动缩放
 option.wdmla.core.entity.icon.default.scale=图标默认缩放
+option.wdmla.core.show.hptext=显示“HP:”文字
 
 # universal options
 option.wdmla.universal.normal.amount=普通数量

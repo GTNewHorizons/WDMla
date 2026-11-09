@@ -8,6 +8,12 @@ import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import com.gtnewhorizons.wdmla.overlay.GuiBlockDraw;
 
 import mcp.mobius.waila.overlay.OverlayConfig;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import com.gtnewhorizons.wdmla.overlay.GuiDraw;
 
 public class BlockDrawable implements IDrawable {
 
@@ -32,7 +38,7 @@ public class BlockDrawable implements IDrawable {
         rotationPitch += (Minecraft.getMinecraft().theWorld.getTotalWorldTime() - lastTime)
                 * PluginsConfig.core.defaultBlock.rendererRotationSpeed;
         // custom viewport is unaffected by GLScalef
-        GuiBlockDraw.drawWorldBlock(
+        boolean rendered = GuiBlockDraw.drawWorldBlock(
                 (int) ((area.getX() - area.getW() * (SIZE_MULTIPLIER - 1) / 2) * OverlayConfig.scale),
                 (int) ((area.getY() - area.getH() * (SIZE_MULTIPLIER - 1) / 2) * OverlayConfig.scale),
                 (int) (area.getW() * OverlayConfig.scale * SIZE_MULTIPLIER),
@@ -42,6 +48,26 @@ public class BlockDrawable implements IDrawable {
                 blockZ,
                 30f,
                 rotationPitch);
+
+        if (!rendered) {
+            // If the fancy world-block preview produced no geometry/TESR, fall back to the item icon.
+            Minecraft mc = Minecraft.getMinecraft();
+            Block b = mc.theWorld.getBlock(blockX, blockY, blockZ);
+            if (b == null) b = Blocks.air;
+            int meta = mc.theWorld.getBlockMetadata(blockX, blockY, blockZ);
+            Item it = Item.getItemFromBlock(b);
+            ItemStack stack = null;
+            if (it != null) {
+                try {
+                    int dmg = b.damageDropped(meta);
+                    stack = new ItemStack(it, 1, dmg);
+                } catch (Throwable t) {
+                    stack = new ItemStack(it, 1, meta);
+                }
+            }
+            if (stack == null) stack = new ItemStack(Blocks.air);
+            GuiDraw.renderStack(area, stack, false, null);
+        }
         lastTime = Minecraft.getMinecraft().theWorld.getTotalWorldTime();
     }
 }

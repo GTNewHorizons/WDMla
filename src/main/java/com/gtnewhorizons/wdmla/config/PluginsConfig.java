@@ -88,6 +88,14 @@ public class PluginsConfig {
             @Config.DefaultFloat(1.2f)
             @Config.RangeFloat(min = 0.1f, max = 100f)
             public float iconDefaultScale;
+
+            @Config.LangKey("option.wdmla.core.show.hptext")
+            @Config.DefaultBoolean(true)
+            public boolean showHPText;
+
+            @Config.LangKey("option.wdmla.core.show.painting.itemicon")
+            @Config.DefaultBoolean(false)
+            public boolean paintingAsItemIcon;
         }
 
         public static enum fancyRendererMode {

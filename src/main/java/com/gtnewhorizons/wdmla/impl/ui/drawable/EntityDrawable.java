@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.BossStatus;
+import net.minecraft.entity.item.EntityPainting;
 
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
@@ -53,22 +54,48 @@ public class EntityDrawable implements IDrawable {
                 BossStatus.hasColorModifier = bossHasColorModifier;
             } else {
                 // yOffset
-                GL11.glTranslatef(area.getX(), (area.getY() + area.getH() - area.getW() / 2), 0);
-                if (PluginsConfig.core.defaultEntity.iconAutoScale) {
-                    GL11.glScalef(autoScale, autoScale, 1.0f);
+                float baseX = area.getX();
+                float baseY = area.getY() + area.getH() - area.getW() / 2;
+                if (entity instanceof EntityPainting) {
+                    baseX = area.getX() + area.getW() / 2.0f;
+                    baseY = area.getY() + area.getH() / 2.0f;
                 }
-                GuiDraw.drawNonLivingEntity(
-                        0,
-                        0,
-                        (int) area.getW(),
-                        135 + (entity.ticksExisted * PluginsConfig.core.defaultEntity.rendererRotationSpeed) % 360,
-                        -0,
-                        entity);
+                GL11.glTranslatef(baseX, baseY, 0);
+                float scale = 1.0f;
+                if (entity instanceof EntityPainting painting) {
+                    float fitScale = getPaintingFitScale(area, painting);
+                    scale = fitScale;
+                } else if (PluginsConfig.core.defaultEntity.iconAutoScale) {
+                    scale = autoScale;
+                }
+                if (scale != 1.0f) {
+                    GL11.glScalef(scale, scale, 1.0f);
+                }
+                float yaw = 135 + (entity.ticksExisted * PluginsConfig.core.defaultEntity.rendererRotationSpeed) % 360;
+                float pitch = -0;
+                if (entity instanceof EntityPainting) {
+                    yaw = 0.0f;
+                    pitch = 0.0f;
+                }
+                GuiDraw.drawNonLivingEntity(0, 0, (int) area.getW(), yaw, pitch, entity);
             }
         } catch (Exception e) {
             Waila.log.error("Error rendering instance of entity", e);
         }
         GL11.glPopMatrix();
         GL11.glDisable(GL11.GL_DEPTH_TEST);
+    }
+
+    private static float getPaintingFitScale(IArea area, EntityPainting painting) {
+        int artWidth = painting.art.sizeX;
+        int artHeight = painting.art.sizeY;
+        if (artWidth <= 0 || artHeight <= 0) {
+            return 1.0f;
+        }
+        float areaW = Math.max(area.getW(), 1.0f);
+        float areaH = Math.max(area.getH(), 1.0f);
+        float fitScaleW = 16.0f / artWidth;
+        float fitScaleH = (areaH / areaW) * (16.0f / artHeight);
+        return Math.min(fitScaleW, fitScaleH);
     }
 }

@@ -1,7 +1,5 @@
 package com.gtnewhorizons.wdmla.overlay;
 
-import static mcp.mobius.waila.api.SpecialChars.ITALIC;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -21,15 +19,14 @@ import org.lwjgl.input.Keyboard;
 
 import com.gtnewhorizons.wdmla.WDMla;
 import com.gtnewhorizons.wdmla.api.accessor.Accessor;
-import com.gtnewhorizons.wdmla.api.ui.MessageType;
 import com.gtnewhorizons.wdmla.config.General;
 import com.gtnewhorizons.wdmla.impl.ObjectDataCenter;
 import com.gtnewhorizons.wdmla.impl.WDMlaClientRegistration;
+import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
 import com.gtnewhorizons.wdmla.impl.ui.component.RootComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.TextComponent;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Area;
 import com.gtnewhorizons.wdmla.impl.ui.sizer.Size;
-import com.gtnewhorizons.wdmla.impl.ui.style.TextStyle;
 import com.gtnewhorizons.wdmla.impl.ui.value.HUDRenderArea;
 
 import cpw.mods.fml.client.config.GuiConfig;
@@ -70,11 +67,11 @@ public class WDMlaTickHandler {
         if (mainHUD == null) {
             mainHUD = new RootComponent();
             mainHUD.child(new TextComponent(StatCollector.translateToLocal("hud.msg.wdmla.cfg.dummy.1")))
-                    .child(new TextComponent(StatCollector.translateToLocal("hud.msg.wdmla.cfg.dummy.2"))).child(
-                            new TextComponent(ITALIC + StatCollector.translateToLocal("hud.msg.wdmla.cfg.dummy.3"))
-                                    .style(
-                                            new TextStyle().color(
-                                                    General.currentTheme.get().textColor(MessageType.MOD_NAME))));
+                    .child(new TextComponent(StatCollector.translateToLocal("hud.msg.wdmla.cfg.dummy.2")));
+            if (General.modName.hudShow) {
+                mainHUD.child(
+                        ThemeHelper.INSTANCE.modName(StatCollector.translateToLocal("hud.msg.wdmla.cfg.dummy.3")));
+            }
         }
 
         Area bgArea = new HUDRenderArea(new Size(mainHUD.getWidth(), mainHUD.getHeight())).computeBackground();

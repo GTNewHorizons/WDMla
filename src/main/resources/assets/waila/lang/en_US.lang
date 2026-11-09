@@ -307,7 +307,14 @@ option.wdmla.general.textcolor.success=Success
 option.wdmla.general.textcolor.warning=Warning
 option.wdmla.general.textcolor.danger=Danger
 option.wdmla.general.textcolor.failure=Failure
-option.wdmla.general.textcolor.modname=Mod Name
+option.wdmla.modname.category=Mod Name
+option.wdmla.modname.hud.show=Show Mod Name (HUD)
+option.wdmla.modname.hud.italic=Italic Mod Name (HUD)
+option.wdmla.modname.hud.color=Mod Name Color (HUD)
+option.wdmla.modname.hud.color.override=Mod Name Color Override (HUD)
+option.wdmla.modname.inventory.show=Show Mod Name (Inventory)
+option.wdmla.modname.inventory.italic=Italic Mod Name (Inventory)
+option.wdmla.modname.inventory.color.override=Mod Name Color Override (Inventory)
 
 option.wdmla.progresscolor.category=Progress Bar Colors
 option.wdmla.general.progresscolor.background=Background
@@ -340,6 +347,8 @@ option.wdmla.core.fancy.renderer=Fancy Renderer
 option.wdmla.core.renderer.rotation.speed=Fancy Renderer Rotation Speed
 option.wdmla.core.entity.icon.auto.scale=Icon Auto Scale
 option.wdmla.core.entity.icon.default.scale=Icon Default Scale
+option.wdmla.core.show.hptext=Show "HP:" text
+option.wdmla.core.show.painting.itemicon=Render Paintings as Item Icons
 
 # universal options
 option.wdmla.universal.normal.amount=Normal Amount

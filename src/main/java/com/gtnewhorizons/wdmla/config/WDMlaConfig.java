@@ -104,7 +104,7 @@ public class WDMlaConfig extends Configuration {
                 General.textColor.warning,
                 General.textColor.danger,
                 General.textColor.failure,
-                General.textColor.modName);
+                General.modName.hudColor);
     }
 
     public <T extends Enum<T>> T loadEnum(String category, String name, T defaultValue, String comment) {

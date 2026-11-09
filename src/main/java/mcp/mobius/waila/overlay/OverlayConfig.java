@@ -47,6 +47,13 @@ public class OverlayConfig {
      */
     public static float scale;
 
+    /**
+     * Scale for the fancy block preview renderer.
+     * 1.0 = default size.
+     */
+    public static float fancyBlockScale;
+
+
     public static void updateColors() {
         OverlayConfig.alpha = (int) (ConfigHandler.instance()
                 .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_ALPHA, 0) / 100.0f

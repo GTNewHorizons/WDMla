@@ -9,6 +9,7 @@ import com.gtnewhorizons.wdmla.api.TooltipPosition;
 import com.gtnewhorizons.wdmla.api.accessor.EntityAccessor;
 import com.gtnewhorizons.wdmla.api.provider.IEntityComponentProvider;
 import com.gtnewhorizons.wdmla.api.ui.ITooltip;
+import com.gtnewhorizons.wdmla.config.PluginsConfig;
 import com.gtnewhorizons.wdmla.impl.ui.ThemeHelper;
 import com.gtnewhorizons.wdmla.impl.ui.component.HPanelComponent;
 import com.gtnewhorizons.wdmla.impl.ui.component.HealthComponent;
@@ -43,8 +44,9 @@ public enum EntityHealthProvider implements IEntityComponentProvider {
         int maxHPForText = ConfigHandler.instance()
                 .getConfig(Configuration.CATEGORY_GENERAL, Constants.CFG_WAILA_MAXHP, 40);
         if (livingEntity.getMaxHealth() > maxHPForText) {
+            String prefix = PluginsConfig.core.defaultEntity.showHPText ? "HP: " : " ";
             tooltip.child(
-                    new HPanelComponent().child(new HealthComponent(1, 1)).text("HP: ")
+                    new HPanelComponent().child(new HealthComponent(1, 1)).text(prefix)
                             .child(ThemeHelper.INSTANCE.info(FormatUtil.STANDARD.format(livingEntity.getHealth())))
                             .text(" / ")
                             .child(ThemeHelper.INSTANCE.info(FormatUtil.STANDARD.format(livingEntity.getMaxHealth())))
