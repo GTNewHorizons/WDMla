@@ -42,9 +42,10 @@ public class ProxyGregTech {
             Field sInstancesField = GT_MetaGenerated_Tool.getField("sInstances");
             ConcurrentHashMap<String, ?> sInstances = (ConcurrentHashMap<String, ?>) (sInstancesField.get(null));
             Object metaTool01 = sInstances.get("gt.metatool.01");
-            Class<?> Materials = Class.forName("gregtech.api.enums.Materials");
+            Class<?> Materials = Class.forName("gregtech.api.enums.materials.Materials");
+            Class<?> Material = Class.forName("com.ruling_0.materiallib.api.Material");
             Method getToolWithStatsMethod = GT_MetaGenerated_Tool
-                    .getDeclaredMethod("getToolWithStats", int.class, int.class, Materials, Materials, long[].class);
+                    .getDeclaredMethod("getToolWithStats", int.class, int.class, Material, Material, long[].class);
             Class<?> GT_MetaGenerated_Tool_01 = Class.forName("gregtech.common.items.IDMetaTool01");
 
             Field idField = GT_MetaGenerated_Tool_01.getField("ID");
